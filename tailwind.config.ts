@@ -54,14 +54,14 @@ export default {
 					foreground: 'hsl(var(--card-foreground))'
 				},
 				sea: {
-					light: '#E0F2F7',
-					DEFAULT: '#1E88E5',
-					dark: '#0D47A1'
+					light: '#FCE4EC',
+					DEFAULT: '#E91E63',
+					dark: '#AD1457'
 				},
 				sand: {
-					light: '#F5F5DC',
-					DEFAULT: '#E6D2B5',
-					dark: '#D2B48C'
+					light: '#F5F5F5',
+					DEFAULT: '#9E9E9E',
+					dark: '#616161'
 				}
 			},
 			borderRadius: {
