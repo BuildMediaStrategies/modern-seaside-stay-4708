@@ -63,6 +63,14 @@ export default {
 					DEFAULT: '#E6D2B5',
 					dark: '#D2B48C'
 				}
+				brand: {
+					primary: '#FF3EA5',
+					'primary-hover': '#FF66B2',
+					secondary: '#B7BAC2',
+					'neutral-bg': '#F9FAFB',
+					'text-primary': '#1F1F1F',
+					'text-secondary': '#6B7280'
+				}
 			},
 			borderRadius: {
 				lg: 'var(--radius)',
