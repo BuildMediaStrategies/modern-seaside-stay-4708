@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Check, CalendarIcon, Users } from "lucide-react";
 import { format } from "date-fns";
@@ -21,16 +20,16 @@ import { useLanguage } from "@/contexts/LanguageContext";
 
 export default function BookingForm() {
   const { t } = useLanguage();
-  const [startDate, setStartDate] = useState<Date>();
-  const [endDate, setEndDate] = useState<Date>();
-  const [adults, setAdults] = useState("2");
-  const [children, setChildren] = useState("0");
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [donationType, setDonationType] = useState("one-time");
+  const [amount, setAmount] = useState("50");
   const [submitted, setSubmitted] = useState(false);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // In a real app, this would send the booking data to a server
-    console.log("Booking submitted:", { startDate, endDate, adults, children });
+    // In a real app, this would send the donation data to a server
+    console.log("Donation submitted:", { firstName, lastName, donationType, amount });
     setSubmitted(true);
     
     // Reset form after 3 seconds
@@ -48,106 +47,72 @@ export default function BookingForm() {
       
       <div className="space-y-4">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          {/* Check-in Date */}
+          {/* First Name */}
           <div className="space-y-2">
-            <label htmlFor="check-in" className="block text-sm font-medium">
+            <label htmlFor="first-name" className="block text-sm font-medium">
               {t.bookingForm.checkIn}
             </label>
-            <Popover>
-              <PopoverTrigger asChild>
-                <Button
-                  id="check-in"
-                  variant="outline"
-                  className={cn(
-                    "w-full justify-start text-left font-normal",
-                    !startDate && "text-muted-foreground"
-                  )}
-                >
-                  <CalendarIcon className="mr-2 h-4 w-4" />
-                  {startDate ? format(startDate, "PPP") : <span>{t.bookingForm.selectDate}</span>}
-                </Button>
-              </PopoverTrigger>
-              <PopoverContent className="w-auto p-0" align="start">
-                <Calendar
-                  mode="single"
-                  selected={startDate}
-                  onSelect={setStartDate}
-                  initialFocus
-                  disabled={(date) => date < new Date()}
-                  className="pointer-events-auto"
-                />
-              </PopoverContent>
-            </Popover>
+            <input
+              id="first-name"
+              type="text"
+              value={firstName}
+              onChange={(e) => setFirstName(e.target.value)}
+              placeholder={t.bookingForm.selectDate}
+              className="w-full px-3 py-2 border border-input rounded-md bg-background"
+              required
+            />
           </div>
           
-          {/* Check-out Date */}
+          {/* Last Name */}
           <div className="space-y-2">
-            <label htmlFor="check-out" className="block text-sm font-medium">
+            <label htmlFor="last-name" className="block text-sm font-medium">
               {t.bookingForm.checkOut}
             </label>
-            <Popover>
-              <PopoverTrigger asChild>
-                <Button
-                  id="check-out"
-                  variant="outline"
-                  className={cn(
-                    "w-full justify-start text-left font-normal",
-                    !endDate && "text-muted-foreground"
-                  )}
-                >
-                  <CalendarIcon className="mr-2 h-4 w-4" />
-                  {endDate ? format(endDate, "PPP") : <span>{t.bookingForm.selectDate}</span>}
-                </Button>
-              </PopoverTrigger>
-              <PopoverContent className="w-auto p-0" align="start">
-                <Calendar
-                  mode="single"
-                  selected={endDate}
-                  onSelect={setEndDate}
-                  initialFocus
-                  disabled={(date) => date < (startDate || new Date())}
-                  className="pointer-events-auto"
-                />
-              </PopoverContent>
-            </Popover>
+            <input
+              id="last-name"
+              type="text"
+              value={lastName}
+              onChange={(e) => setLastName(e.target.value)}
+              placeholder={t.bookingForm.selectDate}
+              className="w-full px-3 py-2 border border-input rounded-md bg-background"
+              required
+            />
           </div>
         </div>
         
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          {/* Adults */}
+          {/* Donation Type */}
           <div className="space-y-2">
-            <label htmlFor="adults" className="block text-sm font-medium">
+            <label htmlFor="donation-type" className="block text-sm font-medium">
               {t.bookingForm.adults}
             </label>
-            <Select value={adults} onValueChange={setAdults}>
-              <SelectTrigger id="adults" className="w-full">
-                <SelectValue placeholder="Select" />
+            <Select value={donationType} onValueChange={setDonationType}>
+              <SelectTrigger id="donation-type" className="w-full">
+                <SelectValue placeholder="Select donation type" />
               </SelectTrigger>
               <SelectContent>
-                {[1, 2, 3, 4, 5, 6].map((num) => (
-                  <SelectItem key={num} value={num.toString()}>
-                    {num} {num === 1 ? t.bookingForm.adult : t.bookingForm.adults}
-                  </SelectItem>
-                ))}
+                <SelectItem value="one-time">{t.bookingForm.adult}</SelectItem>
+                <SelectItem value="monthly">{t.bookingForm.child}</SelectItem>
               </SelectContent>
             </Select>
           </div>
           
-          {/* Children */}
+          {/* Amount */}
           <div className="space-y-2">
-            <label htmlFor="children" className="block text-sm font-medium">
+            <label htmlFor="amount" className="block text-sm font-medium">
               {t.bookingForm.children}
             </label>
-            <Select value={children} onValueChange={setChildren}>
-              <SelectTrigger id="children" className="w-full">
-                <SelectValue placeholder="Select" />
+            <Select value={amount} onValueChange={setAmount}>
+              <SelectTrigger id="amount" className="w-full">
+                <SelectValue placeholder="Select amount" />
               </SelectTrigger>
               <SelectContent>
-                {[0, 1, 2, 3, 4].map((num) => (
-                  <SelectItem key={num} value={num.toString()}>
-                    {num} {num === 1 ? t.bookingForm.child : t.bookingForm.children}
-                  </SelectItem>
-                ))}
+                <SelectItem value="25">£25</SelectItem>
+                <SelectItem value="50">£50</SelectItem>
+                <SelectItem value="100">£100</SelectItem>
+                <SelectItem value="250">£250</SelectItem>
+                <SelectItem value="500">£500</SelectItem>
+                <SelectItem value="1000">£1000</SelectItem>
               </SelectContent>
             </Select>
           </div>
@@ -162,7 +127,7 @@ export default function BookingForm() {
           </>
         ) : (
           <>
-            <Users className="mr-2 h-4 w-4" />
+            <CalendarIcon className="mr-2 h-4 w-4" />
             {t.bookingForm.checkAvailability}
           </>
         )}

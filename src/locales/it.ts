@@ -1,112 +1,112 @@
 export const it = {
   nav: {
     home: "Home",
-    apartments: "Appartamenti",
-    amenities: "Servizi",
+    apartments: "Il Nostro Impatto",
+    amenities: "Aree di Ricerca",
     gallery: "Galleria",
     contact: "Contatti",
-    bookNow: "Prenota Ora"
+    bookNow: "Dona Ora"
   },
   hero: {
-    subtitle: "ALLOGGI DI LUSSO SUL MARE",
-    title: "Vivi la Tranquillità del Mare",
-    description: "Scopri la nostra esclusiva collezione di appartamenti di lusso e camere d'albergo sul mare, che offrono comfort impareggiabile e viste mozzafiato sul mare.",
-    bookStay: "Prenota il tuo Soggiorno",
-    exploreApartments: "Esplora gli Appartamenti",
+    subtitle: "CURE CANCER @ UCL",
+    title: "Avanzare la Ricerca sul Cancro all'UCL",
+    description: "Cure Cancer @ UCL si dedica alla ricerca pionieristica sui Linfomi Non-Hodgkin — un gruppo silenzioso ma mortale di tumori del sangue e del sistema linfatico. Insieme, acceleriamo le scoperte nel trattamento e nella ricerca.",
+    bookStay: "Supporta la Nostra Ricerca",
+    exploreApartments: "La Nostra Causa",
     scrollDown: "Scorri Giù"
   },
   footer: {
-    description: "Appartamenti di lusso sul mare e camere d'albergo con splendide viste sul mare, che offrono il perfetto connubio di comfort ed eleganza per la tua vacanza da sogno.",
+    description: "Cure Cancer @ UCL finanzia ricerca all'avanguardia sui Linfomi Non-Hodgkin, supportando ricercatori di classe mondiale e promuovendo l'innovazione nella diagnostica e nelle terapie oncologiche.",
     quickLinks: "Link Rapidi",
     contact: "Contatti",
     newsletter: "Newsletter",
-    newsletterDesc: "Iscriviti alla nostra newsletter per offerte speciali e aggiornamenti.",
+    newsletterDesc: "Iscriviti alla nostra newsletter per aggiornamenti sulla ricerca e notizie sulla beneficenza.",
     yourEmail: "Il tuo indirizzo email",
     subscribe: "Iscriviti",
     allRights: "Tutti i diritti riservati."
   },
   bookingForm: {
-    title: "Prenota il tuo Soggiorno",
-    checkIn: "Data di Check-in",
-    checkOut: "Data di Check-out",
-    adults: "Adulti",
-    children: "Bambini",
-    adult: "Adulto",
-    child: "Bambino",
-    selectDate: "Seleziona data",
-    checkAvailability: "Verifica Disponibilità",
-    bookingConfirmed: "Prenotazione Confermata!"
+    title: "Diventa un Sostenitore",
+    checkIn: "Nome",
+    checkOut: "Cognome",
+    adults: "Tipo Donazione",
+    children: "Importo",
+    adult: "Una tantum",
+    child: "Mensile",
+    selectDate: "Inserisci nome",
+    checkAvailability: "Dona Ora",
+    bookingConfirmed: "Grazie per il Tuo Sostegno!"
   },
   testimonials: {
-    title: "Cosa Dicono i Nostri Ospiti",
-    description: "Scopri perché i nostri ospiti continuano a tornare a MareSereno per le loro fughe al mare."
+    title: "Storie di Speranza",
+    description: "Ascolta ricercatori, pazienti e sostenitori che credono nella nostra missione di trovare una cura per il Linfoma Non-Hodgkin."
   },
   notFound: {
     title: "Pagina Non Trovata",
-    description: "Non siamo riusciti a trovare la pagina che stavi cercando. Forse hai preso una svolta sbagliata in paradiso?",
+    description: "Non siamo riusciti a trovare la pagina che stavi cercando. Forse vorresti tornare alla nostra missione?",
     returnHome: "Torna alla Home"
   },
   apartments: {
-    title: "I Nostri Appartamenti e Camere",
-    subtitle: "Scopri la nostra selezione di alloggi premium, dalle accoglienti mansarde ai lussuosi attici.",
+    title: "Le Nostre Aree di Impatto",
+    subtitle: "Scopri come le tue donazioni contribuiscono direttamente alla ricerca rivoluzionaria sul cancro e ai servizi di supporto ai pazienti.",
     filters: {
-      guests: "Ospiti",
-      anyGuests: "Qualsiasi numero di ospiti",
-      onePlus: "1+ ospiti",
-      twoPlus: "2+ ospiti",
-      threePlus: "3+ ospiti",
-      fourPlus: "4+ ospiti",
-      location: "Posizione",
-      allLocations: "Tutte le posizioni",
-      priceRange: "Fascia di Prezzo",
+      guests: "Tipo di Impatto",
+      anyGuests: "Tutte le aree di impatto",
+      onePlus: "Finanziamento ricerca",
+      twoPlus: "Supporto pazienti",
+      threePlus: "Finanziamento attrezzature",
+      fourPlus: "Programmi educativi",
+      location: "Area di Ricerca",
+      allLocations: "Tutte le aree di ricerca",
+      priceRange: "Range Donazione",
       showing: "Visualizzando",
       of: "di",
-      accommodations: "alloggi",
+      accommodations: "aree di impatto",
       resetFilters: "Reimposta Filtri",
-      noMatch: "Nessun appartamento corrisponde ai tuoi filtri",
+      noMatch: "Nessuna area di impatto corrisponde ai tuoi filtri",
       adjustFilters: "Prova a modificare i criteri di filtro per vedere più opzioni.",
-      viewDetails: "Visualizza Dettagli",
-      features: "caratteristiche",
+      viewDetails: "Scopri di Più",
+      features: "benefici",
       more: "altro"
     }
   },
   gallery: {
-    title: "Galleria Fotografica",
-    subtitle: "Esplora il nostro paradiso sul mare attraverso immagini suggestive.",
+    title: "Galleria della Ricerca",
+    subtitle: "Esplora le nostre strutture di ricerca all'avanguardia e vedi i nostri scienziati al lavoro.",
     filters: {
       all: "Tutti",
-      exterior: "Esterno",
-      rooms: "Camere",
-      amenities: "Servizi"
+      exterior: "Strutture",
+      rooms: "Laboratori",
+      amenities: "Attrezzature"
     }
   },
   booking: {
-    title: "Prenota il tuo Soggiorno",
-    subtitle: "Completa la tua prenotazione in pochi semplici passi.",
+    title: "Fai una Donazione",
+    subtitle: "Supporta la nostra ricerca in pochi semplici passi.",
     steps: {
-      chooseRoom: "Scegli Camera",
-      guestDetails: "Dettagli Ospite",
+      chooseRoom: "Scegli Impatto",
+      guestDetails: "Dettagli Donatore",
       confirmation: "Conferma"
     },
     dates: {
-      selectDates: "Seleziona Date e Ospiti",
-      checkIn: "Data di Check-in",
-      checkOut: "Data di Check-out",
-      adults: "Adulti",
-      children: "Bambini",
-      adult: "Adulto",
-      child: "Bambino",
-      selectDate: "Seleziona data"
+      selectDates: "Seleziona il Tuo Supporto",
+      checkIn: "Nome",
+      checkOut: "Cognome",
+      adults: "Tipo Donazione",
+      children: "Importo (£)",
+      adult: "Una tantum",
+      child: "Mensile",
+      selectDate: "Inserisci dettagli"
     },
     accommodationSelect: {
-      title: "Seleziona il tuo Alloggio",
-      guests: "Ospiti",
+      title: "Seleziona la Tua Area di Impatto",
+      guests: "Donazione",
       selected: "Selezionato",
       select: "Seleziona",
       continue: "Continua"
     },
     guestInfo: {
-      title: "Informazioni Ospite",
+      title: "Informazioni Donatore",
       firstName: "Nome",
       lastName: "Cognome",
       email: "Email",
@@ -115,13 +115,13 @@ export const it = {
       city: "Città",
       zipCode: "Codice Postale",
       country: "Paese",
-      specialRequests: "Richieste Speciali",
-      specialRequestsPlaceholder: "Qualsiasi richiesta speciale o nota per il tuo soggiorno"
+      specialRequests: "Messaggio Speciale",
+      specialRequestsPlaceholder: "Qualsiasi messaggio o dedica per la tua donazione"
     },
     payment: {
       title: "Informazioni di Pagamento",
       creditCard: "Carta di Credito",
-      payAtProperty: "Paga in Struttura",
+      payAtProperty: "Bonifico Bancario",
       nameOnCard: "Nome sulla Carta",
       cardNumber: "Numero Carta",
       cardNumberPlaceholder: "0000 0000 0000 0000",
@@ -129,269 +129,269 @@ export const it = {
       expiryDatePlaceholder: "MM/AA",
       cvc: "CVC",
       cvcPlaceholder: "123",
-      payAtPropertyInfo: "Ti verrà richiesto di fornire una carta di credito valida all'arrivo per motivi di sicurezza, ma il pagamento sarà effettuato durante il tuo soggiorno nella struttura."
+      payAtPropertyInfo: "Puoi anche fare la tua donazione tramite bonifico bancario. Contattaci per i dettagli del conto e le informazioni di riferimento."
     },
     summary: {
-      title: "Riepilogo Prenotazione",
-      checkIn: "Check-in",
-      checkOut: "Check-out",
-      guests: "Ospiti",
-      night: "notte",
-      nights: "notti",
-      cleaningFee: "Costo pulizie",
-      serviceFee: "Costo servizio",
+      title: "Riepilogo Donazione",
+      checkIn: "Area di Impatto",
+      checkOut: "Frequenza",
+      guests: "Importo",
+      night: "mese",
+      nights: "mesi",
+      cleaningFee: "Commissione di elaborazione",
+      serviceFee: "Commissione amministrativa",
       total: "Totale"
     },
     confirmation: {
-      title: "Rivedi Dettagli Prenotazione",
-      accommodationDetails: "Dettagli Alloggio",
-      guestDetails: "Dettagli Ospite",
+      title: "Rivedi Dettagli Donazione",
+      accommodationDetails: "Dettagli Area di Impatto",
+      guestDetails: "Dettagli Donatore",
       name: "Nome",
       email: "Email",
       phone: "Telefono",
       address: "Indirizzo",
       city: "Città",
       country: "Paese",
-      specialRequests: "Richieste Speciali",
+      specialRequests: "Messaggio Speciale",
       paymentMethod: "Metodo di Pagamento",
       creditCard: "Carta di Credito",
-      priceSummary: "Riepilogo Prezzi",
+      priceSummary: "Riepilogo Donazione",
       termsAgree: "Accetto i",
       termsLink: "Termini e Condizioni",
       privacyLink: "Politica sulla Privacy",
-      cancellationInfo: "Comprendo che la mia prenotazione è soggetta alla politica di cancellazione della struttura.",
+      cancellationInfo: "Comprendo che la mia donazione supporta la ricerca sul cancro all'UCL.",
       back: "Indietro",
-      confirmBooking: "Conferma Prenotazione",
-      success: "Prenotazione Confermata!",
-      emailSent: "La tua prenotazione è stata confermata con successo. Una email di conferma è stata inviata a",
-      bookingReference: "Riferimento Prenotazione",
+      confirmBooking: "Conferma Donazione",
+      success: "Donazione Confermata!",
+      emailSent: "La tua donazione è stata elaborata con successo. Un'email di conferma è stata inviata a",
+      bookingReference: "Riferimento Donazione",
       returnToHome: "Torna alla Homepage"
     }
   },
   contact: {
     title: "Contattaci",
-    subtitle: "Siamo qui per aiutarti a rendere il tuo soggiorno indimenticabile. Contattaci per qualsiasi domanda o richiesta speciale.",
+    subtitle: "Mettiti in contatto con il nostro team per saperne di più sulla nostra ricerca o su come puoi supportare la nostra missione.",
     getInTouch: "Mettiti in Contatto",
     address: "Indirizzo",
     phone: "Telefono",
     email: "Email",
-    receptionHours: "Orari Reception",
-    checkInTime: "Check-in: Dopo le 15:00",
-    checkOutTime: "Check-out: Prima delle 11:00",
+    receptionHours: "Orari Ufficio",
+    checkInTime: "Lunedì - Venerdì: 9:00 - 17:00",
+    checkOutTime: "Sabato: 10:00 - 14:00",
     sendMessage: "Inviaci un Messaggio",
     fullName: "Nome Completo",
     phoneNumber: "Numero di Telefono",
     subject: "Oggetto",
     message: "Messaggio",
     howCanWeHelp: "Come possiamo aiutarti?",
-    send: "Invia",
+    send: "Invia Messaggio",
     messageSent: "Messaggio Inviato!",
     thankYou: "Grazie per averci contattato. Risponderemo al tuo messaggio il prima possibile.",
     faq: "Domande Frequenti",
-    faqSubtitle: "Trova risposte rapide alle domande più comuni sui nostri alloggi e servizi.",
+    faqSubtitle: "Trova risposte rapide alle domande più comuni sulla nostra ricerca e beneficenza.",
     questions: {
       checkInOut: {
-        question: "Quali sono gli orari di check-in e check-out?",
-        answer: "Il check-in è dalle 15:00 in poi, e il check-out è fino alle 11:00. Il check-in anticipato o il check-out posticipato possono essere organizzati in base alla disponibilità."
+        question: "Come vengono utilizzate le donazioni?",
+        answer: "Il 100% delle donazioni va direttamente al finanziamento di attrezzature di ricerca, supporto ai ricercatori e servizi di assistenza ai pazienti."
       },
       parking: {
-        question: "È disponibile il parcheggio presso la struttura?",
-        answer: "Sì, offriamo parcheggio gratuito per tutti gli ospiti. Il servizio di parcheggio con valletto è disponibile anche a un costo aggiuntivo."
+        question: "La mia donazione è deducibile dalle tasse?",
+        answer: "Sì, come organizzazione benefica registrata, tutte le donazioni sono deducibili dalle tasse. Riceverai una ricevuta per i tuoi archivi e scopi fiscali."
       },
       pets: {
-        question: "Gli animali domestici sono ammessi negli appartamenti?",
-        answer: "Accogliamo gli animali domestici in appartamenti designati pet-friendly. Si prega di informarci in anticipo se si prevede di portare un animale domestico, poiché potrebbero essere applicati costi aggiuntivi."
+        question: "Posso visitare le strutture di ricerca?",
+        answer: "Organizziamo occasionalmente visite per i donatori e giornate aperte. Contattaci per saperne di più sulle prossime opportunità di vedere la nostra ricerca in azione."
       },
       breakfast: {
-        question: "La colazione è inclusa nella tariffa della camera?",
-        answer: "La colazione è inclusa in pacchetti camera selezionati. Puoi verificare l'inclusione durante il processo di prenotazione o aggiungerla alla tua prenotazione in qualsiasi momento."
+        question: "Come posso ricevere aggiornamenti sulla ricerca?",
+        answer: "Iscriviti alla nostra newsletter per ricevere aggiornamenti regolari sui progressi della ricerca, scoperte rivoluzionarie e storie dai nostri pazienti e ricercatori."
       },
       transfers: {
-        question: "Offrite trasferimenti aeroportuali?",
-        answer: "Sì, offriamo trasferimenti aeroportuali a un costo aggiuntivo. Si prega di contattare la nostra concierge almeno 48 ore prima del tuo arrivo per organizzare il trasporto."
+        question: "Posso supportare un progetto di ricerca specifico?",
+        answer: "Sì, offriamo l'opzione di indirizzare la tua donazione verso aree di ricerca o progetti specifici. Contatta il nostro team per discutere le opportunità di donazione mirata."
       },
       amenities: {
-        question: "Quali servizi sono disponibili nella struttura?",
-        answer: "La nostra struttura dispone di piscine, una spa, ristoranti, un bar sulla spiaggia, un centro fitness e accesso diretto alla spiaggia. Tutti gli appartamenti includono Wi-Fi, aria condizionata e elettrodomestici moderni."
+        question: "Cos'è il Linfoma Non-Hodgkin?",
+        answer: "Il Linfoma Non-Hodgkin è un gruppo di tumori del sangue che si sviluppano nel sistema linfatico. La nostra ricerca si concentra sulla comprensione di questi tumori per sviluppare trattamenti più efficaci."
       }
     }
   },
   home: {
     welcome: {
-      subtitle: "Benvenuti a MareSereno",
-      title: "Alloggi di Lusso sul Mare",
-      description1: "Situato sulla incontaminata costa mediterranea, MareSereno offre una squisita collezione di appartamenti di lusso e camere d'albergo. I nostri alloggi fronte mare combinano un design elegante con comfort moderni, creando l'ambientazione perfetta per una indimenticabile fuga al mare.",
-      description2: "Che tu stia cercando una fuga romantica, una vacanza in famiglia o un ritiro tranquillo, la nostra vasta gamma di alloggi si adatta a ogni preferenza ed esigenza. Ogni spazio è progettato con cura per fornire viste panoramiche sul mare e accesso diretto alla spiaggia.",
-      learnMore: "Scopri di Più"
+      subtitle: "Benvenuti a Cure Cancer @ UCL",
+      title: "Dove la Scienza Incontra la Speranza",
+      description1: "In collaborazione con l'UCL Cancer Institute, finanziamo attrezzature all'avanguardia, supportiamo ricercatori di classe mondiale e promuoviamo l'innovazione nella diagnostica e nelle terapie oncologiche. Ogni donazione ci aiuta ad avvicinarci a una cura.",
+      description2: "La nostra ricerca si concentra specificamente sui Linfomi Non-Hodgkin, un gruppo di tumori del sangue che colpisce migliaia di persone ogni anno. Attraverso studi rivoluzionari e sperimentazioni cliniche, stiamo lavorando per sviluppare trattamenti migliori e trovare una cura.",
+      learnMore: "Scopri di Più sulla Nostra Missione"
     },
     booking: {
-      subtitle: "Prenota il tuo Soggiorno",
-      title: "Prenota la tua Vacanza Perfetta",
-      description: "Fai il primo passo verso la tua vacanza da sogno verificando la disponibilità e assicurandoti le date preferite. Il nostro semplice processo di prenotazione garantisce un'esperienza senza interruzioni dalla prenotazione all'arrivo.",
-      benefits: ["Conferma istantanea", "Miglior tariffa garantita", "Opzioni di cancellazione flessibili", "Pagamento sicuro"]
+      subtitle: "Fai la Differenza",
+      title: "Diventa un Sostenitore",
+      description: "Partecipa facendo una donazione una tantum o ricorrente. Il tuo contributo aiuterà direttamente a finanziare la nostra ricerca e i servizi di supporto per pazienti e famiglie.",
+      benefits: ["Impatto diretto sulla ricerca", "Aggiornamenti regolari sui progressi", "Donazioni deducibili dalle tasse", "Uso trasparente dei fondi"]
     },
     featuredApartments: {
-      subtitle: "I Nostri Alloggi",
-      title: "Appartamenti in Evidenza",
-      description: "Scopri le nostre opzioni di alloggio più popolari, ognuna che offre un perfetto equilibrio di comfort, stile e viste mozzafiato sul mare.",
-      viewAll: "Visualizza Tutti gli Appartamenti"
+      subtitle: "Le Nostre Aree di Impatto",
+      title: "Dove la Tua Donazione Fa la Differenza",
+      description: "Scopri come il tuo supporto contribuisce direttamente alla ricerca rivoluzionaria sul cancro e ai servizi di assistenza ai pazienti.",
+      viewAll: "Visualizza Tutte le Aree di Impatto"
     },
     amenities: {
-      subtitle: "Servizi dell'Hotel",
-      title: "Vivi il Meglio",
-      description: "Goditi le nostre strutture e servizi premium progettati per rendere il tuo soggiorno eccezionale.",
+      subtitle: "Focus della Ricerca",
+      title: "Avanzare la Scienza Medica",
+      description: "Il nostro approccio completo alla ricerca sul cancro comprende molteplici aree di studio e supporto.",
       features: {
         beachfront: {
-          title: "Posizione Fronte Mare",
-          description: "Accesso diretto a spiagge incontaminate con acque cristalline."
+          title: "Ricerca di Laboratorio",
+          description: "Strutture all'avanguardia che conducono ricerca rivoluzionaria sui linfomi."
         },
         pools: {
-          title: "Piscine",
-          description: "Rilassati accanto alle nostre piscine a sfioro con vista mozzafiato sul mare."
+          title: "Studi Clinici",
+          description: "Test di nuovi trattamenti e terapie per pazienti con Linfoma Non-Hodgkin."
         },
         restaurant: {
-          title: "Ristorante Gourmet",
-          description: "Goditi squisita cucina locale e internazionale."
+          title: "Supporto Pazienti",
+          description: "Fornire assistenza e supporto ai pazienti e alle loro famiglie."
         },
         wifi: {
-          title: "Wi-Fi ad Alta Velocità",
-          description: "Rimani connesso con internet ad alta velocità gratuito."
+          title: "Collaborazione nella Ricerca",
+          description: "Partnership con le principali istituzioni di ricerca sul cancro in tutto il mondo."
         },
         bar: {
-          title: "Bar & Caffè sulla Spiaggia",
-          description: "Bevande rinfrescanti e snack serviti direttamente sulla spiaggia."
+          title: "Educazione e Sensibilizzazione",
+          description: "Aumentare la consapevolezza sui tumori del sangue e la loro prevenzione."
         },
         location: {
-          title: "Posizione Privilegiata",
-          description: "Vicino alle attrazioni locali, negozi e ristoranti."
+          title: "Centro di Innovazione",
+          description: "Con sede all'UCL, una delle principali università di ricerca al mondo."
         }
       }
     },
     cta: {
-      title: "Pronto per la tua Vacanza da Sogno?",
-      description: "Prenota il tuo soggiorno oggi e vivi il perfetto connubio di lusso, comfort e viste mozzafiato sul mare.",
-      bookNow: "Prenota Ora"
-    }
-  },
-  amenitiesPage: {
-    title: "I Nostri Servizi",
-    subtitle: "Scopri i servizi e le comodità di lusso che rendono il tuo soggiorno indimenticabile.",
-    description: "A MareSereno, ci dedichiamo a fornire un'esperienza di soggiorno completa e lussuosa. Dai nostri servizi sulla spiaggia alle strutture di benessere, ogni dettaglio è stato curato per garantire il massimo comfort e piacere.",
-    categories: {
-      wellness: {
-        title: "Benessere e Relax",
-        description: "Trattati con la nostra gamma di servizi benessere progettati per ringiovanire corpo e mente.",
-        items: [
-          {
-            title: "Spa di Lusso",
-            description: "La nostra spa offre una gamma completa di trattamenti, dalle terapie tradizionali ai trattamenti di bellezza più moderni."
-          },
-          {
-            title: "Centro Fitness",
-            description: "Mantieni la tua routine di fitness con la nostra palestra all'avanguardia con vista panoramica sul mare."
-          },
-          {
-            title: "Piscina Infinity",
-            description: "Immergiti nella nostra piscina a sfioro mentre ammiri l'orizzonte infinito del mare."
-          },
-          {
-            title: "Yoga sulla Spiaggia",
-            description: "Partecipa alle nostre sessioni di yoga mattutine sulla spiaggia per un risveglio rivitalizzante."
-          }
-        ]
-      },
-      dining: {
-        title: "Ristorazione",
-        description: "Scopri il meglio della cucina locale e internazionale nei nostri ristoranti e bar.",
-        items: [
-          {
-            title: "Ristorante Gourmet",
-            description: "Assapora piatti raffinati preparati dai nostri chef con ingredienti locali freschi."
-          },
-          {
-            title: "Bar sulla Spiaggia",
-            description: "Goditi cocktail rinfrescanti e snack leggeri con i piedi nella sabbia."
-          },
-          {
-            title: "Lounge Bar",
-            description: "Rilassati con una selezione di vini pregiati e liquori in un'atmosfera elegante."
-          },
-          {
-            title: "Servizio in Camera",
-            description: "Goditi pasti gourmet nella privacy del tuo appartamento, disponibile 24 ore su 24."
-          }
-        ]
-      },
-      services: {
-        title: "Servizi Extra",
-        description: "Approfitta dei nostri servizi aggiuntivi per un soggiorno senza problemi.",
-        items: [
-          {
-            title: "Concierge 24/7",
-            description: "Il nostro team di concierge è disponibile in qualsiasi momento per assisterti con qualsiasi richiesta."
-          },
-          {
-            title: "Trasferimenti Aeroportuali",
-            description: "Viaggia comodamente da e per l'aeroporto con il nostro servizio di trasferimento privato."
-          },
-          {
-            title: "Noleggio Auto",
-            description: "Esplora la zona con la nostra flotta di veicoli premium disponibili per il noleggio."
-          },
-          {
-            title: "Escursioni Guidate",
-            description: "Scopri le attrazioni locali con le nostre escursioni personalizzate guidate da esperti."
-          }
-        ]
-      },
-      entertainment: {
-        title: "Intrattenimento",
-        description: "Goditi una varietà di attività ricreative pensate per tutti i gusti.",
-        items: [
-          {
-            title: "Sport Acquatici",
-            description: "Prova una vasta gamma di sport acquatici, dal paddleboarding al jet skiing."
-          },
-          {
-            title: "Area Giochi per Bambini",
-            description: "I più piccoli possono divertirsi nella nostra area giochi sicura e supervisionata."
-          },
-          {
-            title: "Serate a Tema",
-            description: "Partecipa alle nostre serate a tema settimanali con musica dal vivo e intrattenimento."
-          },
-          {
-            title: "Biblioteca & Sala Giochi",
-            description: "Rilassati con un buon libro o goditi i giochi da tavolo nella nostra sala comune."
-          }
-        ]
-      }
+      title: "Pronto a Fare la Differenza?",
+      description: "Unisciti a noi nella lotta contro il Linfoma Non-Hodgkin. Il tuo supporto può aiutare a salvare vite e avvicinarci a una cura.",
+      bookNow: "Dona Ora"
     }
   },
   apartmentDescriptions: {
     "1": {
-      name: "Suite Vista Mare Deluxe",
-      description: "Suite lussuosa con vista panoramica sul mare, comfort moderni e balcone privato."
+      name: "Finanziamento Attrezzature di Laboratorio",
+      description: "Aiutaci ad acquistare strumenti vitali utilizzati quotidianamente nella ricerca rivoluzionaria sul cancro."
     },
     "2": {
-      name: "Appartamento Premium per Famiglie",
-      description: "Appartamento spazioso ideale per famiglie, con cucina completa e splendide viste costiere."
+      name: "Servizi di Supporto ai Pazienti",
+      description: "Fornire aiuto pratico e assistenza emotiva a coloro che lottano contro i tumori del sangue."
     },
     "3": {
-      name: "Studio Esecutivo sulla Spiaggia",
-      description: "Elegante studio con accesso diretto alla spiaggia, design moderno e finiture di pregio."
+      name: "Borse di Studio per Ricercatori",
+      description: "Potenziare la prossima generazione di scienziati del cancro attraverso dottorati finanziati."
     },
     "4": {
-      name: "Suite Attico di Lusso",
-      description: "Esclusiva suite all'ultimo piano con ampia terrazza e vista panoramica sul mare."
+      name: "Supporto agli Studi Clinici",
+      description: "Finanziare studi clinici innovativi che testano nuovi trattamenti per pazienti con linfomi."
     },
     "5": {
-      name: "Camera Doppia Classica",
-      description: "Confortevole camera d'albergo con comfort moderni e vista parziale sul mare."
+      name: "Infrastruttura di Ricerca",
+      description: "Supportare l'infrastruttura essenziale che consente ricerca oncologica di classe mondiale."
     },
     "6": {
-      name: "Appartamento Vista Giardino",
-      description: "Appartamento tranquillo circondato da rigogliosi giardini, a breve distanza dalla spiaggia."
+      name: "Educazione e Sensibilizzazione",
+      description: "Finanziare programmi che educano il pubblico sulla prevenzione e la diagnosi precoce dei tumori del sangue."
+    }
+  },
+  amenitiesPage: {
+    title: "Le Nostre Aree di Ricerca",
+    subtitle: "Scopri l'approccio completo che adottiamo alla ricerca sul cancro e al supporto ai pazienti.",
+    description: "A Cure Cancer @ UCL, ci concentriamo su molteplici aspetti della ricerca e del supporto oncologico, dalle scoperte di laboratorio all'assistenza ai pazienti, garantendo un approccio olistico per trovare una cura per il Linfoma Non-Hodgkin.",
+    categories: {
+      wellness: {
+        title: "Ricerca e Scoperta",
+        description: "Le nostre attività di ricerca principali focalizzate sulla comprensione e il trattamento del Linfoma Non-Hodgkin.",
+        items: [
+          {
+            title: "Ricerca di Biologia Molecolare",
+            description: "Comprensione dei meccanismi genetici e molecolari dietro lo sviluppo e la progressione dei linfomi."
+          },
+          {
+            title: "Sviluppo di Farmaci",
+            description: "Sviluppo e test di nuovi composti terapeutici specificamente mirati alle cellule del linfoma."
+          },
+          {
+            title: "Ricerca sull'Immunoterapia",
+            description: "Sfruttare il sistema immunitario del corpo per combattere il cancro più efficacemente."
+          },
+          {
+            title: "Scoperta di Biomarcatori",
+            description: "Identificazione di marcatori biologici per la diagnosi precoce e approcci di trattamento personalizzati."
+          }
+        ]
+      },
+      dining: {
+        title: "Supporto ai Pazienti",
+        description: "Servizi di supporto completi per pazienti e famiglie colpiti da tumori del sangue.",
+        items: [
+          {
+            title: "Supporto alle Cure Cliniche",
+            description: "Finanziamento di risorse aggiuntive per l'assistenza ai pazienti e il supporto al trattamento."
+          },
+          {
+            title: "Servizi di Informazione ai Pazienti",
+            description: "Fornire informazioni accessibili e accurate sui linfomi e le opzioni di trattamento."
+          },
+          {
+            title: "Programmi di Supporto alle Famiglie",
+            description: "Supportare le famiglie durante il percorso del cancro con consulenza e aiuto pratico."
+          },
+          {
+            title: "Programmi per Sopravvissuti",
+            description: "Supporto a lungo termine per i sopravvissuti al cancro e le loro esigenze di salute continue."
+          }
+        ]
+      },
+      services: {
+        title: "Educazione e Formazione",
+        description: "Costruire la prossima generazione di ricercatori del cancro e aumentare la consapevolezza pubblica.",
+        items: [
+          {
+            title: "Borse di Studio per Dottorati",
+            description: "Finanziamento di studenti di dottorato per intraprendere carriere nella ricerca sul cancro."
+          },
+          {
+            title: "Formazione alla Ricerca",
+            description: "Fornire opportunità di formazione avanzata per ricercatori all'inizio della carriera."
+          },
+          {
+            title: "Educazione Pubblica",
+            description: "Aumentare la consapevolezza sui tumori del sangue e l'importanza della ricerca."
+          },
+          {
+            title: "Formazione per Professionisti Medici",
+            description: "Formazione di professionisti sanitari negli approcci di trattamento più recenti per i linfomi."
+          }
+        ]
+      },
+      entertainment: {
+        title: "Collaborazione e Innovazione",
+        description: "Costruire partnership e promuovere l'innovazione nella ricerca sul cancro.",
+        items: [
+          {
+            title: "Collaborazioni Internazionali",
+            description: "Partnership con le principali istituzioni di ricerca sul cancro in tutto il mondo."
+          },
+          {
+            title: "Innovazione Tecnologica",
+            description: "Investimento in tecnologie all'avanguardia per la ricerca e il trattamento del cancro."
+          },
+          {
+            title: "Condivisione della Conoscenza",
+            description: "Facilitare la condivisione dei risultati della ricerca e delle migliori pratiche a livello globale."
+          },
+          {
+            title: "Partnership Industriali",
+            description: "Collaborazione con aziende farmaceutiche per accelerare lo sviluppo di farmaci."
+          }
+        ]
+      }
     }
   }
 };

@@ -1,169 +1,169 @@
 export const en = {
   nav: {
     home: "Home",
-    apartments: "Apartments",
-    amenities: "Amenities",
+    apartments: "Our Impact",
+    amenities: "Research Areas",
     gallery: "Gallery",
     contact: "Contact",
-    bookNow: "Book Now"
+    bookNow: "Donate Now"
   },
   hero: {
-    subtitle: "BEACHFRONT LUXURY ACCOMMODATION",
-    title: "Experience Seaside Tranquility",
-    description: "Discover our exclusive collection of luxury beachfront apartments and hotel rooms, offering unparalleled comfort and breathtaking sea views.",
-    bookStay: "Book Your Stay",
-    exploreApartments: "Explore Apartments",
+    subtitle: "CURE CANCER @ UCL",
+    title: "Advancing Cancer Research at UCL",
+    description: "Cure Cancer @ UCL is dedicated to pioneering research into Non-Hodgkin's Lymphoma — a silent but deadly group of blood and lymphatic cancers. Together, we accelerate breakthroughs in treatment and discovery.",
+    bookStay: "Support Our Research",
+    exploreApartments: "About the Cause",
     scrollDown: "Scroll Down"
   },
   footer: {
-    description: "Luxurious beachfront apartments and hotel rooms with stunning sea views, offering the perfect blend of comfort and elegance for your dream vacation.",
+    description: "Cure Cancer @ UCL funds cutting-edge research into Non-Hodgkin's Lymphoma, supporting world-class researchers and driving innovation in cancer diagnostics and therapies.",
     quickLinks: "Quick Links",
     contact: "Contact",
     newsletter: "Newsletter",
-    newsletterDesc: "Subscribe to our newsletter for special deals and updates.",
+    newsletterDesc: "Subscribe to our newsletter for research updates and charity news.",
     yourEmail: "Your email address",
     subscribe: "Subscribe",
     allRights: "All rights reserved."
   },
   bookingForm: {
-    title: "Book Your Stay",
-    checkIn: "Check-in Date",
-    checkOut: "Check-out Date",
-    adults: "Adults",
-    children: "Children",
-    adult: "Adult",
-    child: "Child",
-    selectDate: "Select date",
-    checkAvailability: "Check Availability",
-    bookingConfirmed: "Booking Confirmed!"
+    title: "Become a Supporter",
+    checkIn: "First Name",
+    checkOut: "Last Name",
+    adults: "Donation Type",
+    children: "Amount",
+    adult: "One-time",
+    child: "Monthly",
+    selectDate: "Enter name",
+    checkAvailability: "Donate Now",
+    bookingConfirmed: "Thank You for Your Support!"
   },
   testimonials: {
-    title: "What Our Guests Say",
-    description: "Discover why our guests keep coming back to MareSereno for their seaside getaways."
+    title: "Stories of Hope",
+    description: "Hear from researchers, patients, and supporters who believe in our mission to find a cure for Non-Hodgkin's Lymphoma."
   },
   notFound: {
     title: "Page Not Found",
-    description: "We couldn't find the page you were looking for. Perhaps you took a wrong turn in paradise?",
+    description: "We couldn't find the page you were looking for. Perhaps you'd like to return to our mission?",
     returnHome: "Return Home"
   },
   home: {
     welcome: {
-      subtitle: "Welcome to MareSereno",
-      title: "Luxury Seaside Accommodations",
-      description1: "Nestled on the pristine Mediterranean coastline, MareSereno offers an exquisite collection of luxury apartments and hotel rooms. Our beachfront accommodations combine elegant design with modern comfort, creating the perfect setting for an unforgettable seaside getaway.",
-      description2: "Whether you're seeking a romantic escape, a family vacation, or a peaceful retreat, our diverse range of accommodations caters to every preference and need. Each space is thoughtfully designed to provide panoramic sea views and direct beach access.",
-      learnMore: "Learn More"
+      subtitle: "Welcome to Cure Cancer @ UCL",
+      title: "Where Science Meets Hope",
+      description1: "In collaboration with the UCL Cancer Institute, we fund cutting-edge equipment, support world-class researchers, and drive forward innovation in cancer diagnostics and therapies. Every donation helps us get closer to a cure.",
+      description2: "Our research focuses specifically on Non-Hodgkin's Lymphoma, a group of blood cancers that affects thousands of people each year. Through groundbreaking studies and clinical trials, we're working to develop better treatments and ultimately find a cure.",
+      learnMore: "Learn More About Our Mission"
     },
     booking: {
-      subtitle: "Book Your Stay",
-      title: "Reserve Your Perfect Getaway",
-      description: "Take the first step towards your dream vacation by checking availability and securing your preferred dates. Our simple booking process ensures a seamless experience from reservation to arrival.",
-      benefits: ["Instant confirmation", "Best rate guarantee", "Flexible cancellation options", "Secure payment"]
+      subtitle: "Make a Difference",
+      title: "Become a Supporter",
+      description: "Get involved by making a one-time or recurring donation. Your contribution will directly help fund our research and support services for patients and families.",
+      benefits: ["Direct impact on research", "Regular progress updates", "Tax-deductible donations", "Transparent fund usage"]
     },
     featuredApartments: {
-      subtitle: "Our Accommodations",
-      title: "Featured Apartments",
-      description: "Discover our most popular accommodation options, each offering a perfect blend of comfort, style, and breathtaking sea views.",
-      viewAll: "View All Apartments"
+      subtitle: "Our Impact Areas",
+      title: "Where Your Donation Makes a Difference",
+      description: "Discover how your support directly contributes to breakthrough cancer research and patient care services.",
+      viewAll: "View All Impact Areas"
     },
     amenities: {
-      subtitle: "Hotel Amenities",
-      title: "Experience The Best",
-      description: "Enjoy our premium facilities and services designed to make your stay exceptional.",
+      subtitle: "Research Focus",
+      title: "Advancing Medical Science",
+      description: "Our comprehensive approach to cancer research encompasses multiple areas of study and support.",
       features: {
         beachfront: {
-          title: "Beachfront Location",
-          description: "Direct access to pristine beaches with crystal clear waters."
+          title: "Laboratory Research",
+          description: "State-of-the-art facilities conducting groundbreaking lymphoma research."
         },
         pools: {
-          title: "Swimming Pools",
-          description: "Relax by our infinity pools with stunning sea views."
+          title: "Clinical Trials",
+          description: "Testing new treatments and therapies for Non-Hodgkin's Lymphoma patients."
         },
         restaurant: {
-          title: "Gourmet Restaurant",
-          description: "Enjoy exquisite local and international cuisine."
+          title: "Patient Support",
+          description: "Providing care and assistance to patients and their families."
         },
         wifi: {
-          title: "High-Speed Wi-Fi",
-          description: "Stay connected with complimentary high-speed internet."
+          title: "Research Collaboration",
+          description: "Partnering with leading cancer research institutions worldwide."
         },
         bar: {
-          title: "Beach Bar & Café",
-          description: "Refreshing drinks and snacks served right on the beach."
+          title: "Education & Awareness",
+          description: "Raising awareness about blood cancers and their prevention."
         },
         location: {
-          title: "Prime Location",
-          description: "Close to local attractions, shops, and restaurants."
+          title: "Innovation Hub",
+          description: "Located at UCL, one of the world's leading research universities."
         }
       }
     },
     cta: {
-      title: "Ready for Your Dream Vacation?",
-      description: "Book your stay today and experience the perfect blend of luxury, comfort, and stunning sea views.",
-      bookNow: "Book Now"
+      title: "Ready to Make a Difference?",
+      description: "Join us in the fight against Non-Hodgkin's Lymphoma. Your support can help save lives and bring us closer to a cure.",
+      bookNow: "Donate Now"
     }
   },
   apartments: {
-    title: "Our Apartments & Rooms",
-    subtitle: "Discover our selection of premium accommodations, ranging from cozy studios to luxurious penthouses.",
+    title: "Our Impact Areas",
+    subtitle: "Discover how your donations directly contribute to breakthrough cancer research and patient support services.",
     filters: {
-      guests: "Guests",
-      anyGuests: "Any number of guests",
-      onePlus: "1+ guests",
-      twoPlus: "2+ guests",
-      threePlus: "3+ guests",
-      fourPlus: "4+ guests",
-      location: "Location",
-      allLocations: "All locations",
-      priceRange: "Price Range",
+      guests: "Impact Type",
+      anyGuests: "All impact areas",
+      onePlus: "Research funding",
+      twoPlus: "Patient support",
+      threePlus: "Equipment funding",
+      fourPlus: "Education programs",
+      location: "Research Area",
+      allLocations: "All research areas",
+      priceRange: "Donation Range",
       showing: "Showing",
       of: "of",
-      accommodations: "accommodations",
+      accommodations: "impact areas",
       resetFilters: "Reset Filters",
-      noMatch: "No apartments match your filters",
+      noMatch: "No impact areas match your filters",
       adjustFilters: "Try adjusting your filter criteria to see more options.",
-      viewDetails: "View Details",
-      features: "features",
+      viewDetails: "Learn More",
+      features: "benefits",
       more: "more"
     }
   },
   gallery: {
-    title: "Photo Gallery",
-    subtitle: "Explore our seaside paradise through captivating imagery.",
+    title: "Research Gallery",
+    subtitle: "Explore our cutting-edge research facilities and see our scientists at work.",
     filters: {
       all: "All",
-      exterior: "Exterior",
-      rooms: "Rooms",
-      amenities: "Amenities"
+      exterior: "Facilities",
+      rooms: "Laboratories",
+      amenities: "Equipment"
     }
   },
   booking: {
-    title: "Book Your Stay",
-    subtitle: "Complete your reservation in a few simple steps.",
+    title: "Make a Donation",
+    subtitle: "Support our research in a few simple steps.",
     steps: {
-      chooseRoom: "Choose Room",
-      guestDetails: "Guest Details",
+      chooseRoom: "Choose Impact",
+      guestDetails: "Donor Details",
       confirmation: "Confirmation"
     },
     dates: {
-      selectDates: "Select Dates and Guests",
-      checkIn: "Check-in Date",
-      checkOut: "Check-out Date",
-      adults: "Adults",
-      children: "Children",
-      adult: "Adult",
-      child: "Child",
-      selectDate: "Select date"
+      selectDates: "Select Your Support",
+      checkIn: "First Name",
+      checkOut: "Last Name",
+      adults: "Donation Type",
+      children: "Amount (£)",
+      adult: "One-time",
+      child: "Monthly",
+      selectDate: "Enter details"
     },
     accommodationSelect: {
-      title: "Select Your Accommodation",
-      guests: "Guests",
+      title: "Select Your Impact Area",
+      guests: "Donation",
       selected: "Selected",
       select: "Select",
       continue: "Continue"
     },
     guestInfo: {
-      title: "Guest Information",
+      title: "Donor Information",
       firstName: "First Name",
       lastName: "Last Name",
       email: "Email",
@@ -172,13 +172,13 @@ export const en = {
       city: "City",
       zipCode: "Zip Code",
       country: "Country",
-      specialRequests: "Special Requests",
-      specialRequestsPlaceholder: "Any special requests or notes for your stay"
+      specialRequests: "Special Message",
+      specialRequestsPlaceholder: "Any message or dedication for your donation"
     },
     payment: {
       title: "Payment Information",
       creditCard: "Credit Card",
-      payAtProperty: "Pay at Property",
+      payAtProperty: "Bank Transfer",
       nameOnCard: "Name on Card",
       cardNumber: "Card Number",
       cardNumberPlaceholder: "0000 0000 0000 0000",
@@ -186,55 +186,55 @@ export const en = {
       expiryDatePlaceholder: "MM/YY",
       cvc: "CVC",
       cvcPlaceholder: "123",
-      payAtPropertyInfo: "You will be required to provide a valid credit card upon arrival for security purposes, but payment will be collected during your stay at the property."
+      payAtPropertyInfo: "You can also make your donation via bank transfer. Contact us for account details and reference information."
     },
     summary: {
-      title: "Booking Summary",
-      checkIn: "Check-in",
-      checkOut: "Check-out",
-      guests: "Guests",
-      night: "night",
-      nights: "nights",
-      cleaningFee: "Cleaning fee",
-      serviceFee: "Service fee",
+      title: "Donation Summary",
+      checkIn: "Impact Area",
+      checkOut: "Frequency",
+      guests: "Amount",
+      night: "month",
+      nights: "months",
+      cleaningFee: "Processing fee",
+      serviceFee: "Administrative fee",
       total: "Total"
     },
     confirmation: {
-      title: "Review Booking Details",
-      accommodationDetails: "Accommodation Details",
-      guestDetails: "Guest Details",
+      title: "Review Donation Details",
+      accommodationDetails: "Impact Area Details",
+      guestDetails: "Donor Details",
       name: "Name",
       email: "Email",
       phone: "Phone",
-      address: "Address", 
+      address: "Address",
       city: "City",
       country: "Country",
-      specialRequests: "Special Requests",
+      specialRequests: "Special Message",
       paymentMethod: "Payment Method",
       creditCard: "Credit Card",
-      priceSummary: "Price Summary",
+      priceSummary: "Donation Summary",
       termsAgree: "I agree to the",
       termsLink: "Terms and Conditions",
       privacyLink: "Privacy Policy",
-      cancellationInfo: "I understand that my booking is subject to the property's cancellation policy.",
+      cancellationInfo: "I understand that my donation supports cancer research at UCL.",
       back: "Back",
-      confirmBooking: "Confirm Booking",
-      success: "Booking Confirmed!",
-      emailSent: "Your reservation has been successfully confirmed. A confirmation email has been sent to",
-      bookingReference: "Booking Reference",
+      confirmBooking: "Confirm Donation",
+      success: "Donation Confirmed!",
+      emailSent: "Your donation has been successfully processed. A confirmation email has been sent to",
+      bookingReference: "Donation Reference",
       returnToHome: "Return to Homepage"
     }
   },
   contact: {
     title: "Contact Us",
-    subtitle: "We're here to help make your stay unforgettable. Reach out with any questions or special requests.",
+    subtitle: "Get in touch with our team to learn more about our research or how you can support our mission.",
     getInTouch: "Get In Touch",
     address: "Address",
     phone: "Phone",
     email: "Email",
-    receptionHours: "Reception Hours",
-    checkInTime: "Check-in: After 3:00 PM",
-    checkOutTime: "Check-out: Before 11:00 AM",
+    receptionHours: "Office Hours",
+    checkInTime: "Monday - Friday: 9:00 AM - 5:00 PM",
+    checkOutTime: "Saturday: 10:00 AM - 2:00 PM",
     sendMessage: "Send Us a Message",
     fullName: "Full Name",
     phoneNumber: "Phone Number",
@@ -245,150 +245,150 @@ export const en = {
     messageSent: "Message Sent!",
     thankYou: "Thank you for reaching out. We'll respond to your message as soon as possible.",
     faq: "Frequently Asked Questions",
-    faqSubtitle: "Find quick answers to commonly asked questions about our accommodations and services.",
+    faqSubtitle: "Find quick answers to commonly asked questions about our research and charity.",
     questions: {
       checkInOut: {
-        question: "What are your check-in and check-out times?",
-        answer: "Check-in is from 3:00 PM onwards, and check-out is until 11:00 AM. Early check-in or late check-out may be arranged based on availability."
+        question: "How are donations used?",
+        answer: "100% of donations go directly to funding research equipment, supporting researchers, and patient care services. Administrative costs are covered separately."
       },
       parking: {
-        question: "Is parking available at the property?",
-        answer: "Yes, we offer complimentary parking for all guests. Valet parking service is also available for an additional fee."
+        question: "Is my donation tax-deductible?",
+        answer: "Yes, as a registered charity, all donations are tax-deductible. You'll receive a receipt for your records and tax purposes."
       },
       pets: {
-        question: "Are pets allowed in the apartments?",
-        answer: "We welcome pets in designated pet-friendly apartments. Please inform us in advance if you plan to bring a pet, as additional charges may apply."
+        question: "Can I visit the research facilities?",
+        answer: "We occasionally organize donor visits and open days. Please contact us to learn about upcoming opportunities to see our research in action."
       },
       breakfast: {
-        question: "Is breakfast included in the room rate?",
-        answer: "Breakfast is included in select room packages. You can check the inclusion during the booking process or add it to your reservation at any time."
+        question: "How can I get research updates?",
+        answer: "Subscribe to our newsletter to receive regular updates on research progress, breakthrough discoveries, and stories from our patients and researchers."
       },
       transfers: {
-        question: "Do you offer airport transfers?",
-        answer: "Yes, we offer airport transfers for an additional fee. Please contact our concierge at least 48 hours before your arrival to arrange transportation."
+        question: "Can I support a specific research project?",
+        answer: "Yes, we offer the option to direct your donation to specific research areas or projects. Contact our team to discuss targeted giving opportunities."
       },
       amenities: {
-        question: "What amenities are available at the property?",
-        answer: "Our property features swimming pools, a spa, restaurants, a beach bar, fitness center, and direct beach access. All apartments include Wi-Fi, air conditioning, and modern appliances."
+        question: "What is Non-Hodgkin's Lymphoma?",
+        answer: "Non-Hodgkin's Lymphoma is a group of blood cancers that develop in the lymphatic system. Our research focuses on understanding these cancers better to develop more effective treatments."
       }
     }
   },
   apartmentDescriptions: {
     "1": {
-      name: "Deluxe Sea View Suite",
-      description: "Luxurious suite with panoramic sea views, modern amenities, and a private balcony."
+      name: "Lab Equipment Funding",
+      description: "Help us purchase vital tools used daily in breakthrough cancer research."
     },
     "2": {
-      name: "Premium Family Apartment",
-      description: "Spacious apartment ideal for families, with full kitchen and stunning coastal views."
+      name: "Patient Support Services",
+      description: "Providing practical help and emotional care for those fighting blood cancer."
     },
     "3": {
-      name: "Executive Beach Studio",
-      description: "Elegant studio with direct beach access, modern design, and premium finishes."
+      name: "Scholarships for Researchers",
+      description: "Empower the next generation of cancer scientists through funded PhDs."
     },
     "4": {
-      name: "Luxury Penthouse Suite",
-      description: "Exclusive top-floor suite with expansive terrace and panoramic sea views."
+      name: "Clinical Trial Support",
+      description: "Fund innovative clinical trials testing new treatments for lymphoma patients."
     },
     "5": {
-      name: "Classic Double Room",
-      description: "Comfortable hotel room with modern amenities and partial sea views."
+      name: "Research Infrastructure",
+      description: "Support the essential infrastructure that enables world-class cancer research."
     },
     "6": {
-      name: "Garden View Apartment",
-      description: "Peaceful apartment surrounded by lush gardens, just a short walk from the beach."
+      name: "Education & Awareness",
+      description: "Fund programs that educate the public about blood cancer prevention and early detection."
     }
   },
   amenitiesPage: {
-    title: "Our Amenities",
-    subtitle: "Discover the luxury amenities and services that make your stay unforgettable.",
-    description: "At MareSereno, we are dedicated to providing a comprehensive and luxurious stay experience. From our beachfront services to wellness facilities, every detail has been curated to ensure maximum comfort and pleasure.",
+    title: "Our Research Areas",
+    subtitle: "Discover the comprehensive approach we take to cancer research and patient support.",
+    description: "At Cure Cancer @ UCL, we focus on multiple aspects of cancer research and support, from laboratory discoveries to patient care, ensuring a holistic approach to finding a cure for Non-Hodgkin's Lymphoma.",
     categories: {
       wellness: {
-        title: "Wellness & Relaxation",
-        description: "Treat yourself with our range of wellness services designed to rejuvenate body and mind.",
+        title: "Research & Discovery",
+        description: "Our core research activities focused on understanding and treating Non-Hodgkin's Lymphoma.",
         items: [
           {
-            title: "Luxury Spa",
-            description: "Our spa offers a full range of treatments, from traditional therapies to the most modern beauty treatments."
+            title: "Molecular Biology Research",
+            description: "Understanding the genetic and molecular mechanisms behind lymphoma development and progression."
           },
           {
-            title: "Fitness Center",
-            description: "Maintain your fitness routine with our state-of-the-art gym featuring panoramic sea views."
+            title: "Drug Development",
+            description: "Developing and testing new therapeutic compounds specifically targeting lymphoma cells."
           },
           {
-            title: "Infinity Pool",
-            description: "Immerse yourself in our infinity pool while admiring the endless horizon of the sea."
+            title: "Immunotherapy Research",
+            description: "Harnessing the body's immune system to fight cancer more effectively."
           },
           {
-            title: "Beach Yoga",
-            description: "Join our morning yoga sessions on the beach for a revitalizing awakening."
+            title: "Biomarker Discovery",
+            description: "Identifying biological markers for early detection and personalized treatment approaches."
           }
         ]
       },
       dining: {
-        title: "Dining",
-        description: "Discover the best of local and international cuisine at our restaurants and bars.",
+        title: "Patient Support",
+        description: "Comprehensive support services for patients and families affected by blood cancers.",
         items: [
           {
-            title: "Gourmet Restaurant",
-            description: "Savor fine dishes prepared by our chefs with fresh local ingredients."
+            title: "Clinical Care Support",
+            description: "Funding additional resources for patient care and treatment support."
           },
           {
-            title: "Beach Bar",
-            description: "Enjoy refreshing cocktails and light snacks with your feet in the sand."
+            title: "Patient Information Services",
+            description: "Providing accessible, accurate information about lymphoma and treatment options."
           },
           {
-            title: "Lounge Bar",
-            description: "Relax with a selection of fine wines and spirits in an elegant atmosphere."
+            title: "Family Support Programs",
+            description: "Supporting families through the cancer journey with counseling and practical help."
           },
           {
-            title: "Room Service",
-            description: "Enjoy gourmet meals in the privacy of your apartment, available 24 hours a day."
+            title: "Survivorship Programs",
+            description: "Long-term support for cancer survivors and their ongoing health needs."
           }
         ]
       },
       services: {
-        title: "Extra Services",
-        description: "Take advantage of our additional services for a hassle-free stay.",
+        title: "Education & Training",
+        description: "Building the next generation of cancer researchers and raising public awareness.",
         items: [
           {
-            title: "24/7 Concierge",
-            description: "Our concierge team is available at any time to assist you with any request."
+            title: "PhD Scholarships",
+            description: "Funding doctoral students to pursue careers in cancer research."
           },
           {
-            title: "Airport Transfers",
-            description: "Travel comfortably to and from the airport with our private transfer service."
+            title: "Research Training",
+            description: "Providing advanced training opportunities for early-career researchers."
           },
           {
-            title: "Car Rental",
-            description: "Explore the area with our fleet of premium vehicles available for rent."
+            title: "Public Education",
+            description: "Raising awareness about blood cancers and the importance of research."
           },
           {
-            title: "Guided Excursions",
-            description: "Discover local attractions with our personalized expert-guided tours."
+            title: "Medical Professional Training",
+            description: "Training healthcare professionals in the latest lymphoma treatment approaches."
           }
         ]
       },
       entertainment: {
-        title: "Entertainment",
-        description: "Enjoy a variety of recreational activities designed for all tastes.",
+        title: "Collaboration & Innovation",
+        description: "Building partnerships and fostering innovation in cancer research.",
         items: [
           {
-            title: "Water Sports",
-            description: "Try a wide range of water sports, from paddleboarding to jet skiing."
+            title: "International Collaborations",
+            description: "Partnering with leading cancer research institutions worldwide."
           },
           {
-            title: "Kids Play Area",
-            description: "Little ones can have fun in our safe and supervised play area."
+            title: "Technology Innovation",
+            description: "Investing in cutting-edge technologies for cancer research and treatment."
           },
           {
-            title: "Themed Evenings",
-            description: "Join our weekly themed evenings with live music and entertainment."
+            title: "Knowledge Sharing",
+            description: "Facilitating the sharing of research findings and best practices globally."
           },
           {
-            title: "Library & Game Room",
-            description: "Relax with a good book or enjoy board games in our common room."
+            title: "Industry Partnerships",
+            description: "Collaborating with pharmaceutical companies to accelerate drug development."
           }
         ]
       }

@@ -15,27 +15,27 @@ interface Testimonial {
 const testimonials: Testimonial[] = [
   {
     id: 1,
-    name: "Sophia Martinez",
-    location: "New York, USA",
+    name: "Dr. Sarah Williams",
+    location: "UCL Cancer Institute",
     avatar: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150&h=150&fit=crop&crop=faces",
-    content: "My family and I had the most wonderful stay at MareSereno. The apartment was immaculate, with breathtaking sea views. The staff went above and beyond to make our vacation special.",
+    content: "The funding from Cure Cancer @ UCL has enabled our research team to make significant breakthroughs in understanding Non-Hodgkin's Lymphoma. We're closer to finding effective treatments thanks to this vital support.",
     rating: 5
   },
   {
     id: 2,
-    name: "Marco Rossi",
-    location: "Rome, Italy",
+    name: "James Thompson",
+    location: "Lymphoma Survivor",
     avatar: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=150&h=150&fit=crop&crop=faces",
-    content: "Absolutely perfect location, steps away from the beach. The apartment had everything we needed and more. The modern amenities combined with the traditional coastal charm created a truly magical experience.",
+    content: "After being diagnosed with Non-Hodgkin's Lymphoma, I was connected with incredible support services. The research happening at UCL gives me hope for the future and for others facing this diagnosis.",
     rating: 5
   },
   {
     id: 3,
-    name: "Emma Johnson",
-    location: "London, UK",
+    name: "Professor Michael Chen",
+    location: "Cancer Research UK",
     avatar: "https://images.unsplash.com/photo-1569913486515-b74bf7751574?w=150&h=150&fit=crop&crop=faces",
-    content: "We spent a wonderful week at this beachfront paradise. The sunrise views from our terrace were worth the trip alone. Exceptionally clean and beautifully designed spaces.",
-    rating: 4
+    content: "Cure Cancer @ UCL's commitment to funding innovative research has accelerated our understanding of blood cancers. Their support enables us to pursue the most promising avenues for treatment development.",
+    rating: 5
   },
 ];
 
