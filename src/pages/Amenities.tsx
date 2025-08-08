@@ -34,15 +34,9 @@ export default function Amenities() {
         <section className="relative py-20 bg-gradient-to-r from-sea-light to-white dark:from-sea-dark dark:to-background">
           <div className="container relative z-10 pt-20">
             <div className="text-center max-w-3xl mx-auto">
-              <span className="text-sm text-primary font-medium uppercase tracking-wider">
-                MareSereno
-              </span>
               <h1 className="text-4xl md:text-5xl font-bold mt-2 mb-6">
-                {t.amenitiesPage.title}
+                Our Partnership with the UCL Cancer Institute
               </h1>
-              <p className="text-muted-foreground">
-                {t.amenitiesPage.subtitle}
-              </p>
             </div>
           </div>
           
@@ -57,8 +51,14 @@ export default function Amenities() {
         <section className="py-16">
           <div className="container">
             <div className="max-w-3xl mx-auto text-center">
+              <p className="text-lg text-muted-foreground mb-6">
+                CureCancer UCL proudly supports the UCL Cancer Institute by funding key research tools and equipment that lead to real-world breakthroughs in treatment.
+              </p>
+              <p className="text-lg text-muted-foreground mb-6">
+                While UCL's reputation speaks for itself, our focus is on making direct, meaningful impact—not just celebrating achievements, but actively enabling them.
+              </p>
               <p className="text-lg text-muted-foreground">
-                {t.amenitiesPage.description}
+                Your support ensures donations are used for what truly matters: saving lives through science.
               </p>
             </div>
           </div>

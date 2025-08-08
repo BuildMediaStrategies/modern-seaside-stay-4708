@@ -16,10 +16,10 @@ export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   
   const navLinks = [
-    { name: t.nav.home, path: "/" },
     { name: t.nav.apartments, path: "/apartments" },
     { name: t.nav.amenities, path: "/amenities" },
-    { name: t.nav.gallery, path: "/gallery" },
+    { name: "Wishlist", path: "/wishlist" },
+    { name: "Team", path: "/team" },
     { name: t.nav.contact, path: "/contact" }
   ];
 
