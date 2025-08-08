@@ -47,9 +47,11 @@ export default function HeroSection() {
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6">
             {t.hero.title}
           </h1>
-          <p className="text-lg text-white/90 mb-8 max-w-2xl mx-auto font-bold">
-            {t.hero.description}
-          </p>
+          <div className="bg-black/60 rounded-md px-4 py-2 mb-8" aria-label="About Cure Cancer at UCL">
+            <p className="font-serif text-lg sm:text-xl font-medium leading-relaxed max-w-3xl mx-auto text-white">
+              {t.hero.description}
+            </p>
+          </div>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <Button asChild size="lg" variant="heroSolid" className="min-w-[200px] rounded-full transform transition-all duration-300 hover:translate-y-[-2px]">
               <Link to="/booking">{t.hero.bookStay}</Link>
