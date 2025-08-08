@@ -44,11 +44,6 @@ export default function HeroSection() {
         style={{ transform: `translateY(${contentY}px)` }}
       >
         <div className="max-w-3xl animate-fade-in">
-          <img 
-            src="/ChatGPT Image Aug 8, 2025, 12_12_53 AM.png" 
-            alt="Cure Cancer @ UCL Logo" 
-            className="inline-block mb-2 h-40 w-auto mx-auto"
-          />
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6">
             {t.hero.title}
           </h1>
