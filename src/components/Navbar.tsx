@@ -41,7 +41,7 @@ export default function Navbar() {
             <img 
               src="/assets/ChatGPT Image Aug 8, 2025, 11_43_00 AM.png" 
               alt="Cure Cancer @ UCL Logo" 
-              className="h-16 w-auto"
+             className="h-20 w-auto object-contain"
             />
           </Link>
         </div>
