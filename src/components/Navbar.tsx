@@ -39,9 +39,9 @@ export default function Navbar() {
         <div className="flex items-center space-x-2">
           <Link to="/" className="flex items-center">
             <img 
-              src="/assets/ChatGPT Image Aug 8, 2025, 11_43_00 AM.png" 
+              src="/assets/Untitled design (4).svg" 
               alt="Cure Cancer @ UCL Logo" 
-             className="h-28 w-auto object-contain"
+             className="h-32 w-auto object-contain"
             />
           </Link>
         </div>
