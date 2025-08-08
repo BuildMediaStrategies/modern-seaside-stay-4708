@@ -37,6 +37,13 @@ export default function Navbar() {
   return <header className={cn("fixed top-0 left-0 right-0 z-50 transition-all duration-300", scrolled ? "bg-white/80 dark:bg-card/80 backdrop-blur-lg py-3 shadow-md" : "bg-transparent py-5")}>
       <nav className="container flex justify-between items-center">
         <div className="flex items-center space-x-2">
+          <Link to="/" className="flex items-center">
+            <img 
+              src="/assets/ChatGPT Image Aug 8, 2025, 11_43_00 AM.png" 
+              alt="Cure Cancer @ UCL Logo" 
+              className="h-12 w-auto"
+            />
+          </Link>
         </div>
 
         {/* Desktop Navigation */}
