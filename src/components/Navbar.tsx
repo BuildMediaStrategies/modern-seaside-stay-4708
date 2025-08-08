@@ -7,6 +7,9 @@ import ThemeToggle from "./ThemeToggle";
 import { Button } from "@/components/ui/button";
 import { useLanguage } from "@/contexts/LanguageContext";
 
+// Temporary stub to avoid runtime errors; renders nothing.
+const LanguageSelector = (_props: any) => null;
+
 export default function Navbar() {
   const { t } = useLanguage();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
