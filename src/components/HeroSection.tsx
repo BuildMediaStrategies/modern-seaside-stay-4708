@@ -47,7 +47,7 @@ export default function HeroSection() {
           <img 
             src="/ChatGPT Image Aug 8, 2025, 12_12_53 AM.png" 
             alt="Cure Cancer @ UCL Logo" 
-            className="inline-block mb-4 h-16 w-auto mx-auto"
+            className="inline-block mb-4 h-32 w-auto mx-auto"
           />
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6">
             {t.hero.title}
