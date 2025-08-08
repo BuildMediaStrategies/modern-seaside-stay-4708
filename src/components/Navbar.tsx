@@ -82,6 +82,7 @@ export default function Navbar() {
             </div>
             
             <Button asChild className="w-full btn-primary mt-6">
+              <Link to="/booking">
                 {t.nav.bookNow}
               </Link>
             </Button>
