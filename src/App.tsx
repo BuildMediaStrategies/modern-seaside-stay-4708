@@ -7,7 +7,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { LanguageProvider } from "@/contexts/LanguageContext";
 import Index from "./pages/Index";
 import Apartments from "./pages/Apartments";
-import BookingPage from "./pages/BookingPage";
+import DonatePage from "./pages/DonatePage";
 import Wishlist from "./pages/Gallery"; // Renamed Gallery to Wishlist
 import Team from "./pages/Team";
 import Contact from "./pages/Contact";
@@ -26,7 +26,7 @@ const AppRoot = () => (
         <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/apartments" element={<Apartments />} />
-          <Route path="/booking" element={<BookingPage />} />
+          <Route path="/donate" element={<DonatePage />} />
           <Route path="/wishlist" element={<Wishlist />} />
           <Route path="/team" element={<Team />} />
           <Route path="/contact" element={<Contact />} />

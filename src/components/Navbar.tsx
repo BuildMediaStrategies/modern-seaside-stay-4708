@@ -83,9 +83,9 @@ export default function Navbar() {
             </div>
             
             <Button asChild className="w-full btn-primary mt-6">
-              <Link to="/booking">
+              <Link to="/donate">
                 Donate Now
-              </Link>
+              <Link to="/donate">Donate Now</Link>
             </Button>
           </div>
         </div>

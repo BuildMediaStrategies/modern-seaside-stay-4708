@@ -39,7 +39,7 @@ export default function Footer() {
                 { name: "Research Areas", path: "/amenities" },
                 { name: "Wishlist", path: "/wishlist" },
                 { name: "Contact", path: "/contact" },
-                { name: "Donate Now", path: "/booking" },
+                { name: "Donate Now", path: "/donate" },
               ].map((link) => (
                 <li key={link.name}>
                   <Link 
