@@ -127,7 +127,7 @@ export default function Index() {
         <HeroSection />
         
         {/* Welcome Section */}
-        <section id="welcome" className="section">
+        <section id="welcome" className="section bg-white">
           <div className="container">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
               <div className="animate-fade-in [animation-delay:100ms]">
@@ -178,7 +178,7 @@ export default function Index() {
         </section>
         
         {/* Booking Form Section */}
-        <section className="relative py-20 bg-gradient-to-r from-sea-light to-white dark:from-sea-dark dark:to-background overflow-hidden">
+        <section className="relative py-20 bg-gradient-to-r from-sea-light to-white overflow-hidden">
           <div className="container relative z-10">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
               <div className="animate-fade-in">
@@ -215,7 +215,7 @@ export default function Index() {
         </section>
         
         {/* Impact Areas */}
-        <section className="section">
+        <section className="section bg-white">
           <div className="container">
             <div className="text-center max-w-3xl mx-auto mb-12 animate-fade-in">
               <span className="text-sm text-primary font-medium uppercase tracking-wider">
@@ -251,7 +251,7 @@ export default function Index() {
         <TestimonialsSection />
         
         {/* Features Section */}
-        <section className="section bg-card">
+        <section className="section bg-white">
           <div className="container">
             <div className="text-center max-w-3xl mx-auto mb-12 animate-fade-in">
               <span className="text-sm text-primary font-medium uppercase tracking-wider">
@@ -304,7 +304,7 @@ export default function Index() {
           {/* Decorative waves */}
           <div className="absolute bottom-0 left-0 right-0 h-24 overflow-hidden">
             <svg 
-              className="absolute bottom-0 w-full h-24 fill-background"
+              className="absolute bottom-0 w-full h-24 fill-white"
               preserveAspectRatio="none"
               viewBox="0 0 1440 74"
               xmlns="http://www.w3.org/2000/svg"

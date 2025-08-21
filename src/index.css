@@ -5,6 +5,13 @@
 @tailwind components;
 @tailwind utilities;
 
+html, body {
+  background: #ffffff;
+  color: #0f172a;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
 @layer base {
   :root {
     --background: 210 50% 98%;
@@ -38,44 +45,12 @@
     --radius: 0.5rem;
   }
 
-  .dark {
-    --background: 210 30% 12%;
-    --foreground: 210 20% 98%;
-
-    --card: 210 30% 15%;
-    --card-foreground: 210 20% 98%;
-
-    --popover: 210 30% 15%;
-    --popover-foreground: 210 20% 98%;
-
-    --primary: 330 81% 60%;
-    --primary-foreground: 0 0% 100%;
-
-    --secondary: 210 30% 20%;
-    --secondary-foreground: 210 20% 98%;
-
-    --muted: 210 30% 20%;
-    --muted-foreground: 210 20% 60%;
-
-    --accent: 210 30% 20%;
-    --accent-foreground: 210 20% 98%;
-
-    --destructive: 0 70% 50%;
-    --destructive-foreground: 210 20% 98%;
-
-    --border: 210 30% 25%;
-    --input: 210 30% 25%;
-    --ring: 330 81% 60%;
-  }
-}
-
-@layer base {
   * {
     @apply border-border;
   }
   
   body {
-    @apply bg-background text-foreground antialiased;
+    @apply bg-white text-slate-900 antialiased;
     font-family: 'Inter', sans-serif;
   }
   

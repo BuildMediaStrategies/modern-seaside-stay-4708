@@ -28,7 +28,7 @@ export default function Amenities() {
       
       <main className="flex-1">
         {/* Hero Section */}
-        <section className="relative py-20 bg-gradient-to-r from-sea-light to-white dark:from-sea-dark dark:to-background">
+        <section className="relative py-20 bg-gradient-to-r from-sea-light to-white">
           <div className="container relative z-10 pt-20">
             <div className="text-center max-w-3xl mx-auto">
               <h1 className="text-4xl md:text-5xl font-bold mt-2 mb-6">
