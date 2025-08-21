@@ -3,11 +3,11 @@ import { Link } from "react-router-dom";
 import { Menu, X } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
-import { useLanguage } from "@/contexts/LanguageContext";
+import { useScrolled } from "@/hooks/useScrolled";
 
 export default function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
+  const scrolled = useScrolled(8);
   
   const navLinks = [
     { name: "Our Impact", path: "/apartments" },
@@ -17,16 +17,19 @@ export default function Navbar() {
     { name: "Contact", path: "/contact" }
   ];
 
-  useEffect(() => {
-    const handleScroll = () => {
-      const isScrolled = window.scrollY > 20;
-      if (isScrolled !== scrolled) {
-        setScrolled(isScrolled);
-      }
-    };
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, [scrolled]);
+  const linkBase =
+    "px-3 py-2 text-sm md:text-[15px] font-medium transition-colors duration-200 underline-offset-4 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2";
+
+  // At top: white text, underline only on hover (white)
+  const linkTop =
+    "text-white no-underline hover:underline hover:decoration-white";
+
+  // On scroll: using project's primary color (pink)
+  const linkScrolled =
+    "text-primary underline decoration-white decoration-2";
+
+  const linkClass = (extra = "") =>
+    [linkBase, scrolled ? linkScrolled : linkTop, extra].join(" ");
   
   return <header className={cn("fixed top-0 left-0 right-0 z-50 transition-all duration-300", scrolled ? "bg-white/80 dark:bg-card/80 backdrop-blur-lg py-3 shadow-md" : "bg-transparent py-5")}>
       <nav className="container flex justify-between items-center">
@@ -43,7 +46,7 @@ export default function Navbar() {
         {/* Desktop Navigation */}
         <ul className="hidden md:flex space-x-8">
           {navLinks.map(link => <li key={link.name} className="relative">
-              <Link to={link.path} className="font-medium transition-colors hover:text-primary after:absolute after:bottom-0 after:left-0 after:right-0 after:h-0.5 after:w-0 after:bg-primary after:transition-all hover:after:w-full">
+              <Link to={link.path} className={linkClass()}>
                 {link.name}
               </Link>
             </li>)}
