@@ -1,4 +1,8 @@
 import { useEffect } from "react";
+
+// Safe string helper: never throw on undefined/null/non-strings
+const s = (v: any) => (typeof v === "string" ? v : v == null ? "" : String(v));
+
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import HeroSection from "@/components/HeroSection";
