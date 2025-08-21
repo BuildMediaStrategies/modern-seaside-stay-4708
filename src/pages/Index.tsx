@@ -294,7 +294,7 @@ export default function Index() {
                 Learn More About Our Mission
               </p>
               <Button asChild className="btn-primary">
-                <Link to="/booking">
+                <Link to="/donate">
                   Donate Now <ArrowRight className="ml-2 h-4 w-4" />
                 </Link>
               </Button>
