@@ -8,6 +8,7 @@ import ApartmentCard, { ApartmentProps } from "@/components/ApartmentCard";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { ArrowRight, Wifi, Utensils, Waves, LifeBuoy, MapPin, Coffee } from "lucide-react";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 // Sample apartments data
 const impactAreas: ApartmentProps[] = [
@@ -47,6 +48,8 @@ const impactAreas: ApartmentProps[] = [
 ];
 
 export default function Index() {
+  const { t } = useLanguage();
+  
   useEffect(() => {
     // Scroll to top when component mounts
     window.scrollTo(0, 0);
@@ -250,19 +253,21 @@ export default function Index() {
             </div>
           </div>
         </section>
-                Welcome to Cure Cancer @ UCL
+                Welcome to Our Mission
         {/* CTA Section */}
         <section className="relative py-24 bg-primary/5">
-                Where Science Meets Hope
+                Welcome to Cure Cancer @ UCL
             <div className="max-w-3xl mx-auto text-center animate-fade-in">
               <h2 className="text-3xl md:text-4xl font-bold mb-6">
-                Ready to Make a Difference?
+                Where Science Meets Hope
               </h2>
               <p className="text-muted-foreground mb-8">
-                Join us in the fight against Non-Hodgkin's Lymphoma. Your support can help save lives and bring us closer to a cure.
+                Learn More About Our Mission
               </p>
-                  Learn More About Our Mission <ArrowRight className="ml-2 h-4 w-4" />
-                <Link to="/booking">Donate Now</Link>
+              <Button asChild className="btn-primary">
+                <Link to="/booking">
+                  Donate Now <ArrowRight className="ml-2 h-4 w-4" />
+                </Link>
               </Button>
             </div>
           </div>

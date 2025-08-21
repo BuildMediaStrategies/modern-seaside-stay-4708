@@ -2,12 +2,9 @@
 import { useEffect } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import { useLanguage } from "@/contexts/LanguageContext";
 import { Heart, Dumbbell, Droplets, Flower, Utensils, Wine, Coffee, Clock, Car, Plane, Car as CarIcon, MapPin, Waves, Users, Music, BookOpen } from "lucide-react";
 
 export default function Amenities() {
-  const { t } = useLanguage();
-  
   useEffect(() => {
     // Scroll to top when component mounts
     window.scrollTo(0, 0);
@@ -65,8 +62,15 @@ export default function Amenities() {
         </section>
         
         {/* Categories Sections */}
-        {Object.keys(t.amenitiesPage.categories).map((category, categoryIndex) => {
-          const categoryData = t.amenitiesPage.categories[category as keyof typeof t.amenitiesPage.categories];
+        {["wellness", "dining", "services", "entertainment"].map((category, categoryIndex) => {
+          const categoryData = {
+            title: category.charAt(0).toUpperCase() + category.slice(1),
+            description: `Our ${category} services and facilities`,
+            items: Array.from({ length: 4 }, (_, i) => ({
+              title: `${category} Service ${i + 1}`,
+              description: `Description for ${category} service ${i + 1}`
+            }))
+          };
           const isEven = categoryIndex % 2 === 0;
           
           return (
@@ -106,10 +110,10 @@ export default function Amenities() {
           <div className="container">
             <div className="text-center max-w-3xl mx-auto mb-12">
               <h2 className="text-3xl font-bold mb-4">
-                {t.gallery.title}
+                Gallery
               </h2>
               <p className="text-muted-foreground">
-                {t.gallery.subtitle}
+                View our facilities and research areas
               </p>
             </div>
             
