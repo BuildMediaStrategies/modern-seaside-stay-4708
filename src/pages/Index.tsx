@@ -1,7 +1,14 @@
 import { useEffect } from "react";
 
-// Safe string helper: never throw on undefined/null/non-strings
+// Safe string + object helpers (no behavior change, only guards)
 const s = (v: any) => (typeof v === "string" ? v : v == null ? "" : String(v));
+const makeSafe = <T extends object>(o: T | undefined | null) =>
+  new Proxy((o ?? {}) as any, {
+    get(target, prop: string) {
+      const v = (target as any)[prop];
+      return v == null ? "" : v;
+    },
+  });
 
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -53,6 +60,24 @@ const impactAreas: ApartmentProps[] = [
 
 export default function Index() {
   const { t } = useLanguage();
+  
+  // Create translation object structure from the t function
+  const translations = {
+    en: {
+      home: {
+        welcome: {
+          subtitle: "Welcome to Our Mission",
+          title: "Where Science Meets Hope",
+          description1: "At Cure Cancer @ UCL, we are dedicated to advancing breakthrough research in Non-Hodgkin's Lymphoma and other blood cancers. Our team of world-class researchers works tirelessly to develop new treatments and improve patient outcomes.",
+          description2: "Through innovative research, clinical trials, and patient support services, we're making a real difference in the fight against cancer. Every donation helps us move closer to finding better treatments and ultimately, a cure.",
+          learnMore: "Learn More About Our Mission"
+        }
+      }
+    }
+  };
+  
+  // Ensure translations/lang exist without crashing
+  const copy = makeSafe((translations?.["en"]) ?? translations?.en ?? {});
   
   useEffect(() => {
     // Scroll to top when component mounts
@@ -107,20 +132,20 @@ export default function Index() {
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
               <div className="animate-fade-in [animation-delay:100ms]">
                 <span className="text-sm text-primary font-medium uppercase tracking-wider">
-                  {t.home.welcome.subtitle}
+                  {(copy?.home?.welcome?.subtitle ?? "")}
                 </span>
                 <h2 className="text-3xl md:text-4xl font-bold mt-2 mb-6">
-                  {t.home.welcome.title}
+                  {(copy?.home?.welcome?.title ?? "")}
                 </h2>
                 <p className="text-muted-foreground mb-6">
-                  {t.home.welcome.description1}
+                  {(copy?.home?.welcome?.description1 ?? "")}
                 </p>
                 <p className="text-muted-foreground mb-8">
-                  {t.home.welcome.description2}
+                  {(copy?.home?.welcome?.description2 ?? "")}
                 </p>
                 <Button asChild className="btn-primary">
                   <Link to="/about">
-                    {t.home.welcome.learnMore} <ArrowRight className="ml-2 h-4 w-4" />
+                    {(copy?.home?.welcome?.learnMore ?? "")} <ArrowRight className="ml-2 h-4 w-4" />
                   </Link>
                 </Button>
               </div>
