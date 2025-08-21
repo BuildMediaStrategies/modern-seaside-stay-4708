@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -6,10 +5,8 @@ import { MapPin, Phone, Mail, Clock, Send, Check } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { useLanguage } from "@/contexts/LanguageContext";
 
 export default function Contact() {
-  const { t } = useLanguage();
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -61,10 +58,10 @@ export default function Contact() {
           <div className="container relative z-10">
             <div className="max-w-3xl mx-auto text-center animate-fade-in">
               <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4">
-                {t.contact.title}
+                Contact
               </h1>
               <p className="text-muted-foreground text-lg mb-6">
-                {t.contact.subtitle}
+                Get in Touch
               </p>
             </div>
           </div>
@@ -126,14 +123,14 @@ export default function Contact() {
               
               {/* Contact Form */}
               <div className="animate-fade-in [animation-delay:300ms]">
-                <h2 className="text-2xl font-bold mb-6">{t.contact.sendMessage}</h2>
+                <h2 className="text-2xl font-bold mb-6">Send Message</h2>
                 
                 <div className="glass-card p-6">
                   {!isSubmitted ? (
                     <form onSubmit={handleSubmit} className="space-y-6">
                       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         <div className="space-y-2">
-                          <Label htmlFor="name">{t.contact.fullName}</Label>
+                          <Label htmlFor="name">Full Name</Label>
                           <Input 
                             id="name" 
                             name="name"
@@ -145,7 +142,7 @@ export default function Contact() {
                         </div>
                         
                         <div className="space-y-2">
-                          <Label htmlFor="email">{t.contact.email}</Label>
+                          <Label htmlFor="email">Email</Label>
                           <Input 
                             id="email" 
                             name="email"
@@ -160,7 +157,7 @@ export default function Contact() {
                       
                       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         <div className="space-y-2">
-                          <Label htmlFor="phone">{t.contact.phoneNumber}</Label>
+                          <Label htmlFor="phone">Phone Number</Label>
                           <Input 
                             id="phone" 
                             name="phone"
@@ -171,7 +168,7 @@ export default function Contact() {
                         </div>
                         
                         <div className="space-y-2">
-                          <Label htmlFor="subject">{t.contact.subject}</Label>
+                          <Label htmlFor="subject">Subject</Label>
                           <Input 
                             id="subject" 
                             name="subject"
@@ -184,13 +181,13 @@ export default function Contact() {
                       </div>
                       
                       <div className="space-y-2">
-                        <Label htmlFor="message">{t.contact.message}</Label>
+                        <Label htmlFor="message">Message</Label>
                         <textarea 
                           id="message" 
                           name="message"
                           value={formData.message}
                           onChange={handleInputChange}
-                          placeholder={t.contact.howCanWeHelp} 
+                          placeholder="How can we help?" 
                           className="w-full min-h-[150px] p-3 rounded-md border border-input bg-background"
                           required 
                         />
@@ -198,7 +195,7 @@ export default function Contact() {
                       
                       <Button type="submit" className="w-full btn-primary">
                         <Send className="mr-2 h-4 w-4" />
-                        {t.contact.send}
+                        Send
                       </Button>
                     </form>
                   ) : (
@@ -206,9 +203,9 @@ export default function Contact() {
                       <div className="w-16 h-16 bg-green-100 dark:bg-green-900/30 rounded-full flex items-center justify-center mx-auto mb-6">
                         <Check className="h-8 w-8 text-green-600 dark:text-green-400" />
                       </div>
-                      <h3 className="text-xl font-semibold mb-2">{t.contact.messageSent}</h3>
+                      <h3 className="text-xl font-semibold mb-2">Message Sent</h3>
                       <p className="text-muted-foreground mb-6">
-                        {t.contact.thankYou}
+                        Thank you for your message
                       </p>
                     </div>
                   )}
@@ -222,45 +219,51 @@ export default function Contact() {
         <section className="section bg-muted">
           <div className="container">
             <div className="max-w-3xl mx-auto text-center mb-12 animate-fade-in">
-              <h2 className="text-3xl font-bold mb-4">{t.contact.faq}</h2>
+              <h2 className="text-3xl font-bold mb-4">FAQ</h2>
               <p className="text-muted-foreground">
-                {t.contact.faqSubtitle}
+                Frequently Asked Questions
               </p>
             </div>
             
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 animate-fade-in [animation-delay:200ms]">
               {[
                 {
-                  questionKey: "checkInOut",
+                  question: "How can I support your research?",
+                  answer: "You can support our research through donations, volunteering, or spreading awareness about our mission.",
                   icon: <Clock className="h-5 w-5 text-primary" />
                 },
                 {
-                  questionKey: "parking",
+                  question: "Where is your research conducted?",
+                  answer: "Our research is conducted at the UCL Cancer Institute in London.",
                   icon: <MapPin className="h-5 w-5 text-primary" />
                 },
                 {
-                  questionKey: "pets",
+                  question: "How are donations used?",
+                  answer: "Donations are used directly for research equipment, patient support, and educational programs.",
                   icon: <MapPin className="h-5 w-5 text-primary" />
                 },
                 {
-                  questionKey: "breakfast",
+                  question: "Can I visit your facilities?",
+                  answer: "Please contact us to arrange a visit to our research facilities.",
                   icon: <MapPin className="h-5 w-5 text-primary" />
                 },
                 {
-                  questionKey: "transfers",
+                  question: "How can I get involved?",
+                  answer: "There are many ways to get involved - from donations to volunteering opportunities.",
                   icon: <MapPin className="h-5 w-5 text-primary" />
                 },
                 {
-                  questionKey: "amenities",
+                  question: "What research areas do you focus on?",
+                  answer: "We focus primarily on Non-Hodgkin's Lymphoma research and related blood cancers.",
                   icon: <MapPin className="h-5 w-5 text-primary" />
                 },
               ].map((faq, index) => (
                 <div key={index} className="glass-card p-6">
                   <h3 className="font-semibold text-lg mb-2">
-                    {t.contact.questions[faq.questionKey].question}
+                    {faq.question}
                   </h3>
                   <p className="text-muted-foreground">
-                    {t.contact.questions[faq.questionKey].answer}
+                    {faq.answer}
                   </p>
                 </div>
               ))}
