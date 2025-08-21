@@ -274,7 +274,7 @@ export default function Index() {
                 </Link>
               </Button>
             </div>
-          </div>
+        </section>
           
           {/* Decorative waves */}
           <div className="absolute bottom-0 left-0 right-0 h-24 overflow-hidden">
@@ -294,7 +294,6 @@ export default function Index() {
               />
             </svg>
           </div>
-        </section>
       </main>
       
       <Footer />
