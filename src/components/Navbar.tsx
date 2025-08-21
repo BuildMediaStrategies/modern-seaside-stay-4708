@@ -3,11 +3,9 @@ import { Link } from "react-router-dom";
 import { Menu, X } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
-import { useScrolled } from "@/hooks/useScrolled";
 
 export default function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const scrolled = useScrolled(8);
   
   const navLinks = [
     { name: "Our Impact", path: "/apartments" },
@@ -20,18 +18,13 @@ export default function Navbar() {
   const linkBase =
     "px-3 py-2 text-sm md:text-[15px] font-medium transition-colors duration-200 underline-offset-4 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2";
 
-  // At top: white text, underline only on hover (white)
-  const linkTop =
-    "text-white no-underline hover:underline hover:decoration-white";
+  // Always black text, underline only on hover, underline is pink
+  const linkStyle =
+    "text-black no-underline hover:underline hover:decoration-primary";
 
-  // On scroll: using project's primary color (pink)
-  const linkScrolled =
-    "text-primary underline decoration-white decoration-2";
-
-  const linkClass = (extra = "") =>
-    [linkBase, scrolled ? linkScrolled : linkTop, extra].join(" ");
+  const linkClass = (extra = "") => [linkBase, linkStyle, extra].join(" ");
   
-  return <header className={cn("fixed top-0 left-0 right-0 z-50 transition-all duration-300", scrolled ? "bg-white/80 dark:bg-card/80 backdrop-blur-lg py-3 shadow-md" : "bg-transparent py-5")}>
+  return <header className={cn("fixed top-0 left-0 right-0 z-50 transition-all duration-300", "bg-white/80 backdrop-blur-lg py-3 shadow-md")}>
       <nav className="container flex justify-between items-center">
         <div className="flex items-center space-x-2">
           <Link to="/" className="flex items-center">
@@ -61,7 +54,7 @@ export default function Navbar() {
         {/* Mobile Navigation */}
         <div className="md:hidden flex items-center space-x-2">
           <Button variant="ghost" size="icon" onClick={() => setMobileMenuOpen(!mobileMenuOpen)} className="rounded-full">
-            {mobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+            {mobileMenuOpen ? <X className="h-6 w-6 text-black" /> : <Menu className="h-6 w-6 text-black" />}
           </Button>
         </div>
       </nav>
@@ -78,7 +71,7 @@ export default function Navbar() {
               </div>
               <ul className="space-y-6">
                 {navLinks.map(link => <li key={link.name}>
-                    <Link to={link.path} className="text-lg font-medium transition-colors hover:text-primary" onClick={() => setMobileMenuOpen(false)}>
+                    <Link to={link.path} className="text-lg font-medium text-black transition-colors hover:text-primary" onClick={() => setMobileMenuOpen(false)}>
                       {link.name}
                     </Link>
                   </li>)}
