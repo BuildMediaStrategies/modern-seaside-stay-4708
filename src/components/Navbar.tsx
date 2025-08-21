@@ -15,14 +15,18 @@ export default function Navbar() {
     { name: "Contact", path: "/contact" }
   ];
 
+  // Base link: black text, no native underline, focus-friendly
   const linkBase =
-    "px-3 py-2 text-sm md:text-[15px] font-medium transition-colors duration-200 underline-offset-4 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2";
+    "px-3 py-2 text-sm md:text-[15px] font-medium text-black no-underline focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2";
 
-  // Always black text, underline only on hover, underline is pink
-  const linkStyle =
-    "text-black no-underline hover:underline hover:decoration-primary";
+  // Animated underline classes:
+  // - nav-underline sets up the pseudo-element
+  // - nav-underline-hover triggers animation on hover
+  // - decoration color via Tailwind utility below to override fallback
+  const linkUnderline =
+    "nav-underline nav-underline-hover after:bg-primary";
 
-  const linkClass = (extra = "") => [linkBase, linkStyle, extra].join(" ");
+  const linkClass = (extra = "") => [linkBase, linkUnderline, extra].join(" ");
   
   return <header className={cn("fixed top-0 left-0 right-0 z-50 transition-all duration-300", "bg-white/80 backdrop-blur-lg py-3 shadow-md")}>
       <nav className="container flex justify-between items-center">

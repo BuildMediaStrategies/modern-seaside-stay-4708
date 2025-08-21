@@ -5,6 +5,32 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer utilities {
+  /* Smooth, thicker underline using a pseudo-element (no text-decoration jitter) */
+  .nav-underline {
+    @apply relative;
+  }
+  .nav-underline::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -2px;              /* keeps underline slightly below text without shifting layout */
+    height: 3px;               /* thicker underline (increase to 4px if you prefer) */
+    width: 100%;
+    background: var(--brand-pink, #ec4899); /* fallback; will be overridden by Tailwind class below */
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 280ms ease-out;  /* smooth but snappy */
+  }
+  .nav-underline-hover:hover::after,
+  .nav-underline-active::after {
+    transform: scaleX(1);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .nav-underline::after { transition: none; }
+  }
+}
+
 html, body {
   background: #ffffff;
   color: #0f172a;
