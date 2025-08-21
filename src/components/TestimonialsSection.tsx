@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import { ChevronLeft, ChevronRight, Star } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { useLanguage } from "@/contexts/LanguageContext";
 
 interface Testimonial {
   id: number;
@@ -40,7 +39,6 @@ const testimonials: Testimonial[] = [
 ];
 
 export default function TestimonialsSection() {
-  const { t } = useLanguage();
   const [activeIndex, setActiveIndex] = useState(0);
   const [isAnimating, setIsAnimating] = useState(false);
   
@@ -76,10 +74,10 @@ export default function TestimonialsSection() {
       <div className="container">
         <div className="text-center max-w-3xl mx-auto mb-12 animate-fade-in">
           <h2 className="text-3xl md:text-4xl font-bold mb-4">
-            {t.testimonials.title}
+            Stories of Hope
           </h2>
           <p className="text-muted-foreground">
-            {t.testimonials.description}
+            Hear from researchers, patients, and supporters who believe in our mission to find a cure for Non-Hodgkin's Lymphoma.
           </p>
         </div>
         

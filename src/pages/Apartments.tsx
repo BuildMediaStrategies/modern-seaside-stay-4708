@@ -12,7 +12,6 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Slider } from "@/components/ui/slider";
-import { useLanguage } from "@/contexts/LanguageContext";
 
 // Sample apartments data (will use translations from context)
 const allApartments: ApartmentProps[] = [
@@ -85,7 +84,6 @@ const allApartments: ApartmentProps[] = [
 ];
 
 export default function Apartments() {
-  const { t } = useLanguage();
   const [filteredApartments, setFilteredApartments] = useState<ApartmentProps[]>(allApartments);
   const [capacityFilter, setCapacityFilter] = useState<string>("all");
   const [locationFilter, setLocationFilter] = useState<string>("all");
@@ -130,10 +128,10 @@ export default function Apartments() {
           <div className="container relative z-10">
             <div className="max-w-3xl mx-auto text-center animate-fade-in">
               <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4">
-                {t.apartments.title}
+                Our Impact Areas
               </h1>
               <p className="text-muted-foreground text-lg mb-6">
-                {t.apartments.subtitle}
+                Discover how your donations directly contribute to breakthrough cancer research and patient support services.
               </p>
             </div>
           </div>
@@ -152,18 +150,18 @@ export default function Apartments() {
               {/* Capacity Filter */}
               <div>
                 <label className="block text-sm font-medium mb-2">
-                  {t.apartments.filters.guests}
+                  Impact Type
                 </label>
                 <Select value={capacityFilter} onValueChange={setCapacityFilter}>
                   <SelectTrigger className="w-full">
-                    <SelectValue placeholder={t.apartments.filters.guests} />
+                    <SelectValue placeholder="Impact Type" />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="all">{t.apartments.filters.anyGuests}</SelectItem>
-                    <SelectItem value="1">{t.apartments.filters.onePlus}</SelectItem>
-                    <SelectItem value="2">{t.apartments.filters.twoPlus}</SelectItem>
-                    <SelectItem value="3">{t.apartments.filters.threePlus}</SelectItem>
-                    <SelectItem value="4">{t.apartments.filters.fourPlus}</SelectItem>
+                    <SelectItem value="all">All impact areas</SelectItem>
+                    <SelectItem value="1">Research funding</SelectItem>
+                    <SelectItem value="2">Patient support</SelectItem>
+                    <SelectItem value="3">Equipment funding</SelectItem>
+                    <SelectItem value="4">Education programs</SelectItem>
                   </SelectContent>
                 </Select>
               </div>
@@ -171,14 +169,14 @@ export default function Apartments() {
               {/* Location Filter */}
               <div>
                 <label className="block text-sm font-medium mb-2">
-                  {t.apartments.filters.location}
+                  Research Area
                 </label>
                 <Select value={locationFilter} onValueChange={setLocationFilter}>
                   <SelectTrigger className="w-full">
-                    <SelectValue placeholder={t.apartments.filters.location} />
+                    <SelectValue placeholder="Research Area" />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="all">{t.apartments.filters.allLocations}</SelectItem>
+                    <SelectItem value="all">All research areas</SelectItem>
                     {locations.filter(loc => loc !== "all").map(location => (
                       <SelectItem key={location} value={location}>{location}</SelectItem>
                     ))}
@@ -189,7 +187,7 @@ export default function Apartments() {
               {/* Price Range Filter */}
               <div>
                 <label className="block text-sm font-medium mb-2">
-                  {t.apartments.filters.priceRange}: ${priceRange[0]} - ${priceRange[1]}
+                  Donation Range: ${priceRange[0]} - ${priceRange[1]}
                 </label>
                 <Slider
                   defaultValue={[100, 350]}
@@ -205,7 +203,7 @@ export default function Apartments() {
             
             <div className="flex justify-between items-center mt-6 animate-fade-in [animation-delay:200ms]">
               <p className="text-muted-foreground">
-                {t.apartments.filters.showing} {filteredApartments.length} {t.apartments.filters.of} {allApartments.length} {t.apartments.filters.accommodations}
+                Showing {filteredApartments.length} of {allApartments.length} impact areas
               </p>
               <Button 
                 variant="outline" 
@@ -215,7 +213,7 @@ export default function Apartments() {
                   setPriceRange([100, 350]);
                 }}
               >
-                {t.apartments.filters.resetFilters}
+                Reset Filters
               </Button>
             </div>
           </div>
@@ -234,8 +232,8 @@ export default function Apartments() {
               </div>
             ) : (
               <div className="text-center py-12 animate-fade-in">
-                <h3 className="text-xl font-semibold mb-2">{t.apartments.filters.noMatch}</h3>
-                <p className="text-muted-foreground mb-6">{t.apartments.filters.adjustFilters}</p>
+                <h3 className="text-xl font-semibold mb-2">No impact areas match your filters</h3>
+                <p className="text-muted-foreground mb-6">Try adjusting your filter criteria to see more options.</p>
                 <Button 
                   variant="outline" 
                   onClick={() => {
@@ -244,7 +242,7 @@ export default function Apartments() {
                     setPriceRange([100, 350]);
                   }}
                 >
-                  {t.apartments.filters.resetFilters}
+                  Reset Filters
                 </Button>
               </div>
             )}

@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Menu, X } from "lucide-react";
@@ -7,20 +6,16 @@ import ThemeToggle from "./ThemeToggle";
 import { Button } from "@/components/ui/button";
 import { useLanguage } from "@/contexts/LanguageContext";
 
-// Temporary stub to avoid runtime errors; renders nothing.
-const LanguageSelector = (_props: any) => null;
-
 export default function Navbar() {
-  const { t } = useLanguage();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   
   const navLinks = [
-    { name: t.nav.apartments, path: "/apartments" },
-    { name: t.nav.amenities, path: "/amenities" },
+    { name: "Our Impact", path: "/apartments" },
+    { name: "Research Areas", path: "/amenities" },
     { name: "Wishlist", path: "/wishlist" },
     { name: "Team", path: "/team" },
-    { name: t.nav.contact, path: "/contact" }
+    { name: "Contact", path: "/contact" }
   ];
 
   useEffect(() => {
@@ -58,7 +53,7 @@ export default function Navbar() {
         <div className="hidden md:flex items-center space-x-2">
           <ThemeToggle />
           <Button asChild className="btn-primary">
-            <Link to="/booking">{t.nav.bookNow}</Link>
+            <Link to="/booking">Donate Now</Link>
           </Button>
         </div>
 
@@ -77,7 +72,6 @@ export default function Navbar() {
           <div className="flex flex-col h-full justify-between">
             <div>
               <div className="flex justify-between mb-8">
-                <LanguageSelector />
                 <Button variant="ghost" size="icon" onClick={() => setMobileMenuOpen(false)} className="rounded-full">
                   <X className="h-6 w-6" />
                 </Button>
@@ -93,7 +87,7 @@ export default function Navbar() {
             
             <Button asChild className="w-full btn-primary mt-6">
               <Link to="/booking">
-                {t.nav.bookNow}
+                Donate Now
               </Link>
             </Button>
           </div>

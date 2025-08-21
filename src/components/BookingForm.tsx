@@ -16,10 +16,8 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { useLanguage } from "@/contexts/LanguageContext";
 
 export default function BookingForm() {
-  const { t } = useLanguage();
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [donationType, setDonationType] = useState("one-time");
@@ -43,21 +41,21 @@ export default function BookingForm() {
       onSubmit={handleSubmit} 
       className="glass-card p-6 space-y-6 animate-fade-in [animation-delay:200ms]"
     >
-      <h3 className="text-2xl font-bold text-center mb-6">{t.bookingForm.title}</h3>
+      <h3 className="text-2xl font-bold text-center mb-6">Become a Supporter</h3>
       
       <div className="space-y-4">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {/* First Name */}
           <div className="space-y-2">
             <label htmlFor="first-name" className="block text-sm font-medium">
-              {t.bookingForm.checkIn}
+              First Name
             </label>
             <input
               id="first-name"
               type="text"
               value={firstName}
               onChange={(e) => setFirstName(e.target.value)}
-              placeholder={t.bookingForm.selectDate}
+              placeholder="Enter name"
               className="w-full px-3 py-2 border border-input rounded-md bg-background"
               required
             />
@@ -66,14 +64,14 @@ export default function BookingForm() {
           {/* Last Name */}
           <div className="space-y-2">
             <label htmlFor="last-name" className="block text-sm font-medium">
-              {t.bookingForm.checkOut}
+              Last Name
             </label>
             <input
               id="last-name"
               type="text"
               value={lastName}
               onChange={(e) => setLastName(e.target.value)}
-              placeholder={t.bookingForm.selectDate}
+              placeholder="Enter name"
               className="w-full px-3 py-2 border border-input rounded-md bg-background"
               required
             />
@@ -84,15 +82,15 @@ export default function BookingForm() {
           {/* Donation Type */}
           <div className="space-y-2">
             <label htmlFor="donation-type" className="block text-sm font-medium">
-              {t.bookingForm.adults}
+              Donation Type
             </label>
             <Select value={donationType} onValueChange={setDonationType}>
               <SelectTrigger id="donation-type" className="w-full">
                 <SelectValue placeholder="Select donation type" />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="one-time">{t.bookingForm.adult}</SelectItem>
-                <SelectItem value="monthly">{t.bookingForm.child}</SelectItem>
+                <SelectItem value="one-time">One-time</SelectItem>
+                <SelectItem value="monthly">Monthly</SelectItem>
               </SelectContent>
             </Select>
           </div>
@@ -100,7 +98,7 @@ export default function BookingForm() {
           {/* Amount */}
           <div className="space-y-2">
             <label htmlFor="amount" className="block text-sm font-medium">
-              {t.bookingForm.children}
+              Amount
             </label>
             <Select value={amount} onValueChange={setAmount}>
               <SelectTrigger id="amount" className="w-full">
@@ -123,12 +121,12 @@ export default function BookingForm() {
         {submitted ? (
           <>
             <Check className="mr-2 h-4 w-4" />
-            {t.bookingForm.bookingConfirmed}
+            Thank You for Your Support!
           </>
         ) : (
           <>
             <CalendarIcon className="mr-2 h-4 w-4" />
-            {t.bookingForm.checkAvailability}
+            Donate Now
           </>
         )}
       </Button>

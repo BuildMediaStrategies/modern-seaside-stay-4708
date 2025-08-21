@@ -4,10 +4,8 @@ import { Link } from "react-router-dom";
 import { ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-import { useLanguage } from "@/contexts/LanguageContext";
 
 export default function HeroSection() {
-  const { t } = useLanguage();
   const [scrollY, setScrollY] = useState(0);
   
   useEffect(() => {
@@ -45,19 +43,19 @@ export default function HeroSection() {
       >
         <div className="max-w-3xl animate-fade-in">
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6">
-            {t.hero.title}
+            Advancing Cancer Research at UCL
           </h1>
           <div className="bg-black/60 rounded-md px-4 py-2 mb-8" aria-label="About Cure Cancer at UCL">
             <p className="font-serif text-lg sm:text-xl font-medium leading-relaxed max-w-3xl mx-auto text-white">
-              {t.hero.description}
+              Cure Cancer @ UCL is dedicated to pioneering research into Non-Hodgkin's Lymphoma — a silent but deadly group of blood and lymphatic cancers. Together, we accelerate breakthroughs in treatment and discovery.
             </p>
           </div>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <Button asChild size="lg" variant="heroSolid" className="min-w-[200px] rounded-full transform transition-all duration-300 hover:translate-y-[-2px]">
-              <Link to="/booking">{t.hero.bookStay}</Link>
+              <Link to="/booking">Support Our Research</Link>
             </Button>
             <Button asChild variant="hero" size="lg" className="min-w-[200px] rounded-full transform transition-all duration-300 hover:translate-y-[-2px]">
-              <Link to="/apartments">{t.hero.exploreApartments}</Link>
+              <Link to="/apartments">About the Cause</Link>
             </Button>
           </div>
         </div>
