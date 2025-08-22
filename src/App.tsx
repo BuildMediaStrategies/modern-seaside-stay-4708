@@ -13,6 +13,7 @@ import Team from "./pages/Team";
 import Contact from "./pages/Contact";
 import Amenities from "./pages/Amenities";
 import NotFound from "./pages/NotFound";
+import StairwayToHeaven from "./pages/StairwayToHeaven";
 
 // Create a react-query client
 const queryClient = new QueryClient();
@@ -31,6 +32,7 @@ const AppRoot = () => (
           <Route path="/team" element={<Team />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/amenities" element={<Amenities />} />
+          <Route path="/stairway-to-heaven" element={<StairwayToHeaven />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
