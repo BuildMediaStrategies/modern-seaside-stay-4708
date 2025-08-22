@@ -24,7 +24,7 @@ export default function Navbar() {
     <header
       className={cn(
         "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
-        "bg-white/80 backdrop-blur-lg py-2 md:py-1 shadow-md"
+        "bg-white/80 backdrop-blur-lg py-1 md:py-0.5 shadow-md"
       )}
     >
       <nav className="container flex justify-between items-center">
@@ -33,7 +33,7 @@ export default function Navbar() {
             <img
               src="/brand/ucl-logo@2x.png"
               alt="Cure Cancer @ UCL Logo"
-              className="h-24 md:h-32 lg:h-40 w-auto object-contain"
+              className="h-28 md:h-36 lg:h-44 w-auto object-contain"
             />
           </Link>
         </div>
@@ -42,7 +42,7 @@ export default function Navbar() {
         <ul className="hidden md:flex space-x-4">
           {navLinks.map((link) => (
             <li key={link.name} className="relative">
-              <Link to={link.path} className={linkClass("md:text-[14px] md:px-2 md:py-1")}>
+              <Link to={link.path} className={linkClass("md:text-base md:px-3 md:py-1.5")}>
                 {link.name}
               </Link>
             </li>
