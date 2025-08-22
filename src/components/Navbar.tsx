@@ -24,10 +24,10 @@ export default function Navbar() {
     <header
       className={cn(
         "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
-        "bg-white/80 backdrop-blur-lg py-1 md:py-0.5 shadow-md"
+        "bg-white/80 backdrop-blur-lg py-0 shadow-md"
       )}
     >
-      <nav className="container flex justify-between items-center">
+      <nav className="container flex justify-between items-center py-0">
         <div className="flex items-center space-x-2 ml-4">
           <Link to="/" className="flex items-center">
             <img
