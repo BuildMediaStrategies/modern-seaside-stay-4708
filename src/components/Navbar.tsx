@@ -31,7 +31,7 @@ export default function Navbar() {
         <div className="flex items-center space-x-2">
           <Link to="/" className="flex items-center">
             <img
-              src="https://github.com/BuildMediaStrategies/ucl-cancer-assets/blob/9c199773dddba01a7ff849a63b62a23890aea5ae/ChatGPT%20Image%20Aug%2022%2C%202025%2C%2001_03_56%20AM.png"
+              src="/brand/ucl-logo@2x.png"
               alt="Cure Cancer @ UCL Logo"
               className="h-28 w-auto object-contain"
             />
