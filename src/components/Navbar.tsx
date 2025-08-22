@@ -24,7 +24,7 @@ export default function Navbar() {
     <header
       className={cn(
         "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
-        "bg-white/80 backdrop-blur-lg py-2 shadow-md"
+        "bg-white/80 backdrop-blur-lg py-2 md:py-1 shadow-md"
       )}
     >
       <nav className="container flex justify-between items-center">
@@ -33,16 +33,16 @@ export default function Navbar() {
             <img
               src="/brand/ucl-logo@2x.png"
               alt="Cure Cancer @ UCL Logo"
-              className="h-36 w-auto object-contain"
+              className="h-24 md:h-32 lg:h-40 w-auto object-contain"
             />
           </Link>
         </div>
 
         {/* Desktop Navigation */}
-        <ul className="hidden md:flex space-x-8">
+        <ul className="hidden md:flex space-x-4">
           {navLinks.map((link) => (
             <li key={link.name} className="relative">
-              <Link to={link.path} className={linkClass()}>
+              <Link to={link.path} className={linkClass("md:text-[14px] md:px-2 md:py-1")}>
                 {link.name}
               </Link>
             </li>
@@ -50,7 +50,7 @@ export default function Navbar() {
         </ul>
 
         <div className="hidden md:flex items-center space-x-2">
-          <Button asChild className="btn-primary">
+          <Button asChild className="btn-primary" size="sm">
             <Link to="/donate">Donate Now</Link>
           </Button>
         </div>
