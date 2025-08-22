@@ -87,4 +87,6 @@ export default function Navbar() {
             </Button>
           </div>
         </div>
+    </header>
+  );
 }
