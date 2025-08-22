@@ -24,17 +24,19 @@ export default function Navbar() {
     <header
       className={cn(
         "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
-        "bg-white/80 backdrop-blur-lg py-0 shadow-md"
+        "bg-white/80 backdrop-blur-lg shadow-md overflow-visible h-14 md:h-16"
       )}
     >
-      <nav className="container flex justify-between items-center py-0">
+      <nav className="container flex justify-between items-center h-full">
         <div className="flex items-center space-x-2 ml-4">
           <Link to="/" className="flex items-center">
-            <img
-              src="/brand/ucl-logo@2x.png"
-              alt="Cure Cancer @ UCL Logo"
-              className="h-28 md:h-36 lg:h-44 w-auto object-contain"
-            />
+            <div className="h-full flex items-center">
+              <img
+                src="/brand/ucl-logo@2x.png"
+                alt="Cure Cancer @ UCL Logo"
+                className="h-28 md:h-36 lg:h-44 w-auto object-contain translate-y-2"
+              />
+            </div>
           </Link>
         </div>
 
@@ -42,7 +44,7 @@ export default function Navbar() {
         <ul className="hidden md:flex space-x-4">
           {navLinks.map((link) => (
             <li key={link.name} className="relative">
-              <Link to={link.path} className={linkClass("md:text-base md:px-3 md:py-1.5")}>
+              <Link to={link.path} className={linkClass("md:text-base md:px-3 py-0 leading-none")}>
                 {link.name}
               </Link>
             </li>
@@ -50,7 +52,7 @@ export default function Navbar() {
         </ul>
 
         <div className="hidden md:flex items-center space-x-2">
-          <Button asChild className="btn-primary" size="sm">
+          <Button asChild className="btn-primary h-8 px-3 text-sm">
             <Link to="/donate">Donate Now</Link>
           </Button>
         </div>
