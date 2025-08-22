@@ -13,6 +13,7 @@ export default function Navbar() {
     { name: "Wishlist", path: "/wishlist" },
     { name: "Team", path: "/team" },
     { name: "Contact", path: "/contact" },
+    { name: "Stairway to Heaven", path: "/stairway-to-heaven" },
   ];
 
   const linkBase =
