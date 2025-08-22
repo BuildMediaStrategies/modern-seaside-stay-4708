@@ -33,7 +33,7 @@ export default function Navbar() {
             <img
               src="/brand/ucl-logo@2x.png"
               alt="Cure Cancer @ UCL Logo"
-              className="h-32 w-auto object-contain"
+              className="h-28 w-auto object-contain"
             />
           </Link>
         </div>
