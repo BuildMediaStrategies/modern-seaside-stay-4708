@@ -24,13 +24,13 @@ export default function Navbar() {
     <header
       className={cn(
         "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
-        "bg-white/80 backdrop-blur-lg shadow-md h-18 md:h-20"
+        "bg-white/80 backdrop-blur-lg shadow-md h-20"
       )}
     >
-      <nav className="container flex justify-between items-center h-full">
+      <nav className="container flex justify-between items-center h-full py-1">
         <div className="flex items-center space-x-2 ml-4">
           <Link to="/" className="flex items-center">
-            <div className="flex items-center">
+            <div className="flex items-center h-full">
               <img
                 src="/brand/ucl-logo@2x.png"
                 alt="Cure Cancer @ UCL Logo"
