@@ -127,6 +127,15 @@ html, body {
     transition: opacity 300ms;
   }
 
+  /* Reduced motion support */
+  @media (prefers-reduced-motion: reduce) {
+    * {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+
   @keyframes float {
     0%, 100% { transform: translateY(0px) translateX(0px); }
     25% { transform: translateY(-10px) translateX(5px); }
