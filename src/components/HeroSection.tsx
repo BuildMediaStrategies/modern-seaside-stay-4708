@@ -47,7 +47,7 @@ export default function HeroSection() {
           </h1>
           <div className="bg-black/60 rounded-md px-4 py-2 mb-8" aria-label="About Cure Cancer at UCL">
             <p className="font-serif text-lg sm:text-xl font-medium leading-relaxed max-w-3xl mx-auto text-white">
-              Cure Cancer @ UCL is dedicated to pioneering research into Non-Hodgkin's Lymphoma — a silent but deadly group of blood and lymphatic cancers. Together, we accelerate breakthroughs in treatment and discovery.
+              Cure Cancer @ UCL funds breakthrough research into Non-Hodgkin's Lymphoma, a group of blood and lymphatic cancers. We provide essential equipment and support to accelerate life-saving discoveries.
             </p>
           </div>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">

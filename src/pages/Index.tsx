@@ -68,8 +68,8 @@ export default function Index() {
         welcome: {
           subtitle: "Welcome to Our Mission",
           title: "Where Science Meets Hope",
-          description1: "At Cure Cancer @ UCL, we are dedicated to advancing breakthrough research in Non-Hodgkin's Lymphoma and other blood cancers. Our team of world-class researchers works tirelessly to develop new treatments and improve patient outcomes.",
-          description2: "Through innovative research, clinical trials, and patient support services, we're making a real difference in the fight against cancer. Every donation helps us move closer to finding better treatments and ultimately, a cure.",
+          description1: "Cure Cancer @ UCL funds essential medical equipment for Non-Hodgkin's Lymphoma research at the UCL Cancer Institute. Our support enables world-class researchers to develop new treatments and improve patient outcomes.",
+          description2: "Founded in 2007, the UCL Cancer Institute is part of UCL, ranked among the world's top 10 universities, with over 400 cancer medicine faculty members. Your donation directly supports their groundbreaking work.",
           learnMore: "Learn More About Our Mission"
         }
       }
@@ -138,10 +138,10 @@ export default function Index() {
                   {(copy?.home?.welcome?.title ?? "")}
                 </h2>
                 <p className="text-muted-foreground mb-6">
-                  {(copy?.home?.welcome?.description1 ?? "")}
+                  Cure Cancer @ UCL funds essential medical equipment for Non-Hodgkin's Lymphoma research at the UCL Cancer Institute. Our support enables world-class researchers to develop new treatments and improve patient outcomes.
                 </p>
                 <p className="text-muted-foreground mb-8">
-                  {(copy?.home?.welcome?.description2 ?? "")}
+                  Founded in 2007, the UCL Cancer Institute is part of UCL, ranked among the world's top 10 universities, with over 400 cancer medicine faculty members. Your donation directly supports their groundbreaking work.
                 </p>
                 <Button asChild className="btn-primary">
                   <Link to="/about">
