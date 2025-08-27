@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import { Heart, Candle, MessageCircle, Star, Send, Check } from "lucide-react";
+import { Heart, Candy as Candle, MessageCircle, Star, Send, Check } from "lucide-react";
 
 interface Tribute {
   id: string;
