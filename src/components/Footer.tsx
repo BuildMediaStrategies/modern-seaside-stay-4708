@@ -38,6 +38,7 @@ export default function Footer() {
                 { name: "UCL Institute", path: "/apartments" },
                 { name: "Research Areas", path: "/amenities" },
                 { name: "Wishlist", path: "/wishlist" },
+                { name: "Events", path: "/events" },
                 { name: "Contact", path: "/contact" },
                 { name: "Donate Now", path: "/donate" },
               ].map((link) => (

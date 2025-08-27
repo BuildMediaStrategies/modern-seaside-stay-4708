@@ -9,6 +9,7 @@ import Index from "./pages/Index";
 import Apartments from "./pages/Apartments";
 import DonatePage from "./pages/DonatePage";
 import Wishlist from "./pages/Gallery"; // Renamed Gallery to Wishlist
+import Events from "./pages/Events";
 import Team from "./pages/Team";
 import Contact from "./pages/Contact";
 import Amenities from "./pages/Amenities";
@@ -29,6 +30,7 @@ const AppRoot = () => (
           <Route path="/apartments" element={<Apartments />} />
           <Route path="/donate" element={<DonatePage />} />
           <Route path="/wishlist" element={<Wishlist />} />
+          <Route path="/events" element={<Events />} />
           <Route path="/team" element={<Team />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/amenities" element={<Amenities />} />

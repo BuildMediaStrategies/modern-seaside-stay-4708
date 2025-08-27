@@ -11,6 +11,7 @@ export default function Navbar() {
     { name: "UCL Institute", path: "/apartments" },
     { name: "Research Areas", path: "/amenities" },
     { name: "Wishlist", path: "/wishlist" },
+    { name: "Events", path: "/events" },
     { name: "Team", path: "/team" },
     { name: "Contact", path: "/contact" },
     { name: "Stairway to Heaven", path: "/stairway-to-heaven" },
