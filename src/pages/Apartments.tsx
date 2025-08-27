@@ -128,10 +128,10 @@ export default function Apartments() {
           <div className="container relative z-10">
             <div className="max-w-3xl mx-auto text-center animate-fade-in">
               <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4">
-                Our Impact Areas
+                UCL Cancer Institute
               </h1>
               <p className="text-muted-foreground text-lg mb-6">
-                Discover how your donations directly contribute to breakthrough cancer research and patient support services.
+                World-class cancer research at the heart of London's medical district.
               </p>
             </div>
           </div>
@@ -143,109 +143,106 @@ export default function Apartments() {
           </div>
         </section>
         
-        {/* Filter Section */}
-        <section className="py-8 border-b">
+        {/* Institute Overview */}
+        <section className="section bg-white">
           <div className="container">
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 animate-fade-in">
-              {/* Capacity Filter */}
-              <div>
-                <label className="block text-sm font-medium mb-2">
-                  Impact Type
-                </label>
-                <Select value={capacityFilter} onValueChange={setCapacityFilter}>
-                  <SelectTrigger className="w-full">
-                    <SelectValue placeholder="Impact Type" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="all">All impact areas</SelectItem>
-                    <SelectItem value="1">Research funding</SelectItem>
-                    <SelectItem value="2">Patient support</SelectItem>
-                    <SelectItem value="3">Equipment funding</SelectItem>
-                    <SelectItem value="4">Education programs</SelectItem>
-                  </SelectContent>
-                </Select>
+            <div className="max-w-4xl mx-auto">
+              <div className="prose prose-lg max-w-none animate-fade-in">
+                <p className="text-lg text-muted-foreground mb-6">
+                  UCL is ranked among the world's top 10 universities globally. The UCL Cancer Institute, established in 2007, serves as the central hub for cancer research at UCL, bringing together over 400 scientists dedicated to understanding and treating cancer.
+                </p>
+                
+                <p className="text-lg text-muted-foreground mb-6">
+                  Located in central London, the Institute is part of UCL's Faculty of Medical Sciences and benefits from its position at the heart of one of the world's leading medical districts. This strategic location enables close collaboration with major teaching hospitals and research centers.
+                </p>
+                
+                <h3 className="text-2xl font-bold mb-4 animate-fade-in [animation-delay:200ms]">Research Strengths</h3>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8 animate-fade-in [animation-delay:300ms]">
+                  <ul className="space-y-2">
+                    <li className="flex items-start">
+                      <span className="w-2 h-2 bg-primary rounded-full mt-2 mr-3 flex-shrink-0"></span>
+                      <span>Stem cell biology</span>
+                    </li>
+                    <li className="flex items-start">
+                      <span className="w-2 h-2 bg-primary rounded-full mt-2 mr-3 flex-shrink-0"></span>
+                      <span>Transcription factors</span>
+                    </li>
+                    <li className="flex items-start">
+                      <span className="w-2 h-2 bg-primary rounded-full mt-2 mr-3 flex-shrink-0"></span>
+                      <span>Cell cycle regulation</span>
+                    </li>
+                    <li className="flex items-start">
+                      <span className="w-2 h-2 bg-primary rounded-full mt-2 mr-3 flex-shrink-0"></span>
+                      <span>Translational immunology</span>
+                    </li>
+                    <li className="flex items-start">
+                      <span className="w-2 h-2 bg-primary rounded-full mt-2 mr-3 flex-shrink-0"></span>
+                      <span>Genomics & bioinformatics</span>
+                    </li>
+                  </ul>
+                  <ul className="space-y-2">
+                    <li className="flex items-start">
+                      <span className="w-2 h-2 bg-primary rounded-full mt-2 mr-3 flex-shrink-0"></span>
+                      <span>Chromatin regulation</span>
+                    </li>
+                    <li className="flex items-start">
+                      <span className="w-2 h-2 bg-primary rounded-full mt-2 mr-3 flex-shrink-0"></span>
+                      <span>Gene therapy & immunotherapy</span>
+                    </li>
+                    <li className="flex items-start">
+                      <span className="w-2 h-2 bg-primary rounded-full mt-2 mr-3 flex-shrink-0"></span>
+                      <span>Viral oncology</span>
+                    </li>
+                    <li className="flex items-start">
+                      <span className="w-2 h-2 bg-primary rounded-full mt-2 mr-3 flex-shrink-0"></span>
+                      <span>Drug development</span>
+                    </li>
+                    <li className="flex items-start">
+                      <span className="w-2 h-2 bg-primary rounded-full mt-2 mr-3 flex-shrink-0"></span>
+                      <span>Clinical trials</span>
+                    </li>
+                  </ul>
+                </div>
+                
+                <p className="text-lg text-muted-foreground mb-6 animate-fade-in [animation-delay:400ms]">
+                  The Institute maintains strong partnerships with University College London Hospitals (UCLH), Royal Free Hospital, and Great Ormond Street Hospital. The UCH Macmillan Cancer Centre, opened in 2012, provides a dedicated space for cancer care and enables seamless collaboration between researchers and clinicians.
+                </p>
+                
+                <p className="text-lg text-muted-foreground animate-fade-in [animation-delay:500ms]">
+                  Looking ahead, the UCL Cancer Institute continues to drive progress in targeted therapies, personalized medicine, advanced diagnostics, and proton therapy. Through continued research excellence and strategic partnerships, the Institute remains at the forefront of the global fight against cancer.
+                </p>
               </div>
-              
-              {/* Location Filter */}
-              <div>
-                <label className="block text-sm font-medium mb-2">
-                  Research Area
-                </label>
-                <Select value={locationFilter} onValueChange={setLocationFilter}>
-                  <SelectTrigger className="w-full">
-                    <SelectValue placeholder="Research Area" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="all">All research areas</SelectItem>
-                    {locations.filter(loc => loc !== "all").map(location => (
-                      <SelectItem key={location} value={location}>{location}</SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-              </div>
-              
-              {/* Price Range Filter */}
-              <div>
-                <label className="block text-sm font-medium mb-2">
-                  Donation Range: ${priceRange[0]} - ${priceRange[1]}
-                </label>
-                <Slider
-                  defaultValue={[100, 350]}
-                  min={100}
-                  max={350}
-                  step={10}
-                  value={priceRange}
-                  onValueChange={setPriceRange}
-                  className="my-4"
-                />
-              </div>
-            </div>
-            
-            <div className="flex justify-between items-center mt-6 animate-fade-in [animation-delay:200ms]">
-              <p className="text-muted-foreground">
-                Showing {filteredApartments.length} of {allApartments.length} impact areas
-              </p>
-              <Button 
-                variant="outline" 
-                onClick={() => {
-                  setCapacityFilter("all");
-                  setLocationFilter("all");
-                  setPriceRange([100, 350]);
-                }}
-              >
-                Reset Filters
-              </Button>
             </div>
           </div>
         </section>
         
-        {/* Apartments Grid */}
-        <section className="section">
+        {/* Research Impact Gallery */}
+        <section className="section bg-muted">
           <div className="container">
-            {filteredApartments.length > 0 ? (
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                {filteredApartments.map((apartment, index) => (
-                  <div key={apartment.id} className="animate-fade-in" style={{ animationDelay: `${(index + 1) * 100}ms` }}>
-                    <ApartmentCard apartment={apartment} />
-                  </div>
-                ))}
-              </div>
-            ) : (
-              <div className="text-center py-12 animate-fade-in">
-                <h3 className="text-xl font-semibold mb-2">No impact areas match your filters</h3>
-                <p className="text-muted-foreground mb-6">Try adjusting your filter criteria to see more options.</p>
-                <Button 
-                  variant="outline" 
-                  onClick={() => {
-                    setCapacityFilter("all");
-                    setLocationFilter("all");
-                    setPriceRange([100, 350]);
-                  }}
+            <div className="text-center max-w-3xl mx-auto mb-12 animate-fade-in">
+              <h2 className="text-3xl md:text-4xl font-bold mb-4">
+                Research in Action
+              </h2>
+              <p className="text-muted-foreground">
+                Explore the cutting-edge research facilities and collaborative spaces where breakthrough discoveries happen.
+              </p>
+            </div>
+            
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+              {Array.from({ length: 8 }).map((_, index) => (
+                <div 
+                  key={index} 
+                  className="aspect-square rounded-lg overflow-hidden shadow-md transition-transform hover:scale-105 animate-fade-in"
+                  style={{ animationDelay: `${(index + 1) * 100}ms` }}
                 >
-                  Reset Filters
-                </Button>
-              </div>
-            )}
+                  <img 
+                    src={`https://images.unsplash.com/photo-${1550000000000 + index * 100000}?w=400&h=400&fit=crop`}
+                    alt={`Research facility ${index + 1}`}
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+              ))}
+            </div>
           </div>
         </section>
       </main>

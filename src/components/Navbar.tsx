@@ -8,7 +8,7 @@ export default function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const navLinks = [
-    { name: "Our Impact", path: "/apartments" },
+    { name: "UCL Institute", path: "/apartments" },
     { name: "Research Areas", path: "/amenities" },
     { name: "Wishlist", path: "/wishlist" },
     { name: "Team", path: "/team" },

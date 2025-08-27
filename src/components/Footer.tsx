@@ -35,7 +35,7 @@ export default function Footer() {
             <ul className="space-y-2">
               {[
                 { name: "Home", path: "/" },
-                { name: "Our Impact", path: "/apartments" },
+                { name: "UCL Institute", path: "/apartments" },
                 { name: "Research Areas", path: "/amenities" },
                 { name: "Wishlist", path: "/wishlist" },
                 { name: "Contact", path: "/contact" },
