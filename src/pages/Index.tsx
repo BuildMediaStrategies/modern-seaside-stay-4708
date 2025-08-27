@@ -138,10 +138,10 @@ export default function Index() {
                   {(copy?.home?.welcome?.title ?? "")}
                 </h2>
                 <p className="text-muted-foreground mb-6">
-                  Cure Cancer @ UCL funds essential medical equipment for Non-Hodgkin's Lymphoma research at the UCL Cancer Institute. Our support enables world-class researchers to develop new treatments and improve patient outcomes.
+                  Cure Cancer @ UCL funds state-of-the-art medical equipment for the Non-Hodgkin's Lymphoma research team at the UCL Cancer Institute. Your support enables breakthrough discoveries that save lives.
                 </p>
                 <p className="text-muted-foreground mb-8">
-                  Founded in 2007, the UCL Cancer Institute is part of UCL, ranked among the world's top 10 universities, with over 400 cancer medicine faculty members. Your donation directly supports their groundbreaking work.
+                  The UCL Cancer Institute, founded in 2007, is the hub of cancer research at UCL, a top 10 global university with over 400 cancer medicine faculty members.
                 </p>
                 <Button asChild className="btn-primary">
                   <Link to="/about">
