@@ -1,5 +1,6 @@
 import { useEffect, useState, useRef } from "react";
 import { motion, useScroll, useTransform, useInView, AnimatePresence } from "framer-motion";
+import { Link } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
@@ -655,10 +656,10 @@ export default function StairwayToHeaven() {
               animate={memoryTreeInView ? { y: 0, opacity: 1 } : {}}
               transition={{ duration: 0.8, delay: 1.2 }}
             >
-              <Button className="bg-gradient-to-r from-green-500 to-blue-500 hover:from-green-600 hover:to-blue-600 text-white px-8 py-3 rounded-full">
+              <Button asChild className="bg-gradient-to-r from-green-500 to-blue-500 hover:from-green-600 hover:to-blue-600 text-white px-8 py-3 rounded-full">
                 <Link to="/memory-tree">View the Memory Tree</Link>
               </Button>
-              <Button variant="outline" className="border-green-500 text-green-600 hover:bg-green-50 px-8 py-3 rounded-full">
+              <Button asChild variant="outline" className="border-green-500 text-green-600 hover:bg-green-50 px-8 py-3 rounded-full">
                 <Link to="/memory-tree#add">Add a Name</Link>
               </Button>
             </motion.div>
