@@ -2,81 +2,80 @@ import { useEffect } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
-import { Progress } from "@/components/ui/progress";
-import { Check, Target, Users, Heart } from "lucide-react";
+import { Calendar, ArrowRight, Award, Users, Microscope, Heart } from "lucide-react";
 
-const wishlistItems = [
+const newsItems = [
   {
     id: "1",
-    name: "PromethION 2 Solo Sequencer",
-    description: "Advanced DNA sequencing technology for breakthrough lymphoma research",
-    target: 65000,
-    raised: 65000,
-    status: "completed",
-    priority: "High"
+    headline: "New PromethION Sequencer Fully Funded",
+    date: "March 2024",
+    summary: "Thanks to generous donations, we've successfully funded the £65,000 PromethION 2 Solo Sequencer. This advanced DNA sequencing technology will accelerate lymphoma research breakthroughs.",
+    category: "Equipment",
+    icon: <Microscope className="h-5 w-5" />,
+    image: "https://images.unsplash.com/photo-1582719471384-894fbb16e074?w=400&h=300&fit=crop"
   },
   {
-    id: "2", 
-    name: "Flow Cytometer Upgrade",
-    description: "Enhanced cell analysis capabilities for diagnostic research",
-    target: 45000,
-    raised: 28500,
-    status: "active",
-    priority: "High"
+    id: "2",
+    headline: "UCL Cancer Institute Receives Research Excellence Award",
+    date: "February 2024",
+    summary: "The Institute has been recognized for outstanding contributions to blood cancer research. This achievement highlights our commitment to advancing Non-Hodgkin's Lymphoma treatments.",
+    category: "Recognition",
+    icon: <Award className="h-5 w-5" />,
+    image: "https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=400&h=300&fit=crop"
   },
   {
     id: "3",
-    name: "Microscopy Equipment",
-    description: "High-resolution imaging for cellular research studies",
-    target: 25000,
-    raised: 12800,
-    status: "active", 
-    priority: "Medium"
+    headline: "New Clinical Trial Launches for Lymphoma Patients",
+    date: "January 2024",
+    summary: "Our research team has initiated a groundbreaking clinical trial testing innovative immunotherapy approaches. Early results show promising potential for improved patient outcomes.",
+    category: "Research",
+    icon: <Heart className="h-5 w-5" />,
+    image: "https://images.unsplash.com/photo-1576091160399-112ba8d25d1f?w=400&h=300&fit=crop"
   },
   {
     id: "4",
-    name: "Laboratory Consumables",
-    description: "Essential supplies for ongoing research projects",
-    target: 15000,
-    raised: 5200,
-    status: "active",
-    priority: "Medium"
+    headline: "Research Team Expands with Leading Scientists",
+    date: "December 2023",
+    summary: "Three world-renowned cancer researchers have joined our team. Their expertise in genomics and immunotherapy will strengthen our research capabilities significantly.",
+    category: "Team",
+    icon: <Users className="h-5 w-5" />,
+    image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=300&fit=crop"
   },
   {
     id: "5",
-    name: "Data Storage System",
-    description: "Secure storage for research data and patient information",
-    target: 35000,
-    raised: 8900,
-    status: "active",
-    priority: "High"
+    headline: "Flow Cytometer Upgrade Campaign Reaches 60% Funding",
+    date: "November 2023",
+    summary: "Our £45,000 flow cytometer upgrade is making excellent progress. This enhanced cell analysis technology will improve diagnostic accuracy for blood cancer patients.",
+    category: "Equipment",
+    icon: <Microscope className="h-5 w-5" />,
+    image: "https://images.unsplash.com/photo-1582719471384-894fbb16e074?w=400&h=300&fit=crop"
   },
   {
     id: "6",
-    name: "Centrifuge Equipment",
-    description: "Sample preparation equipment for laboratory analysis",
-    target: 18000,
-    raised: 3400,
-    status: "active",
-    priority: "Low"
+    headline: "Patient Support Services Expand Across London",
+    date: "October 2023",
+    summary: "New counseling and practical support programs are now available at three additional hospital locations. These services provide vital assistance to patients and families.",
+    category: "Support",
+    icon: <Heart className="h-5 w-5" />,
+    image: "https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=400&h=300&fit=crop"
   }
 ];
 
-export default function Wishlist() {
+const categories = ["All", "Equipment", "Research", "Recognition", "Team", "Support"];
+
+export default function News() {
   useEffect(() => {
     // Scroll to top when component mounts
     window.scrollTo(0, 0);
   }, []);
-  
-  const getProgressPercentage = (raised: number, target: number) => {
-    return Math.min((raised / target) * 100, 100);
-  };
 
-  const getPriorityColor = (priority: string) => {
-    switch (priority) {
-      case "High": return "text-red-600 bg-red-50";
-      case "Medium": return "text-yellow-600 bg-yellow-50";
-      case "Low": return "text-green-600 bg-green-50";
+  const getCategoryColor = (category: string) => {
+    switch (category) {
+      case "Equipment": return "text-blue-600 bg-blue-50";
+      case "Research": return "text-green-600 bg-green-50";
+      case "Recognition": return "text-purple-600 bg-purple-50";
+      case "Team": return "text-orange-600 bg-orange-50";
+      case "Support": return "text-pink-600 bg-pink-50";
       default: return "text-gray-600 bg-gray-50";
     }
   };
@@ -91,13 +90,10 @@ export default function Wishlist() {
           <div className="container relative z-10">
             <div className="max-w-3xl mx-auto text-center animate-fade-in">
               <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4">
-                Wishlist
+                Latest News & Updates
               </h1>
-              <p className="text-muted-foreground text-lg mb-4">
-                Each year the UCL Cancer Institute shares a list of vital research equipment.
-              </p>
               <p className="text-muted-foreground text-lg">
-                Cure Cancer @ UCL raises funds to provide these items. Donations directly advance research and care.
+                Stay informed about our research progress, equipment funding, and impact on cancer treatment.
               </p>
             </div>
           </div>
@@ -109,63 +105,68 @@ export default function Wishlist() {
           </div>
         </section>
         
-        {/* Wishlist Items */}
+        {/* News Grid */}
         <section className="section">
           <div className="container">
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {wishlistItems.map((item, index) => (
-                <div 
+              {newsItems.map((item, index) => (
+                <article 
                   key={item.id} 
-                  className="glass-card rounded-xl overflow-hidden animate-fade-in"
+                  className="glass-card rounded-xl overflow-hidden animate-fade-in hover:shadow-lg transition-all duration-300"
                   style={{ animationDelay: `${(index + 1) * 100}ms` }}
                 >
+                  <div className="h-48 relative">
+                    <img 
+                      src={item.image} 
+                      alt={item.headline}
+                      className="w-full h-full object-cover"
+                    />
+                    <div className="absolute top-4 left-4">
+                      <div className={`px-3 py-1 rounded-full text-xs font-medium flex items-center ${getCategoryColor(item.category)}`}>
+                        {item.icon}
+                        <span className="ml-1">{item.category}</span>
+                      </div>
+                    </div>
+                  </div>
+                  
                   <div className="p-6">
-                    <div className="flex items-start justify-between mb-4">
-                      <div className="flex-1">
-                        <h3 className="text-lg font-bold mb-2">{item.name}</h3>
-                        <p className="text-sm text-muted-foreground mb-3">{item.description}</p>
-                      </div>
-                      <div className="ml-4">
-                        {item.status === "completed" ? (
-                          <div className="bg-green-500 text-white px-2 py-1 rounded-full text-xs font-medium flex items-center">
-                            <Check className="h-3 w-3 mr-1" />
-                            Funded
-                          </div>
-                        ) : (
-                          <div className={`px-2 py-1 rounded-full text-xs font-medium ${getPriorityColor(item.priority)}`}>
-                            {item.priority}
-                          </div>
-                        )}
-                      </div>
+                    <div className="flex items-center text-sm text-muted-foreground mb-3">
+                      <Calendar className="h-4 w-4 mr-2" />
+                      {item.date}
                     </div>
                     
-                    <div className="mb-4">
-                      <div className="flex justify-between items-center mb-2">
-                        <span className="text-sm font-medium">
-                          £{item.raised.toLocaleString()} raised
-                        </span>
-                        <span className="text-sm text-muted-foreground">
-                          £{item.target.toLocaleString()} goal
-                        </span>
-                      </div>
-                      <Progress 
-                        value={getProgressPercentage(item.raised, item.target)} 
-                        className="h-2"
-                      />
-                      <div className="text-xs text-muted-foreground mt-1">
-                        {getProgressPercentage(item.raised, item.target).toFixed(0)}% funded
-                      </div>
-                    </div>
+                    <h3 className="text-lg font-bold mb-3 line-clamp-2">{item.headline}</h3>
+                    <p className="text-muted-foreground text-sm mb-4 line-clamp-3">{item.summary}</p>
                     
-                    <Button 
-                      className="w-full btn-primary"
-                      disabled={item.status === "completed"}
-                    >
-                      {item.status === "completed" ? "Fully Funded" : "Support This Item"}
+                    <Button variant="ghost" className="p-0 h-auto text-primary hover:text-primary/80">
+                      Read More
+                      <ArrowRight className="ml-2 h-4 w-4" />
                     </Button>
                   </div>
-                </div>
+                </article>
               ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Newsletter Signup */}
+        <section className="section bg-muted">
+          <div className="container">
+            <div className="max-w-2xl mx-auto text-center">
+              <h2 className="text-2xl font-bold mb-4">Stay Updated</h2>
+              <p className="text-muted-foreground mb-6">
+                Subscribe to receive the latest news about our research progress and funding milestones.
+              </p>
+              <div className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
+                <input 
+                  type="email" 
+                  placeholder="Enter your email" 
+                  className="flex-1 px-4 py-2 rounded-md border border-input bg-background"
+                />
+                <Button className="btn-primary">
+                  Subscribe
+                </Button>
+              </div>
             </div>
           </div>
         </section>
