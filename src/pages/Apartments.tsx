@@ -149,67 +149,38 @@ export default function Apartments() {
             <div className="max-w-4xl mx-auto">
               <div className="prose prose-lg max-w-none animate-fade-in">
                 <p className="text-lg text-muted-foreground mb-6">
-                  UCL is ranked among the world's top 10 universities globally. The UCL Cancer Institute, established in 2007, serves as the central hub for cancer research at UCL, bringing together over 400 scientists dedicated to understanding and treating cancer.
+                  UCL is consistently ranked among the world's top universities, and the UCL Cancer Institute, established in 2007, serves as the central hub for cancer research at UCL. With over 400 scientists dedicated to understanding and treating cancer, the Institute represents one of the largest concentrations of cancer research expertise in Europe.
                 </p>
                 
                 <p className="text-lg text-muted-foreground mb-6">
-                  Located in central London, the Institute is part of UCL's Faculty of Medical Sciences and benefits from its position at the heart of one of the world's leading medical districts. This strategic location enables close collaboration with major teaching hospitals and research centers.
+                  Located in central London, the Institute is part of UCL's Faculty of Medical Sciences and benefits from its position at the heart of one of the world's leading medical districts. This strategic location facilitates collaboration with major teaching hospitals and provides access to diverse patient populations for clinical research.
                 </p>
                 
-                <h3 className="text-2xl font-bold mb-4 animate-fade-in [animation-delay:200ms]">Research Strengths</h3>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8 animate-fade-in [animation-delay:300ms]">
-                  <ul className="space-y-2">
-                    <li className="flex items-start">
-                      <span className="w-2 h-2 bg-primary rounded-full mt-2 mr-3 flex-shrink-0"></span>
-                      <span>Stem cell biology</span>
-                    </li>
-                    <li className="flex items-start">
-                      <span className="w-2 h-2 bg-primary rounded-full mt-2 mr-3 flex-shrink-0"></span>
-                      <span>Transcription factors</span>
-                    </li>
-                    <li className="flex items-start">
-                      <span className="w-2 h-2 bg-primary rounded-full mt-2 mr-3 flex-shrink-0"></span>
-                      <span>Cell cycle regulation</span>
-                    </li>
-                    <li className="flex items-start">
-                      <span className="w-2 h-2 bg-primary rounded-full mt-2 mr-3 flex-shrink-0"></span>
-                      <span>Translational immunology</span>
-                    </li>
-                    <li className="flex items-start">
-                      <span className="w-2 h-2 bg-primary rounded-full mt-2 mr-3 flex-shrink-0"></span>
-                      <span>Genomics & bioinformatics</span>
-                    </li>
-                  </ul>
-                  <ul className="space-y-2">
-                    <li className="flex items-start">
-                      <span className="w-2 h-2 bg-primary rounded-full mt-2 mr-3 flex-shrink-0"></span>
-                      <span>Chromatin regulation</span>
-                    </li>
-                    <li className="flex items-start">
-                      <span className="w-2 h-2 bg-primary rounded-full mt-2 mr-3 flex-shrink-0"></span>
-                      <span>Gene therapy & immunotherapy</span>
-                    </li>
-                    <li className="flex items-start">
-                      <span className="w-2 h-2 bg-primary rounded-full mt-2 mr-3 flex-shrink-0"></span>
-                      <span>Viral oncology</span>
-                    </li>
-                    <li className="flex items-start">
-                      <span className="w-2 h-2 bg-primary rounded-full mt-2 mr-3 flex-shrink-0"></span>
-                      <span>Drug development</span>
-                    </li>
-                    <li className="flex items-start">
-                      <span className="w-2 h-2 bg-primary rounded-full mt-2 mr-3 flex-shrink-0"></span>
-                      <span>Clinical trials</span>
-                    </li>
+                <p className="text-lg text-muted-foreground mb-4">
+                  Key research areas include:
+                </p>
+                
+                <div className="mb-8 animate-fade-in [animation-delay:200ms]">
+                  <ul className="text-lg text-muted-foreground space-y-1 ml-6">
+                    <li>• Stem cell biology</li>
+                    <li>• Transcription factors</li>
+                    <li>• Cell cycle regulation</li>
+                    <li>• Translational immunology</li>
+                    <li>• Genomics & bioinformatics</li>
+                    <li>• Chromatin regulation mechanisms</li>
+                    <li>• Gene therapy & immunotherapy</li>
+                    <li>• Viral oncology</li>
+                    <li>• Drug development</li>
+                    <li>• Clinical trials</li>
                   </ul>
                 </div>
                 
-                <p className="text-lg text-muted-foreground mb-6 animate-fade-in [animation-delay:400ms]">
-                  The Institute maintains strong partnerships with University College London Hospitals (UCLH), Royal Free Hospital, and Great Ormond Street Hospital. The UCH Macmillan Cancer Centre, opened in 2012, provides a dedicated space for cancer care and enables seamless collaboration between researchers and clinicians.
+                <p className="text-lg text-muted-foreground mb-6 animate-fade-in [animation-delay:300ms]">
+                  The Institute maintains strong partnerships with University College London Hospitals (UCLH), Royal Free Hospital, and Great Ormond Street Hospital. The UCH Macmillan Cancer Centre, opened in 2012 directly across from the Institute, enables seamless collaboration between researchers and clinicians, accelerating the translation of laboratory discoveries into patient treatments.
                 </p>
                 
-                <p className="text-lg text-muted-foreground animate-fade-in [animation-delay:500ms]">
-                  Looking ahead, the UCL Cancer Institute continues to drive progress in targeted therapies, personalized medicine, advanced diagnostics, and proton therapy. Through continued research excellence and strategic partnerships, the Institute remains at the forefront of the global fight against cancer.
+                <p className="text-lg text-muted-foreground animate-fade-in [animation-delay:400ms]">
+                  The UCL Cancer Institute stands at the forefront of an exciting era in cancer research. The Institute is driving progress in targeted therapies that attack specific cancer vulnerabilities, advancing personalized medicine through genomic sequencing and sophisticated diagnostics, and pioneering new treatment approaches. With access to cutting-edge facilities including the UK's first hospital-based proton therapy center, the Institute continues to lead the global effort to transform cancer from a fatal disease into a manageable condition.
                 </p>
               </div>
             </div>
