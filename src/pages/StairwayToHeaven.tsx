@@ -656,10 +656,10 @@ export default function StairwayToHeaven() {
               transition={{ duration: 0.8, delay: 1.2 }}
             >
               <Button className="bg-gradient-to-r from-green-500 to-blue-500 hover:from-green-600 hover:to-blue-600 text-white px-8 py-3 rounded-full">
-                View the Memory Tree
+                <Link to="/memory-tree">View the Memory Tree</Link>
               </Button>
               <Button variant="outline" className="border-green-500 text-green-600 hover:bg-green-50 px-8 py-3 rounded-full">
-                Add a Name
+                <Link to="/memory-tree#add">Add a Name</Link>
               </Button>
             </motion.div>
           </div>

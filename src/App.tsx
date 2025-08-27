@@ -15,6 +15,7 @@ import Contact from "./pages/Contact";
 import Amenities from "./pages/Amenities";
 import NotFound from "./pages/NotFound";
 import StairwayToHeaven from "./pages/StairwayToHeaven";
+import MemoryTree from "./pages/MemoryTree";
 
 // Create a react-query client
 const queryClient = new QueryClient();
@@ -35,6 +36,7 @@ const AppRoot = () => (
           <Route path="/contact" element={<Contact />} />
           <Route path="/amenities" element={<Amenities />} />
           <Route path="/stairway-to-heaven" element={<StairwayToHeaven />} />
+          <Route path="/memory-tree" element={<MemoryTree />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
