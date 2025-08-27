@@ -1,122 +1,67 @@
-
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import ApartmentCard, { ApartmentProps } from "@/components/ApartmentCard";
-import { Button } from "@/components/ui/button";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
-import { Slider } from "@/components/ui/slider";
+import { Award, Users, MapPin, Building, Microscope, Heart, Star, Trophy, Target, Zap } from "lucide-react";
 
-// Sample apartments data (will use translations from context)
-const allApartments: ApartmentProps[] = [
+const achievements = [
   {
-    id: "1",
-    name: "Deluxe Sea View Suite",
-    description: "Luxurious suite with panoramic sea views, modern amenities, and a private balcony.",
-    price: 180,
-    capacity: 2,
-    size: 45,
-    image: "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=800&h=600&fit=crop",
-    location: "Beachfront",
-    features: ["Wi-Fi", "Kitchen", "Bathroom", "Air Conditioning", "TV", "Balcony"]
+    icon: <Award className="h-8 w-8 text-primary" />,
+    title: "Top 10 Global University",
+    description: "UCL consistently ranked among world's leading institutions"
   },
   {
-    id: "2",
-    name: "Premium Family Apartment",
-    description: "Spacious apartment ideal for families, with full kitchen and stunning coastal views.",
-    price: 250,
-    capacity: 4,
-    size: 75,
-    image: "https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=800&h=600&fit=crop",
-    location: "Second row",
-    features: ["Wi-Fi", "Kitchen", "Bathroom", "Air Conditioning", "TV", "Washing Machine"]
+    icon: <Users className="h-8 w-8 text-primary" />,
+    title: "400+ Cancer Scientists",
+    description: "Largest concentration of cancer expertise in Europe"
   },
   {
-    id: "3",
-    name: "Executive Beach Studio",
-    description: "Elegant studio with direct beach access, modern design, and premium finishes.",
-    price: 150,
-    capacity: 2,
-    size: 35,
-    image: "https://images.unsplash.com/photo-1598928506311-c55ded91a20c?w=800&h=600&fit=crop",
-    location: "Beachfront",
-    features: ["Wi-Fi", "Kitchenette", "Bathroom", "Air Conditioning", "TV"]
+    icon: <Building className="h-8 w-8 text-primary" />,
+    title: "Established 2007",
+    description: "Central hub for UCL's cancer research activities"
   },
   {
-    id: "4",
-    name: "Luxury Penthouse Suite",
-    description: "Exclusive top-floor suite with expansive terrace and panoramic sea views.",
-    price: 350,
-    capacity: 4,
-    size: 90,
-    image: "https://images.unsplash.com/photo-1562438668-bcf0ca6578f0?w=800&h=600&fit=crop",
-    location: "Beachfront",
-    features: ["Wi-Fi", "Full Kitchen", "2 Bathrooms", "Air Conditioning", "TV", "Terrace", "Jacuzzi"]
+    icon: <Microscope className="h-8 w-8 text-primary" />,
+    title: "Research Excellence",
+    description: "Leading breakthrough discoveries in cancer treatment"
+  }
+];
+
+const researchAreas = [
+  { name: "Stem Cell Biology", icon: <Zap className="h-5 w-5" /> },
+  { name: "Transcription Factors", icon: <Target className="h-5 w-5" /> },
+  { name: "Cell Cycle Regulation", icon: <Microscope className="h-5 w-5" /> },
+  { name: "Translational Immunology", icon: <Heart className="h-5 w-5" /> },
+  { name: "Genomics & Bioinformatics", icon: <Star className="h-5 w-5" /> },
+  { name: "Chromatin Regulation", icon: <Trophy className="h-5 w-5" /> },
+  { name: "Gene Therapy & Immunotherapy", icon: <Zap className="h-5 w-5" /> },
+  { name: "Viral Oncology", icon: <Target className="h-5 w-5" /> },
+  { name: "Drug Development", icon: <Microscope className="h-5 w-5" /> },
+  { name: "Clinical Trials", icon: <Heart className="h-5 w-5" /> }
+];
+
+const partnerships = [
+  {
+    name: "University College London Hospitals (UCLH)",
+    description: "Primary clinical partner for translational research",
+    image: "https://images.unsplash.com/photo-1576091160399-112ba8d25d1f?w=400&h=300&fit=crop"
   },
   {
-    id: "5",
-    name: "Classic Double Room",
-    description: "Comfortable hotel room with modern amenities and partial sea views.",
-    price: 120,
-    capacity: 2,
-    size: 28,
-    image: "https://images.unsplash.com/photo-1611892440504-42a792e24d32?w=800&h=600&fit=crop",
-    location: "Hotel building",
-    features: ["Wi-Fi", "Bathroom", "Air Conditioning", "TV", "Mini Fridge"]
+    name: "Royal Free Hospital",
+    description: "Collaborative research and patient care programs",
+    image: "https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=400&h=300&fit=crop"
   },
   {
-    id: "6",
-    name: "Garden View Apartment",
-    description: "Peaceful apartment surrounded by lush gardens, just a short walk from the beach.",
-    price: 160,
-    capacity: 3,
-    size: 55,
-    image: "https://images.unsplash.com/photo-1600585152220-90363fe7e115?w=800&h=600&fit=crop",
-    location: "Garden area",
-    features: ["Wi-Fi", "Kitchen", "Bathroom", "Air Conditioning", "TV", "Terrace"]
-  },
+    name: "Great Ormond Street Hospital",
+    description: "Pediatric cancer research and treatment excellence",
+    image: "https://images.unsplash.com/photo-1582719471384-894fbb16e074?w=400&h=300&fit=crop"
+  }
 ];
 
 export default function Apartments() {
-  const [filteredApartments, setFilteredApartments] = useState<ApartmentProps[]>(allApartments);
-  const [capacityFilter, setCapacityFilter] = useState<string>("all");
-  const [locationFilter, setLocationFilter] = useState<string>("all");
-  const [priceRange, setPriceRange] = useState<number[]>([100, 350]);
-  
   useEffect(() => {
     // Scroll to top when component mounts
     window.scrollTo(0, 0);
   }, []);
-  
-  // Apply filters
-  useEffect(() => {
-    let result = allApartments;
-    
-    // Filter by capacity
-    if (capacityFilter !== "all") {
-      const capacity = parseInt(capacityFilter);
-      result = result.filter(apt => apt.capacity >= capacity);
-    }
-    
-    // Filter by location
-    if (locationFilter !== "all") {
-      result = result.filter(apt => apt.location === locationFilter);
-    }
-    
-    // Filter by price range
-    result = result.filter(apt => apt.price >= priceRange[0] && apt.price <= priceRange[1]);
-    
-    setFilteredApartments(result);
-  }, [capacityFilter, locationFilter, priceRange]);
-  
-  // Get unique locations for filter
-  const locations = ["all", ...new Set(allApartments.map(apt => apt.location))];
   
   return (
     <div className="min-h-screen flex flex-col">
@@ -124,95 +69,205 @@ export default function Apartments() {
       
       <main className="flex-1 pt-20">
         {/* Header Section */}
-        <section className="relative py-20 bg-gradient-to-r from-sea-light to-white overflow-hidden">
+        <section className="relative py-20 bg-gradient-to-r from-primary/10 via-white to-primary/5 overflow-hidden">
           <div className="container relative z-10">
-            <div className="max-w-3xl mx-auto text-center animate-fade-in">
-              <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4">
+            <div className="max-w-4xl mx-auto text-center animate-fade-in">
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 text-primary">
                 UCL Cancer Institute
               </h1>
-              <p className="text-muted-foreground text-lg mb-6">
-                World-class cancer research at the heart of London's medical district.
+              <p className="text-xl text-muted-foreground mb-8 max-w-3xl mx-auto">
+                World-class cancer research at the heart of London's medical district
               </p>
+              <div className="inline-flex items-center bg-primary/10 rounded-full px-6 py-3">
+                <MapPin className="h-5 w-5 text-primary mr-2" />
+                <span className="text-primary font-medium">Central London • Faculty of Medical Sciences</span>
+              </div>
             </div>
           </div>
           
           {/* Decorative elements */}
-          <div className="absolute bottom-0 right-0 w-1/2 h-1/2 opacity-10">
-            <div className="absolute bottom-0 right-0 w-64 h-64 rounded-full bg-primary/50 blur-3xl" />
-            <div className="absolute top-10 right-40 w-48 h-48 rounded-full bg-sea-light blur-3xl" />
+          <div className="absolute top-0 right-0 w-1/3 h-full opacity-10">
+            <div className="absolute top-10 right-10 w-64 h-64 rounded-full bg-primary/50 blur-3xl" />
+            <div className="absolute bottom-10 right-40 w-48 h-48 rounded-full bg-primary/30 blur-3xl" />
           </div>
         </section>
-        
+
         {/* Institute Overview */}
         <section className="section bg-white">
           <div className="container">
-            <div className="max-w-4xl mx-auto">
-              <div className="prose prose-lg max-w-none animate-fade-in">
-                <p className="text-lg text-muted-foreground mb-6">
-                  UCL is consistently ranked among the world's top universities, and the UCL Cancer Institute, established in 2007, serves as the central hub for cancer research at UCL. With over 400 scientists dedicated to understanding and treating cancer, the Institute represents one of the largest concentrations of cancer research expertise in Europe.
-                </p>
-                
-                <p className="text-lg text-muted-foreground mb-6">
-                  Located in central London, the Institute is part of UCL's Faculty of Medical Sciences and benefits from its position at the heart of one of the world's leading medical districts. This strategic location facilitates collaboration with major teaching hospitals and provides access to diverse patient populations for clinical research.
-                </p>
-                
-                <p className="text-lg text-muted-foreground mb-4">
-                  Key research areas include:
-                </p>
-                
-                <div className="mb-8 animate-fade-in [animation-delay:200ms]">
-                  <ul className="text-lg text-muted-foreground space-y-1 ml-6">
-                    <li>• Stem cell biology</li>
-                    <li>• Transcription factors</li>
-                    <li>• Cell cycle regulation</li>
-                    <li>• Translational immunology</li>
-                    <li>• Genomics & bioinformatics</li>
-                    <li>• Chromatin regulation mechanisms</li>
-                    <li>• Gene therapy & immunotherapy</li>
-                    <li>• Viral oncology</li>
-                    <li>• Drug development</li>
-                    <li>• Clinical trials</li>
-                  </ul>
-                </div>
-                
-                <p className="text-lg text-muted-foreground mb-6 animate-fade-in [animation-delay:300ms]">
-                  The Institute maintains strong partnerships with University College London Hospitals (UCLH), Royal Free Hospital, and Great Ormond Street Hospital. The UCH Macmillan Cancer Centre, opened in 2012 directly across from the Institute, enables seamless collaboration between researchers and clinicians, accelerating the translation of laboratory discoveries into patient treatments.
-                </p>
-                
-                <p className="text-lg text-muted-foreground animate-fade-in [animation-delay:400ms]">
-                  The UCL Cancer Institute stands at the forefront of an exciting era in cancer research. The Institute is driving progress in targeted therapies that attack specific cancer vulnerabilities, advancing personalized medicine through genomic sequencing and sophisticated diagnostics, and pioneering new treatment approaches. With access to cutting-edge facilities including the UK's first hospital-based proton therapy center, the Institute continues to lead the global effort to transform cancer from a fatal disease into a manageable condition.
-                </p>
-              </div>
+            <div className="max-w-4xl mx-auto text-center mb-12 animate-fade-in">
+              <h2 className="text-3xl md:text-4xl font-bold mb-6">Leading Cancer Research Excellence</h2>
+              <p className="text-lg text-muted-foreground mb-8">
+                UCL is consistently ranked among the world's top universities. The UCL Cancer Institute, established in 2007, 
+                serves as the central hub for cancer research at UCL with over 400 scientists dedicated to understanding and treating cancer.
+              </p>
+              <p className="text-lg text-muted-foreground">
+                Located in central London as part of UCL's Faculty of Medical Sciences, the Institute represents one of the 
+                largest concentrations of cancer research expertise in Europe.
+              </p>
             </div>
           </div>
         </section>
-        
-        {/* Research Impact Gallery */}
-        <section className="section bg-muted">
+
+        {/* Achievements Section */}
+        <section className="section bg-primary/5">
           <div className="container">
-            <div className="text-center max-w-3xl mx-auto mb-12 animate-fade-in">
-              <h2 className="text-3xl md:text-4xl font-bold mb-4">
-                Research in Action
-              </h2>
-              <p className="text-muted-foreground">
-                Explore the cutting-edge research facilities and collaborative spaces where breakthrough discoveries happen.
+            <div className="text-center mb-12 animate-fade-in">
+              <h2 className="text-3xl md:text-4xl font-bold mb-4">Recognition & Excellence</h2>
+              <p className="text-muted-foreground">Celebrating our achievements in cancer research and education</p>
+            </div>
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+              {achievements.map((achievement, index) => (
+                <div 
+                  key={index} 
+                  className="glass-card p-6 rounded-xl text-center animate-fade-in border-2 border-primary/10 hover:border-primary/30 transition-all duration-300"
+                  style={{ animationDelay: `${(index + 1) * 100}ms` }}
+                >
+                  <div className="mb-4 p-3 rounded-full bg-primary/10 text-primary inline-flex">
+                    {achievement.icon}
+                  </div>
+                  <h3 className="text-lg font-bold mb-2 text-primary">{achievement.title}</h3>
+                  <p className="text-sm text-muted-foreground">{achievement.description}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Research Areas */}
+        <section className="section bg-white">
+          <div className="container">
+            <div className="text-center mb-12 animate-fade-in">
+              <h2 className="text-3xl md:text-4xl font-bold mb-4">Research Strengths</h2>
+              <p className="text-muted-foreground max-w-2xl mx-auto">
+                Our multidisciplinary approach spans fundamental research to clinical applications
               </p>
             </div>
             
-            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4">
+              {researchAreas.map((area, index) => (
+                <div 
+                  key={index} 
+                  className="glass-card p-4 rounded-lg text-center animate-fade-in hover:bg-primary/5 transition-all duration-300 border border-primary/10"
+                  style={{ animationDelay: `${(index + 1) * 50}ms` }}
+                >
+                  <div className="text-primary mb-2 flex justify-center">
+                    {area.icon}
+                  </div>
+                  <h3 className="text-sm font-medium text-foreground">{area.name}</h3>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Visual Research Gallery */}
+        <section className="section bg-muted">
+          <div className="container">
+            <div className="text-center mb-12 animate-fade-in">
+              <h2 className="text-3xl md:text-4xl font-bold mb-4">Research in Action</h2>
+              <p className="text-muted-foreground">Cutting-edge facilities where breakthrough discoveries happen</p>
+            </div>
+            
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
               {Array.from({ length: 8 }).map((_, index) => (
                 <div 
                   key={index} 
-                  className="aspect-square rounded-lg overflow-hidden shadow-md transition-transform hover:scale-105 animate-fade-in"
+                  className="aspect-square rounded-xl overflow-hidden shadow-lg transition-all duration-300 hover:scale-105 animate-fade-in border-4 border-white"
                   style={{ animationDelay: `${(index + 1) * 100}ms` }}
                 >
                   <img 
-                    src={`https://images.unsplash.com/photo-${1550000000000 + index * 100000}?w=400&h=400&fit=crop`}
+                    src={`https://images.unsplash.com/photo-${1580000000000 + index * 100000}?w=400&h=400&fit=crop`}
                     alt={`Research facility ${index + 1}`}
                     className="w-full h-full object-cover"
                   />
                 </div>
               ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Hospital Partnerships */}
+        <section className="section bg-white">
+          <div className="container">
+            <div className="text-center mb-12 animate-fade-in">
+              <h2 className="text-3xl md:text-4xl font-bold mb-4">Clinical Partnerships</h2>
+              <p className="text-muted-foreground max-w-3xl mx-auto">
+                Strong collaborations with leading hospitals accelerate the translation of research into patient care
+              </p>
+            </div>
+            
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
+              {partnerships.map((partner, index) => (
+                <div 
+                  key={index} 
+                  className="glass-card rounded-xl overflow-hidden animate-fade-in border-2 border-primary/10 hover:border-primary/30 transition-all duration-300"
+                  style={{ animationDelay: `${(index + 1) * 200}ms` }}
+                >
+                  <div className="h-48 relative">
+                    <img 
+                      src={partner.image} 
+                      alt={partner.name}
+                      className="w-full h-full object-cover"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+                  </div>
+                  <div className="p-6">
+                    <h3 className="text-lg font-bold mb-2 text-primary">{partner.name}</h3>
+                    <p className="text-muted-foreground text-sm">{partner.description}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+            
+            <div className="glass-card p-8 rounded-xl bg-primary/5 border-2 border-primary/20 animate-fade-in [animation-delay:800ms]">
+              <div className="text-center">
+                <Building className="h-12 w-12 text-primary mx-auto mb-4" />
+                <h3 className="text-xl font-bold mb-4 text-primary">UCH Macmillan Cancer Centre</h3>
+                <p className="text-muted-foreground max-w-2xl mx-auto">
+                  Opened in 2012 directly across from the Institute, this state-of-the-art facility enables seamless 
+                  collaboration between researchers and clinicians, accelerating the translation of laboratory discoveries into patient treatments.
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Future Vision */}
+        <section className="section bg-gradient-to-r from-primary/10 to-primary/5">
+          <div className="container">
+            <div className="max-w-4xl mx-auto text-center animate-fade-in">
+              <h2 className="text-3xl md:text-4xl font-bold mb-6 text-primary">The Future of Cancer Research</h2>
+              <p className="text-lg text-muted-foreground mb-8">
+                The UCL Cancer Institute stands at the forefront of an exciting era in cancer research, driving progress in 
+                targeted therapies that attack specific cancer vulnerabilities and advancing personalized medicine through 
+                genomic sequencing and sophisticated diagnostics.
+              </p>
+              <p className="text-lg text-muted-foreground mb-8">
+                With access to cutting-edge facilities including the UK's first hospital-based proton therapy center, 
+                the Institute continues to lead the global effort to transform cancer from a fatal disease into a manageable condition.
+              </p>
+              
+              <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mt-12">
+                {[
+                  { title: "Targeted Therapies", icon: <Target className="h-8 w-8" /> },
+                  { title: "Personalized Medicine", icon: <Heart className="h-8 w-8" /> },
+                  { title: "Advanced Diagnostics", icon: <Microscope className="h-8 w-8" /> },
+                  { title: "Proton Therapy", icon: <Zap className="h-8 w-8" /> }
+                ].map((item, index) => (
+                  <div 
+                    key={index} 
+                    className="glass-card p-6 rounded-xl text-center border-2 border-primary/20 hover:border-primary/40 transition-all duration-300"
+                    style={{ animationDelay: `${(index + 1) * 100}ms` }}
+                  >
+                    <div className="text-primary mb-3 flex justify-center">
+                      {item.icon}
+                    </div>
+                    <h3 className="font-bold text-primary">{item.title}</h3>
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
         </section>
