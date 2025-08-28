@@ -139,27 +139,65 @@ export default function MemoryTree() {
   // Get hanging tribute cards (most recent)
   const getHangingTributes = () => {
     const isMobile = window.innerWidth < 768;
-    const maxCards = isMobile ? 3 : 6;
+    const maxCards = isMobile ? 6 : 12;
     return sortedEntries.slice(0, maxCards);
   };
 
-  // Get string position for hanging cards
-  const getStringPosition = (index: number, total: number) => {
-    const startAngle = -Math.PI * 0.75; // Start from top-left of heart
-    const endAngle = -Math.PI * 0.25;   // End at top-right of heart
+  // Get card position around heart (2 concentric arcs)
+  const getCardPosition = (index: number, total: number) => {
+    const isMobile = window.innerWidth < 768;
+    const heartCenterX = 600;
+    const heartCenterY = 200;
+    const minAngleSeparation = Math.PI / 10; // 18 degrees
+    
+    // Distribute cards around top and upper sides of heart
+    const startAngle = -Math.PI * 0.8; // Start from top-left
+    const endAngle = -Math.PI * 0.2;   // End at top-right
     const angleRange = endAngle - startAngle;
-    const angle = startAngle + (index / (total - 1)) * angleRange;
     
-    // Heart canopy dimensions (increased by 35%)
-    const heartCenterX = 400;
-    const heartCenterY = 180;
-    const heartRadiusX = 70; // Increased from ~52
-    const heartRadiusY = 50; // Increased from ~37
+    // Calculate angle for this card
+    let angle;
+    if (total === 1) {
+      angle = -Math.PI / 2; // Top center
+    } else {
+      angle = startAngle + (index / (total - 1)) * angleRange;
+    }
     
+    // Heart dimensions (30% larger)
+    const heartRadiusX = 114;
+    const heartRadiusY = 70;
+    
+    // Determine which arc (inner or outer) based on spacing
+    const isOuterArc = index >= total / 2 && total > 6;
+    const arcRadius = isOuterArc ? 1.4 : 1.2;
+    
+    // Anchor point on heart edge
     const anchorX = heartCenterX + Math.cos(angle) * heartRadiusX;
     const anchorY = heartCenterY + Math.sin(angle) * heartRadiusY;
     
-    return { anchorX, anchorY, angle };
+    // Card position (outside heart with safe margin)
+    const cardDistance = isMobile ? 180 : 220;
+    const cardRadius = cardDistance * arcRadius;
+    const cardX = heartCenterX + Math.cos(angle) * cardRadius;
+    const cardY = heartCenterY + Math.sin(angle) * cardRadius;
+    
+    // Ensure cards don't go off screen
+    const safeMargin = 150;
+    const clampedCardX = Math.max(safeMargin, Math.min(1200 - safeMargin, cardX));
+    const clampedCardY = Math.max(safeMargin, Math.min(600 - safeMargin, cardY));
+    
+    const stringLength = Math.sqrt(
+      Math.pow(clampedCardX - anchorX, 2) + Math.pow(clampedCardY - anchorY, 2)
+    );
+    
+    return { 
+      anchorX, 
+      anchorY, 
+      cardX: clampedCardX, 
+      cardY: clampedCardY, 
+      stringLength,
+      angle 
+    };
   };
 
   // Handle hanging card click
@@ -268,12 +306,12 @@ export default function MemoryTree() {
         </section>
 
         {/* Tree Section */}
-        <section className="py-20 relative min-h-screen flex items-center">
+        <section className="py-20 relative min-h-[70vh] flex items-center">
           <div className="container">
-            <div className="relative h-96 max-w-4xl mx-auto">
+            <div className="relative h-[600px] max-w-6xl mx-auto">
               {/* Fixed, centered tree */}
               <div className="absolute inset-0 flex items-center justify-center">
-                <svg width="800" height="500" viewBox="0 0 800 500" className="w-full h-full">
+                <svg width="1200" height="600" viewBox="0 0 1200 600" className="w-full h-full">
                   <defs>
                     <radialGradient id="heartGradient" cx="50%" cy="50%" r="50%">
                       <stop offset="0%" stopColor="#EC4899" />
@@ -288,32 +326,30 @@ export default function MemoryTree() {
                     </filter>
                   </defs>
 
-                  {/* Tree Trunk - proportionally larger */}
+                  {/* Tree Trunk */}
                   <rect
-                    x="385"
-                    y="320"
-                    width="30"
-                    height="180"
+                    x="588"
+                    y="350"
+                    width="24"
+                    height="150"
                     fill="#9CA3AF"
-                    rx="15"
+                    rx="12"
                     opacity="0.8"
                   />
                   
-                  {/* Heart Canopy - 35% larger */}
-                  <g transform="translate(400, 180)">
+                  {/* Heart Canopy - 30% larger */}
+                  <g transform="translate(600, 200)">
                     <path
-                      d="M0,-54 C-34,-88 -88,-88 -88,-34 C-88,0 0,68 0,68 C0,68 88,0 88,-34 C88,-88 34,-88 0,-54 Z"
+                      d="M0,-70 C-44,-114 -114,-114 -114,-44 C-114,0 0,88 0,88 C0,88 114,0 114,-44 C114,-114 44,-114 0,-70 Z"
                       fill="url(#heartGradient)"
                       filter="url(#pinkGlow)"
                       opacity="0.9"
                     />
                   </g>
 
-                  {/* Hanging Tribute Cards */}
+                  {/* Hanging Tribute Cards Around Heart */}
                   {getHangingTributes().map((entry, index) => {
-                    const { anchorX, anchorY } = getStringPosition(index, getHangingTributes().length);
-                    const stringLength = 80;
-                    const cardY = anchorY + stringLength;
+                    const { anchorX, anchorY, cardX, cardY, stringLength } = getCardPosition(index, getHangingTributes().length);
                     
                     return (
                       <g key={`hanging-${entry.id}`}>
@@ -321,16 +357,17 @@ export default function MemoryTree() {
                         <motion.line
                           x1={anchorX}
                           y1={anchorY}
-                          x2={anchorX}
+                          x2={cardX}
                           y2={cardY}
                           stroke="#EC4899"
                           strokeWidth="1.5"
                           opacity="0.7"
                           animate={shouldReduceMotion ? {} : {
-                            x2: [anchorX, anchorX + 2, anchorX - 2, anchorX],
+                            x2: [cardX, cardX + 1, cardX - 1, cardX],
+                            y2: [cardY, cardY + 1, cardY - 1, cardY],
                           }}
                           transition={{
-                            duration: 4 + Math.random() * 2,
+                            duration: 6 + Math.random() * 2,
                             repeat: Infinity,
                             ease: "easeInOut"
                           }}
@@ -345,94 +382,6 @@ export default function MemoryTree() {
                           opacity="0.8"
                         />
                         
-                        {/* Hanging Card */}
-                        <motion.g
-                          animate={shouldReduceMotion ? {} : {
-                            x: [0, 2, -2, 0],
-                          }}
-                          transition={{
-                            duration: 4 + Math.random() * 2,
-                            repeat: Infinity,
-                            ease: "easeInOut"
-                          }}
-                        >
-                          <rect
-                            x={anchorX - 60}
-                            y={cardY}
-                            width="120"
-                            height="50"
-                            fill="white"
-                            stroke="#EC4899"
-                            strokeWidth="1"
-                            strokeOpacity="0.2"
-                            rx="6"
-                            filter="url(#pinkGlow)"
-                            className="cursor-pointer"
-                            onMouseEnter={() => setHoveredCard(entry.id)}
-                            onMouseLeave={() => setHoveredCard(null)}
-                            onClick={() => handleHangingCardClick(entry.id)}
-                          />
-                          
-                          {/* Card Content */}
-                          <text
-                            x={anchorX}
-                            y={cardY + 18}
-                            textAnchor="middle"
-                            fill="#1F2937"
-                            fontSize="11"
-                            fontWeight="bold"
-                            className="cursor-pointer"
-                            onClick={() => handleHangingCardClick(entry.id)}
-                          >
-                            {entry.name}
-                          </text>
-                          <text
-                            x={anchorX}
-                            y={cardY + 32}
-                            textAnchor="middle"
-                            fill="#6B7280"
-                            fontSize="9"
-                            className="cursor-pointer"
-                            onClick={() => handleHangingCardClick(entry.id)}
-                          >
-                            {entry.message.length > 25 
-                              ? entry.message.substring(0, 25) + "..." 
-                              : entry.message}
-                          </text>
-                        </motion.g>
-                        
-                        {/* Hover tooltip */}
-                        <AnimatePresence>
-                          {hoveredCard === entry.id && (
-                            <motion.g
-                              initial={{ opacity: 0, y: 10 }}
-                              animate={{ opacity: 1, y: 0 }}
-                              exit={{ opacity: 0, y: 10 }}
-                            >
-                              <rect
-                                x={anchorX - 80}
-                                y={cardY - 40}
-                                width="160"
-                                height="30"
-                                fill="white"
-                                stroke="#EC4899"
-                                strokeWidth="1"
-                                strokeOpacity="0.3"
-                                rx="4"
-                                filter="url(#pinkGlow)"
-                              />
-                              <text
-                                x={anchorX}
-                                y={cardY - 22}
-                                textAnchor="middle"
-                                fill="#1F2937"
-                                fontSize="10"
-                              >
-                                {entry.message}
-                              </text>
-                            </motion.g>
-                          )}
-                        </AnimatePresence>
                       </g>
                     );
                   })}
@@ -471,12 +420,87 @@ export default function MemoryTree() {
                   </AnimatePresence>
                 </svg>
               </div>
+              
+              {/* Hanging Cards as HTML elements positioned absolutely */}
+              {getHangingTributes().map((entry, index) => {
+                const { cardX, cardY } = getCardPosition(index, getHangingTributes().length);
+                const isMobile = window.innerWidth < 768;
+                const cardWidth = isMobile ? 240 : 280;
+                
+                return (
+                  <motion.div
+                    key={`card-${entry.id}`}
+                    className="absolute z-20 cursor-pointer"
+                    style={{
+                      left: `${(cardX / 1200) * 100}%`,
+                      top: `${(cardY / 600) * 100}%`,
+                      transform: 'translate(-50%, -50%)',
+                      width: `${cardWidth}px`
+                    }}
+                    animate={shouldReduceMotion ? {} : {
+                      x: [0, 1, -1, 0],
+                      y: [0, 0.5, -0.5, 0],
+                    }}
+                    transition={{
+                      duration: 6 + Math.random() * 2,
+                      repeat: Infinity,
+                      ease: "easeInOut"
+                    }}
+                    onMouseEnter={() => setHoveredCard(entry.id)}
+                    onMouseLeave={() => setHoveredCard(null)}
+                    onClick={() => handleHangingCardClick(entry.id)}
+                    aria-label={`Tribute for ${entry.name}`}
+                    tabIndex={0}
+                    onKeyDown={(e) => {
+                      if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault();
+                        handleHangingCardClick(entry.id);
+                      }
+                    }}
+                  >
+                    <div className="bg-white border border-pink-200/20 rounded-xl p-4 shadow-lg hover:shadow-xl transition-all duration-300 hover:border-pink-300/40">
+                      <div className="flex items-start gap-3">
+                        {entry.photo && (
+                          <img 
+                            src={entry.photo} 
+                            alt={`Photo from ${entry.name}`}
+                            className="w-8 h-8 rounded-full object-cover border border-pink-200"
+                            loading="lazy"
+                          />
+                        )}
+                        <div className="flex-1 min-w-0">
+                          <p className="font-bold text-gray-800 text-sm truncate">{entry.name}</p>
+                          <p className="text-gray-600 text-xs line-clamp-2 mt-1">
+                            {entry.message.length > 60 
+                              ? entry.message.substring(0, 60) + "..." 
+                              : entry.message}
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                    
+                    {/* Hover tooltip */}
+                    <AnimatePresence>
+                      {hoveredCard === entry.id && entry.message.length > 60 && (
+                        <motion.div
+                          className="absolute top-full left-1/2 transform -translate-x-1/2 mt-2 bg-white border border-pink-200 rounded-lg p-3 shadow-lg z-30 max-w-xs"
+                          initial={{ opacity: 0, y: -10 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          exit={{ opacity: 0, y: -10 }}
+                        >
+                          <p className="text-gray-800 text-sm">{entry.message}</p>
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
+                  </motion.div>
+                );
+              })}
             </div>
 
             {/* Legend & Actions */}
             <div className="text-center mt-8 space-y-4">
-              <p className="text-sm text-gray-600">Hanging cards show recent tributes</p>
-              {window.innerWidth < 768 && getHangingTributes().length < sortedEntries.length && (
+              <p className="text-sm text-gray-600">Recent tributes hang from the heart</p>
+              {getHangingTributes().length < sortedEntries.length && (
                 <p className="text-xs text-gray-500">+ more tributes below</p>
               )}
               <Button
