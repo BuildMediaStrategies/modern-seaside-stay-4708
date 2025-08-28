@@ -29,16 +29,17 @@ export default function MemoryTree() {
   const [searchQuery, setSearchQuery] = useState("");
   const [sortBy, setSortBy] = useState<"recent" | "alphabetical">("recent");
   const [symbolicElements, setSymbolicElements] = useState<SymbolicElement[]>([]);
-  const [hoveredStar, setHoveredStar] = useState<string | null>(null);
-  const [focusedStar, setFocusedStar] = useState<string | null>(null);
+  const [hoveredCard, setHoveredCard] = useState<string | null>(null);
+  const [highlightedEntry, setHighlightedEntry] = useState<string | null>(null);
   const [showForm, setShowForm] = useState(false);
   const [formData, setFormData] = useState({ name: "", message: "", photo: null as File | null });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitSuccess, setSubmitSuccess] = useState(false);
   const [submitError, setSubmitError] = useState("");
-  const [newStarId, setNewStarId] = useState<string | null>(null);
+  const [newEntryId, setNewEntryId] = useState<string | null>(null);
 
   const shouldReduceMotion = useReducedMotion();
+  const tributeListRef = useRef<HTMLDivElement>(null);
 
   // Load entries
   useEffect(() => {
@@ -83,13 +84,13 @@ export default function MemoryTree() {
     setSearchQuery(query);
     if (query.trim()) {
       const matchingEntry = entries.find(entry => 
-        entry.name.toLowerCase().includes(query.toLowerCase())
+          setHighlightedEntry(matchingEntry.id);
       );
       if (matchingEntry) {
-        setFocusedStar(matchingEntry.id);
+        setHighlightedEntry(null);
       }
     } else {
-      setFocusedStar(null);
+      setHighlightedEntry(null);
     }
   }, [entries]);
 
@@ -107,12 +108,12 @@ export default function MemoryTree() {
       setFormData({ name: "", message: "", photo: null });
       setShowForm(false);
       setSubmitSuccess(true);
-      setNewStarId(newEntry.id);
-      setFocusedStar(newEntry.id);
+      setNewEntryId(newEntry.id);
+      setHighlightedEntry(newEntry.id);
 
       setTimeout(() => {
         setSubmitSuccess(false);
-        setNewStarId(null);
+        setNewEntryId(null);
       }, 3000);
     } catch (error) {
       setSubmitError(error instanceof Error ? error.message : "Failed to add entry");
@@ -133,22 +134,48 @@ export default function MemoryTree() {
     return new Date(b.created_at).getTime() - new Date(a.created_at).getTime();
   });
 
-  // Position stars around heart canopy in concentric arcs
-  const getStarPosition = (index: number, total: number) => {
+  // Get hanging tribute cards (most recent)
+  const getHangingTributes = () => {
+    const isMobile = window.innerWidth < 768;
+    const maxCards = isMobile ? 3 : 6;
+    return sortedEntries.slice(0, maxCards);
+  };
+
+  // Get string position for hanging cards
+  const getStringPosition = (index: number, total: number) => {
+    const startAngle = -Math.PI * 0.75; // Start from top-left of heart
+    const endAngle = -Math.PI * 0.25;   // End at top-right of heart
+    const angleRange = endAngle - startAngle;
+    const angle = startAngle + (index / (total - 1)) * angleRange;
+    
+    // Heart canopy dimensions (increased by 35%)
     const heartCenterX = 400;
-    const heartCenterY = 200;
+    const heartCenterY = 180;
+    const heartRadiusX = 70; // Increased from ~52
+    const heartRadiusY = 50; // Increased from ~37
     
-    // Create concentric arcs
-    const arc = Math.floor(index / 8); // 8 stars per arc
-    const positionInArc = index % 8;
-    const radius = 60 + (arc * 25); // Increasing radius for each arc
-    const angleOffset = arc * 0.3; // Slight rotation offset per arc
-    const angle = (positionInArc / 8) * Math.PI * 2 + angleOffset;
+    const anchorX = heartCenterX + Math.cos(angle) * heartRadiusX;
+    const anchorY = heartCenterY + Math.sin(angle) * heartRadiusY;
     
-    const x = heartCenterX + Math.cos(angle) * radius;
-    const y = heartCenterY + Math.sin(angle) * radius * 0.7; // Flatten vertically
+    return { anchorX, anchorY, angle };
+  };
+
+  // Handle hanging card click
+  const handleHangingCardClick = (entryId: string) => {
+    setHighlightedEntry(entryId);
     
-    return { x, y };
+    // Smooth scroll to tribute list
+    if (tributeListRef.current) {
+      tributeListRef.current.scrollIntoView({ 
+        behavior: 'smooth', 
+        block: 'start' 
+      });
+    }
+    
+    // Clear highlight after animation
+    setTimeout(() => {
+      setHighlightedEntry(null);
+    }, 2000);
   };
 
   // Get symbolic element emoji
@@ -244,7 +271,7 @@ export default function MemoryTree() {
             <div className="relative h-96 max-w-4xl mx-auto">
               {/* Fixed, centered tree */}
               <div className="absolute inset-0 flex items-center justify-center">
-                <svg width="800" height="400" viewBox="0 0 800 400" className="w-full h-full">
+                <svg width="800" height="500" viewBox="0 0 800 500" className="w-full h-full">
                   <defs>
                     <radialGradient id="heartGradient" cx="50%" cy="50%" r="50%">
                       <stop offset="0%" stopColor="#EC4899" />
@@ -257,35 +284,156 @@ export default function MemoryTree() {
                         <feMergeNode in="SourceGraphic"/>
                       </feMerge>
                     </filter>
-                    <filter id="starGlow">
-                      <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
-                      <feMerge> 
-                        <feMergeNode in="coloredBlur"/>
-                        <feMergeNode in="SourceGraphic"/>
-                      </feMerge>
-                    </filter>
                   </defs>
 
-                  {/* Tree Trunk */}
+                  {/* Tree Trunk - proportionally larger */}
                   <rect
-                    x="390"
-                    y="280"
-                    width="20"
-                    height="120"
+                    x="385"
+                    y="320"
+                    width="30"
+                    height="180"
                     fill="#9CA3AF"
-                    rx="10"
+                    rx="15"
                     opacity="0.8"
                   />
                   
-                  {/* Heart Canopy */}
-                  <g transform="translate(400, 200)">
+                  {/* Heart Canopy - 35% larger */}
+                  <g transform="translate(400, 180)">
                     <path
-                      d="M0,-40 C-25,-65 -65,-65 -65,-25 C-65,0 0,50 0,50 C0,50 65,0 65,-25 C65,-65 25,-65 0,-40 Z"
+                      d="M0,-54 C-34,-88 -88,-88 -88,-34 C-88,0 0,68 0,68 C0,68 88,0 88,-34 C88,-88 34,-88 0,-54 Z"
                       fill="url(#heartGradient)"
                       filter="url(#pinkGlow)"
                       opacity="0.9"
                     />
                   </g>
+
+                  {/* Hanging Tribute Cards */}
+                  {getHangingTributes().map((entry, index) => {
+                    const { anchorX, anchorY } = getStringPosition(index, getHangingTributes().length);
+                    const stringLength = 80;
+                    const cardY = anchorY + stringLength;
+                    
+                    return (
+                      <g key={`hanging-${entry.id}`}>
+                        {/* String */}
+                        <motion.line
+                          x1={anchorX}
+                          y1={anchorY}
+                          x2={anchorX}
+                          y2={cardY}
+                          stroke="#EC4899"
+                          strokeWidth="1.5"
+                          opacity="0.7"
+                          animate={shouldReduceMotion ? {} : {
+                            x2: [anchorX, anchorX + 2, anchorX - 2, anchorX],
+                          }}
+                          transition={{
+                            duration: 4 + Math.random() * 2,
+                            repeat: Infinity,
+                            ease: "easeInOut"
+                          }}
+                        />
+                        
+                        {/* Anchor dot */}
+                        <circle
+                          cx={anchorX}
+                          cy={anchorY}
+                          r="2"
+                          fill="#EC4899"
+                          opacity="0.8"
+                        />
+                        
+                        {/* Hanging Card */}
+                        <motion.g
+                          animate={shouldReduceMotion ? {} : {
+                            x: [0, 2, -2, 0],
+                          }}
+                          transition={{
+                            duration: 4 + Math.random() * 2,
+                            repeat: Infinity,
+                            ease: "easeInOut"
+                          }}
+                        >
+                          <rect
+                            x={anchorX - 60}
+                            y={cardY}
+                            width="120"
+                            height="50"
+                            fill="white"
+                            stroke="#EC4899"
+                            strokeWidth="1"
+                            strokeOpacity="0.2"
+                            rx="6"
+                            filter="url(#pinkGlow)"
+                            className="cursor-pointer"
+                            onMouseEnter={() => setHoveredCard(entry.id)}
+                            onMouseLeave={() => setHoveredCard(null)}
+                            onClick={() => handleHangingCardClick(entry.id)}
+                          />
+                          
+                          {/* Card Content */}
+                          <text
+                            x={anchorX}
+                            y={cardY + 18}
+                            textAnchor="middle"
+                            fill="#1F2937"
+                            fontSize="11"
+                            fontWeight="bold"
+                            className="cursor-pointer"
+                            onClick={() => handleHangingCardClick(entry.id)}
+                          >
+                            {entry.name}
+                          </text>
+                          <text
+                            x={anchorX}
+                            y={cardY + 32}
+                            textAnchor="middle"
+                            fill="#6B7280"
+                            fontSize="9"
+                            className="cursor-pointer"
+                            onClick={() => handleHangingCardClick(entry.id)}
+                          >
+                            {entry.message.length > 25 
+                              ? entry.message.substring(0, 25) + "..." 
+                              : entry.message}
+                          </text>
+                        </motion.g>
+                        
+                        {/* Hover tooltip */}
+                        <AnimatePresence>
+                          {hoveredCard === entry.id && (
+                            <motion.g
+                              initial={{ opacity: 0, y: 10 }}
+                              animate={{ opacity: 1, y: 0 }}
+                              exit={{ opacity: 0, y: 10 }}
+                            >
+                              <rect
+                                x={anchorX - 80}
+                                y={cardY - 40}
+                                width="160"
+                                height="30"
+                                fill="white"
+                                stroke="#EC4899"
+                                strokeWidth="1"
+                                strokeOpacity="0.3"
+                                rx="4"
+                                filter="url(#pinkGlow)"
+                              />
+                              <text
+                                x={anchorX}
+                                y={cardY - 22}
+                                textAnchor="middle"
+                                fill="#1F2937"
+                                fontSize="10"
+                              >
+                                {entry.message}
+                              </text>
+                            </motion.g>
+                          )}
+                        </AnimatePresence>
+                      </g>
+                    );
+                  })}
 
                   {/* Symbolic Elements */}
                   <AnimatePresence>
@@ -304,34 +452,6 @@ export default function MemoryTree() {
                           duration: 6, 
                           ease: "easeInOut",
                           y: { repeat: Infinity, duration: 4 },
-                          x: { repeat: Infinity, duration: 5 }
-                        }}
-                      >
-                        <text
-                          x={element.x}
-                          y={element.y}
-                          textAnchor="middle"
-                          fontSize="16"
-                          opacity={element.opacity}
-                        >
-                          {getSymbolicEmoji(element.type)}
-                        </text>
-                      </motion.g>
-                    ))}
-                  </AnimatePresence>
-
-                  {/* Memory Stars */}
-                  {sortedEntries.map((entry, index) => {
-                    const position = getStarPosition(index, sortedEntries.length);
-                    const isRecentEntry = isRecent(entry);
-                    
-                    return (
-                      <g key={entry.id}>
-                        <motion.g
-                          transform={`translate(${position.x}, ${position.y})`}
-                          animate={
-                            shouldReduceMotion ? {} : {
-                              scale: [1, 1.1, 1],
                               opacity: isRecentEntry ? [0.8, 1, 0.8] : [0.6, 0.8, 0.6]
                             }
                           }
@@ -347,70 +467,16 @@ export default function MemoryTree() {
                             stroke="#EC4899"
                             strokeWidth="1"
                             filter="url(#starGlow)"
-                            className="cursor-pointer"
-                            onMouseEnter={() => setHoveredStar(entry.id)}
-                            onMouseLeave={() => setHoveredStar(null)}
-                            onClick={() => setFocusedStar(entry.id)}
-                            whileHover={{ scale: 1.3 }}
-                            aria-label={`Tribute for ${entry.name}: ${entry.message.substring(0, 50)}...`}
-                          />
-                        </motion.g>
-                        
-                        {/* Star tooltip */}
-                        <AnimatePresence>
-                          {(hoveredStar === entry.id || focusedStar === entry.id) && (
-                            <motion.g
-                              initial={{ opacity: 0, y: 10 }}
-                              animate={{ opacity: 1, y: 0 }}
-                              exit={{ opacity: 0, y: 10 }}
-                            >
-                              <rect
-                                x={position.x - 80}
-                                y={position.y - 60}
-                                width="160"
-                                height="45"
-                                fill="white"
-                                stroke="#EC4899"
-                                strokeWidth="1"
-                                rx="6"
-                                filter="url(#pinkGlow)"
-                              />
-                              <text
-                                x={position.x}
-                                y={position.y - 42}
-                                textAnchor="middle"
-                                fill="#EC4899"
-                                fontSize="12"
-                                fontWeight="bold"
-                              >
-                                {entry.name}
-                              </text>
-                              <text
-                                x={position.x}
-                                y={position.y - 28}
-                                textAnchor="middle"
-                                fill="#6B7280"
-                                fontSize="10"
-                              >
-                                {entry.message.length > 40 
-                                  ? entry.message.substring(0, 40) + "..." 
-                                  : entry.message}
-                              </text>
-                            </motion.g>
-                          )}
-                        </AnimatePresence>
-                      </g>
-                    );
-                  })}
                 </svg>
               </div>
             </div>
 
             {/* Legend & Actions */}
             <div className="text-center mt-8 space-y-4">
-              <p className="text-sm text-gray-600">
-                ⭐ = tribute • ✨ = recent
-              </p>
+              <p className="text-sm text-gray-600">Hanging cards show recent tributes</p>
+              {isMobile && hangingTributes.length < sortedEntries.length && (
+                <p className="text-xs text-gray-500">+ more tributes below</p>
+              )}
               <Button
                 onClick={() => setShowForm(true)}
                 className="bg-pink-500 hover:bg-pink-600 text-white px-8 py-3 rounded-full"
@@ -424,11 +490,16 @@ export default function MemoryTree() {
         {/* Tribute Grid */}
         <section className="py-16 bg-white/50">
           <div className="container">
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
+            <div ref={tributeListRef} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
               {sortedEntries.map((entry, index) => (
                 <motion.div
-                  key={entry.id}
-                  className="bg-white rounded-xl p-4 border border-pink-100 hover:shadow-lg hover:border-pink-200 transition-all duration-300"
+                  key={`tribute-${entry.id}`}
+                  id={`tribute-${entry.id}`}
+                  className={`bg-white rounded-xl p-4 border transition-all duration-300 ${
+                    highlightedEntry === entry.id 
+                      ? 'border-pink-300 shadow-lg bg-pink-50' 
+                      : 'border-pink-100 hover:shadow-lg hover:border-pink-200'
+                  }`}
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.3, delay: index * 0.05 }}
