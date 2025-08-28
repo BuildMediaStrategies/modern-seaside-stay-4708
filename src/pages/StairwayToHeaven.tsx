@@ -53,14 +53,26 @@ interface LightOrb {
 }
 
 const preSeededMessages = [
-  "Hope shines brightest in the darkest moments",
+  "Hope guides us through difficult times",
   "Every step forward honors those we love",
   "Together we carry the light of memory",
   "Courage grows stronger when shared",
   "Love transcends all boundaries",
   "In unity, we find healing",
   "Each story matters, each voice counts",
-  "Strength flows through connection"
+  "Strength flows through connection",
+  "Research brings us closer to answers",
+  "Support creates lasting change",
+  "Your contribution makes a difference",
+  "Science and compassion work together",
+  "Progress happens one discovery at a time",
+  "Community support sustains hope",
+  "Innovation leads to better outcomes",
+  "Together we advance understanding",
+  "Knowledge empowers healing",
+  "Research transforms lives",
+  "Hope drives scientific progress",
+  "Unity strengthens our mission"
 ];
 
 // Constellation formations - meaningful shapes
@@ -87,6 +99,8 @@ const constellationNodes: ConstellationNode[] = [
 export default function StairwayToHeaven() {
   const [activeModal, setActiveModal] = useState<string | null>(null);
   const [soundEnabled, setSoundEnabled] = useState(false);
+  const [selectedShape, setSelectedShape] = useState<'infinity' | 'ribbon' | 'heart'>('infinity');
+  const [driftingMessage, setDriftingMessage] = useState<{ text: string; id: string } | null>(null);
   const [activeFilter, setActiveFilter] = useState('All');
   const [tributes, setTributes] = useState<Tribute[]>([
     { id: '1', name: 'Sarah M.', message: 'In loving memory of Mom', type: 'candle', timestamp: new Date() },
@@ -97,9 +111,6 @@ export default function StairwayToHeaven() {
     { id: '6', name: 'James W.', message: 'Strength through unity', type: 'memory', timestamp: new Date() }
   ]);
   
-  const [nodes, setNodes] = useState<ConstellationNode[]>(constellationNodes);
-  const [lightOrbs, setLightOrbs] = useState<LightOrb[]>([]);
-  const [driftingMessage, setDriftingMessage] = useState<string | null>(null);
   const [formData, setFormData] = useState({ name: '', message: '', photo: null as File | null });
   const [isSubmitted, setIsSubmitted] = useState(false);
 
@@ -120,35 +131,86 @@ export default function StairwayToHeaven() {
   const backgroundY = useTransform(scrollYProgress, [0, 1], ['0%', '30%']);
   const cloudY = useTransform(scrollYProgress, [0, 1], ['0%', '20%']);
 
-  useEffect(() => {
-    window.scrollTo(0, 0);
-    
-    // Initialize light orbs
-    const orbs = Array.from({ length: 8 }, (_, i) => ({
-      id: `orb-${i}`,
-      x: Math.random() * 70 + 15,
-      y: Math.random() * 50 + 25,
-      message: preSeededMessages[i]
-    }));
-    setLightOrbs(orbs);
-  }, []);
+  // Shape path definitions
+  const shapePaths = {
+    infinity: "M 100,250 C 100,100 300,100 400,250 C 500,400 700,400 900,250 C 700,100 500,100 400,250 C 300,400 100,400 100,250 Z",
+    ribbon: "M 200,50 C 320,30 420,140 500,250 C 560,330 650,380 800,360 C 700,430 600,420 520,360 C 440,300 360,200 300,120 C 260,70 230,50 200,50 Z",
+    heart: "M 500,200 C 500,120 620,80 680,160 C 740,240 660,340 500,420 C 340,340 260,240 320,160 C 380,80 500,120 500,200 Z"
+  };
 
-  const handleOrbClick = (orb: LightOrb) => {
-    if (driftingMessage) return;
+  // Get responsive star count
+  const getStarCount = () => {
+    if (typeof window === 'undefined') return 48;
+    const width = window.innerWidth;
+    if (width < 768) return 32; // mobile
+    if (width < 1024) return 48; // tablet
+    return 72; // desktop
+  };
+
+  // Sample points along SVG path
+  const samplePathPoints = (pathData: string, count: number) => {
+    if (typeof document === 'undefined') return [];
     
-    setDriftingMessage(orb.message);
+    const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+    const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
+    path.setAttribute("d", pathData);
+    svg.appendChild(path);
+    document.body.appendChild(svg);
+    
+    const totalLength = path.getTotalLength();
+    const points = [];
+    
+    for (let i = 0; i < count; i++) {
+      const distance = (i / count) * totalLength;
+      const point = path.getPointAtLength(distance);
+      points.push({ x: point.x, y: point.y, messageIndex: i % preSeededMessages.length });
+    }
+    
+    document.body.removeChild(svg);
+    return points;
+  };
+
+  // Get star positions for current shape
+  const [starPositions, setStarPositions] = useState<Array<{ x: number; y: number; messageIndex: number }>>([]);
+
+  useEffect(() => {
+    const updateStarPositions = () => {
+      const count = getStarCount();
+      const positions = samplePathPoints(shapePaths[selectedShape], count);
+      setStarPositions(positions);
+    };
+
+    updateStarPositions();
+    window.addEventListener('resize', updateStarPositions);
+    return () => window.removeEventListener('resize', updateStarPositions);
+  }, [selectedShape]);
+
+  // Handle star click
+  const handleStarClick = (messageIndex: number, starId: string) => {
+    const message = preSeededMessages[messageIndex];
+    setDriftingMessage({ text: message, id: starId });
+    
     if (soundEnabled) {
       console.log('🔔 Soft chime');
     }
     
-    setTimeout(() => setDriftingMessage(null), 4000);
+    setTimeout(() => setDriftingMessage(null), shouldReduceMotion ? 3000 : 12000);
   };
 
-  const handleNodeClick = (nodeId: string) => {
-    setNodes(prev => prev.map(node => 
-      node.id === nodeId ? { ...node, revealed: !node.revealed } : node
-    ));
+  // Handle star keyboard interaction
+  const handleStarKeyDown = (e: React.KeyboardEvent, messageIndex: number, starId: string) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      handleStarClick(messageIndex, starId);
+    }
+    if (e.key === 'Escape') {
+      setDriftingMessage(null);
+    }
   };
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   const handleTributeSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -416,7 +478,7 @@ export default function StairwayToHeaven() {
         {/* 2. Messages of Light */}
         <motion.section 
           ref={messagesRef}
-          className="py-20 relative min-h-screen flex items-center"
+          className="py-20 relative min-h-[70vh] flex items-center"
           initial={{ opacity: 0 }}
           animate={messagesInView ? { opacity: 1 } : {}}
         >
@@ -430,58 +492,131 @@ export default function StairwayToHeaven() {
               <h2 className="text-3xl font-bold mb-4 bg-gradient-to-r from-pink-600 to-gray-700 bg-clip-text text-transparent">
                 Messages of Light
               </h2>
-              <p className="text-gray-600 mb-4">Tap the glowing orbs to reveal messages of hope</p>
+              <p className="text-gray-600 mb-6">Tap the stars to reveal messages of hope</p>
               
-              {/* Sound Toggle */}
-              <motion.button
-                onClick={() => setSoundEnabled(!soundEnabled)}
-                className="p-2 rounded-full bg-white/50 hover:bg-pink-50 border border-pink-100 transition-colors"
-                whileHover={{ scale: 1.1 }}
-                whileTap={{ scale: 0.9 }}
-              >
-                {soundEnabled ? <Volume2 className="h-5 w-5 text-pink-600" /> : <VolumeX className="h-5 w-5 text-gray-400" />}
-              </motion.button>
+              {/* Controls */}
+              <div className="flex items-center justify-center gap-6 mb-8">
+                {/* Shape Selector */}
+                <div className="flex items-center gap-2">
+                  <span className="text-sm text-gray-600">Shape:</span>
+                  <div className="flex bg-white rounded-full border border-pink-100 p-1">
+                    {(['infinity', 'ribbon', 'heart'] as const).map((shape) => (
+                      <button
+                        key={shape}
+                        onClick={() => setSelectedShape(shape)}
+                        className={`px-3 py-1 text-xs font-medium rounded-full transition-colors ${
+                          selectedShape === shape
+                            ? 'bg-pink-500 text-white'
+                            : 'text-gray-600 hover:text-pink-600 hover:bg-pink-50'
+                        }`}
+                      >
+                        {shape.charAt(0).toUpperCase() + shape.slice(1)}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Sound Toggle */}
+                <motion.button
+                  onClick={() => setSoundEnabled(!soundEnabled)}
+                  className="p-2 rounded-full bg-white/50 hover:bg-pink-50 border border-pink-100 transition-colors"
+                  whileHover={{ scale: 1.1 }}
+                  whileTap={{ scale: 0.9 }}
+                  aria-label={soundEnabled ? "Mute chime" : "Enable chime"}
+                >
+                  {soundEnabled ? <Volume2 className="h-5 w-5 text-pink-600" /> : <VolumeX className="h-5 w-5 text-gray-400" />}
+                </motion.button>
+              </div>
             </motion.div>
 
-            {/* Light Orbs */}
-            <div className="relative h-96">
-              {lightOrbs.map((orb, index) => (
-                <motion.div
-                  key={orb.id}
-                  className="absolute cursor-pointer"
-                  style={{ left: `${orb.x}%`, top: `${orb.y}%` }}
-                  initial={{ scale: 0, opacity: 0 }}
-                  animate={messagesInView ? { scale: 1, opacity: 1 } : {}}
-                  transition={{ duration: 0.6, delay: index * 0.1 }}
-                  whileHover={{ scale: 1.2 }}
-                  whileTap={{ scale: 0.9 }}
-                  onClick={() => handleOrbClick(orb)}
-                >
-                  <motion.div
-                    className="w-6 h-6 bg-gradient-to-r from-pink-200 to-pink-300 rounded-full shadow-lg border border-pink-200"
-                    animate={shouldReduceMotion ? {} : {
-                      boxShadow: [
-                        '0 0 10px rgba(236, 72, 153, 0.3)',
-                        '0 0 20px rgba(236, 72, 153, 0.6)',
-                        '0 0 10px rgba(236, 72, 153, 0.3)'
-                      ]
-                    }}
-                    transition={{ duration: 2, repeat: Infinity }}
-                  />
-                </motion.div>
-              ))}
+            {/* SVG Stars Formation */}
+            <div className="relative max-w-5xl mx-auto">
+              <svg 
+                width="100%" 
+                height="520" 
+                viewBox="0 0 1000 500" 
+                preserveAspectRatio="xMidYMid meet"
+                className="w-full"
+              >
+                <defs>
+                  <filter id="starGlow">
+                    <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
+                    <feMerge> 
+                      <feMergeNode in="coloredBlur"/>
+                      <feMergeNode in="SourceGraphic"/>
+                    </feMerge>
+                  </filter>
+                  <filter id="starGlowHover">
+                    <feGaussianBlur stdDeviation="4" result="coloredBlur"/>
+                    <feMerge> 
+                      <feMergeNode in="coloredBlur"/>
+                      <feMergeNode in="SourceGraphic"/>
+                    </feMerge>
+                  </filter>
+                </defs>
 
-              {/* Drifting Message */}
+                {/* Render stars along path */}
+                {starPositions.map((position, index) => {
+                  const starId = `star-${selectedShape}-${index}`;
+                  return (
+                    <g key={starId}>
+                      <motion.path
+                        d="M0,-8 L2.4,-2.4 L8,-2.4 L3.2,1.6 L5.6,8 L0,4 L-5.6,8 L-3.2,1.6 L-8,-2.4 L-2.4,-2.4 Z"
+                        fill="#EC4899"
+                        filter="url(#starGlow)"
+                        transform={`translate(${position.x}, ${position.y})`}
+                        className="cursor-pointer focus:outline-none"
+                        role="button"
+                        tabIndex={0}
+                        aria-label={`Message of hope ${index + 1}`}
+                        initial={{ scale: 0, opacity: 0 }}
+                        animate={messagesInView ? { scale: 1, opacity: 1 } : {}}
+                        transition={{ duration: 0.6, delay: index * 0.02 }}
+                        whileHover={{ 
+                          scale: 1.1,
+                          filter: "url(#starGlowHover)"
+                        }}
+                        whileTap={{ scale: 0.9 }}
+                        onClick={() => handleStarClick(position.messageIndex, starId)}
+                        onKeyDown={(e) => handleStarKeyDown(e, position.messageIndex, starId)}
+                        animate={shouldReduceMotion ? {} : {
+                          opacity: [1, 0.7, 1],
+                        }}
+                        transition={{
+                          opacity: {
+                            duration: 3 + Math.random() * 2,
+                            repeat: Infinity,
+                            ease: "easeInOut"
+                          }
+                        }}
+                      />
+                    </g>
+                  );
+                })}
+              </svg>
+
+              {/* Drifting Message Bubble */}
               <AnimatePresence>
                 {driftingMessage && (
                   <motion.div
-                    className="absolute top-1/2 left-0 transform -translate-y-1/2 bg-white/90 backdrop-blur-lg rounded-lg px-6 py-3 shadow-lg border border-pink-100 text-center max-w-md"
+                    key={driftingMessage.id}
+                    className="absolute top-1/2 left-0 transform -translate-y-1/2 bg-white/95 backdrop-blur-lg rounded-lg px-6 py-3 shadow-lg border border-pink-100 text-center max-w-md z-10"
                     initial={{ x: -100, opacity: 0 }}
-                    animate={{ x: 'calc(100vw + 100px)', opacity: [0, 1, 1, 0] }}
+                    animate={shouldReduceMotion ? 
+                      { opacity: [0, 1, 1, 0] } :
+                      { 
+                        x: 'calc(100vw + 100px)', 
+                        opacity: [0, 1, 1, 0] 
+                      }
+                    }
                     exit={{ opacity: 0 }}
-                    transition={{ duration: 4, ease: "linear" }}
+                    transition={{ 
+                      duration: shouldReduceMotion ? 3 : 12, 
+                      ease: "linear" 
+                    }}
+                    aria-live="polite"
                   >
-                    <p className="text-gray-800 font-medium">{driftingMessage}</p>
+                    <p className="text-gray-800 font-medium text-sm">{driftingMessage.text}</p>
                   </motion.div>
                 )}
               </AnimatePresence>
@@ -492,7 +627,7 @@ export default function StairwayToHeaven() {
         {/* 3. Constellation of Hope */}
         <motion.section 
           ref={constellationRef}
-          className="py-20 bg-gradient-to-b from-transparent to-pink-50/30 relative min-h-screen flex items-center"
+          className="py-20 bg-gradient-to-b from-transparent to-pink-50/30 relative min-h-[60vh] flex items-center"
           initial={{ opacity: 0 }}
           animate={constellationInView ? { opacity: 1 } : {}}
         >
@@ -577,7 +712,7 @@ export default function StairwayToHeaven() {
           </div>
         </motion.section>
 
-        {/* 4. Tributes Section */}
+        {/* 3. Tributes Section */}
         <motion.section 
           ref={tributesRef}
           className="py-20 bg-gradient-to-b from-pink-50/30 to-gray-50/30"
@@ -686,7 +821,7 @@ export default function StairwayToHeaven() {
           </div>
         </motion.section>
 
-        {/* 5. Memory Tree Teaser */}
+        {/* 4. Memory Tree Teaser */}
         <motion.section 
           ref={memoryTreeRef}
           className="py-20 relative"
@@ -739,7 +874,7 @@ export default function StairwayToHeaven() {
           </div>
         </motion.section>
 
-        {/* 6. Community Wall */}
+        {/* 5. Community Wall */}
         <section className="py-20 bg-gradient-to-b from-pink-50/30 to-gray-50/30">
           <div className="container">
             <div className="text-center mb-12">
@@ -844,4 +979,36 @@ export default function StairwayToHeaven() {
       <Footer />
     </div>
   );
+
+  // Helper functions moved to bottom
+  const [nodes, setNodes] = useState<ConstellationNode[]>(constellationNodes);
+
+  const handleNodeClick = (nodeId: string) => {
+    setNodes(prev => prev.map(node => 
+      node.id === nodeId ? { ...node, revealed: !node.revealed } : node
+    ));
+  };
+
+  // Get constellation connections
+  const getConnections = () => {
+    const connections = [];
+    const revealedNodes = nodes.filter(node => node.revealed);
+    
+    // Connect nodes within the same group
+    const groups = revealedNodes.reduce((acc, node) => {
+      if (!acc[node.groupId]) acc[node.groupId] = [];
+      acc[node.groupId].push(node);
+      return acc;
+    }, {} as Record<number, ConstellationNode[]>);
+    
+    Object.values(groups).forEach(groupNodes => {
+      for (let i = 0; i < groupNodes.length - 1; i++) {
+        for (let j = i + 1; j < groupNodes.length; j++) {
+          connections.push([groupNodes[i], groupNodes[j]]);
+        }
+      }
+    });
+    
+    return connections;
+  };
 }
