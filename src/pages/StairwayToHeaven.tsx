@@ -76,31 +76,17 @@ const preSeededMessages = [
   "Unity strengthens our mission"
 ];
 
-// Constellation formations - meaningful shapes
-const constellationNodes: ConstellationNode[] = [
-  // Heart formation
-  { id: '1', name: 'Hope', x: 20, y: 30, message: 'Hope lights the way forward', revealed: false, groupId: 1 },
-  { id: '2', name: 'Love', x: 25, y: 25, message: 'Love never fades away', revealed: false, groupId: 1 },
-  { id: '3', name: 'Peace', x: 30, y: 30, message: 'Peace comes through remembrance', revealed: false, groupId: 1 },
-  
-  // Infinity loop (cancer symbol)
-  { id: '4', name: 'Strength', x: 60, y: 20, message: 'Strength grows through support', revealed: false, groupId: 2 },
-  { id: '5', name: 'Courage', x: 70, y: 25, message: 'Courage inspires others', revealed: false, groupId: 2 },
-  { id: '6', name: 'Faith', x: 80, y: 20, message: 'Faith sustains us', revealed: false, groupId: 2 },
-  { id: '7', name: 'Unity', x: 70, y: 35, message: 'Unity brings healing', revealed: false, groupId: 2 },
-  { id: '8', name: 'Support', x: 60, y: 35, message: 'Support lifts us up', revealed: false, groupId: 2 },
-  
-  // Ribbon formation
-  { id: '9', name: 'Care', x: 25, y: 60, message: 'Care connects hearts', revealed: false, groupId: 3 },
-  { id: '10', name: 'Memory', x: 35, y: 55, message: 'Memories keep love alive', revealed: false, groupId: 3 },
-  { id: '11', name: 'Honor', x: 45, y: 60, message: 'Honor preserves legacy', revealed: false, groupId: 3 },
-  { id: '12', name: 'Grace', x: 35, y: 65, message: 'Grace guides our journey', revealed: false, groupId: 3 }
-];
+// Shape path definitions
+const shapePaths = {
+  ribbon: "M 540,80 C 660,80 740,170 740,260 C 740,360 650,420 560,470 L 665,590 M 540,80 C 420,80 340,170 340,260 C 340,360 430,420 520,470 L 415,590",
+  infinity: "M 200,300 C 200,200 350,150 450,300 C 550,450 700,450 800,300 C 700,150 550,150 450,300 C 350,450 200,450 200,300 Z",
+  heart: "M 500,200 C 500,120 620,80 680,160 C 740,240 660,340 500,420 C 340,340 260,240 320,160 C 380,80 500,120 500,200 Z"
+};
 
 export default function StairwayToHeaven() {
   const [activeModal, setActiveModal] = useState<string | null>(null);
   const [soundEnabled, setSoundEnabled] = useState(false);
-  const [selectedShape, setSelectedShape] = useState<'infinity' | 'ribbon' | 'heart'>('infinity');
+  const [selectedShape, setSelectedShape] = useState<'ribbon' | 'infinity' | 'heart'>('ribbon');
   const [driftingMessage, setDriftingMessage] = useState<{ text: string; id: string } | null>(null);
   const [activeFilter, setActiveFilter] = useState('All');
   const [tributes, setTributes] = useState<Tribute[]>([
@@ -114,7 +100,6 @@ export default function StairwayToHeaven() {
   
   const [formData, setFormData] = useState({ name: '', message: '', photo: null as File | null });
   const [isSubmitted, setIsSubmitted] = useState(false);
-  const [nodes, setNodes] = useState<ConstellationNode[]>(constellationNodes);
 
   const { scrollYProgress } = useScroll();
   const heroRef = useRef(null);
@@ -130,55 +115,13 @@ export default function StairwayToHeaven() {
   const memoryTreeInView = useInView(memoryTreeRef, { once: true });
   const shouldReduceMotion = useReducedMotion();
 
-  // Pure function to build constellation connections
-  const buildConnections = useCallback((nodeList: ConstellationNode[]) => {
-    const edges = [];
-    const revealedNodes = nodeList.filter(node => node.revealed);
-    
-    // Connect nodes within the same group
-    const groups = revealedNodes.reduce((acc, node) => {
-      if (!acc[node.groupId]) acc[node.groupId] = [];
-      acc[node.groupId].push(node);
-      return acc;
-    }, {} as Record<number, ConstellationNode[]>);
-    
-    Object.values(groups).forEach(groupNodes => {
-      for (let i = 0; i < groupNodes.length - 1; i++) {
-        for (let j = i + 1; j < groupNodes.length; j++) {
-          edges.push([groupNodes[i], groupNodes[j]]);
-        }
-      }
-    });
-    
-    return edges;
-  }, []);
-
-  // Memoized connections
-  const connections = useMemo(() => buildConnections(nodes), [nodes, buildConnections]);
-
-  const handleNodeClick = (nodeId: string) => {
-    setNodes(prev => prev.map(node => 
-      node.id === nodeId ? { ...node, revealed: !node.revealed } : node
-    ));
-  };
-
-  const backgroundY = useTransform(scrollYProgress, [0, 1], ['0%', '30%']);
-  const cloudY = useTransform(scrollYProgress, [0, 1], ['0%', '20%']);
-
-  // Shape path definitions
-  const shapePaths = {
-    infinity: "M 100,250 C 100,100 300,100 400,250 C 500,400 700,400 900,250 C 700,100 500,100 400,250 C 300,400 100,400 100,250 Z",
-    ribbon: "M 200,50 C 320,30 420,140 500,250 C 560,330 650,380 800,360 C 700,430 600,420 520,360 C 440,300 360,200 300,120 C 260,70 230,50 200,50 Z",
-    heart: "M 500,200 C 500,120 620,80 680,160 C 740,240 660,340 500,420 C 340,340 260,240 320,160 C 380,80 500,120 500,200 Z"
-  };
-
   // Get responsive star count
   const getStarCount = () => {
-    if (typeof window === 'undefined') return 48;
+    if (typeof window === 'undefined') return 80;
     const width = window.innerWidth;
-    if (width < 768) return 32; // mobile
-    if (width < 1024) return 48; // tablet
-    return 72; // desktop
+    if (width < 768) return 56; // mobile
+    if (width < 1024) return 80; // tablet
+    return 120; // desktop
   };
 
   // Sample points along SVG path
@@ -197,6 +140,23 @@ export default function StairwayToHeaven() {
     for (let i = 0; i < count; i++) {
       const distance = (i / count) * totalLength;
       const point = path.getPointAtLength(distance);
+      
+      // Add perpendicular jitter for band effect
+      const nextPoint = path.getPointAtLength(Math.min(distance + 1, totalLength));
+      const dx = nextPoint.x - point.x;
+      const dy = nextPoint.y - point.y;
+      const length = Math.sqrt(dx * dx + dy * dy);
+      
+      if (length > 0) {
+        const normalX = -dy / length;
+        const normalY = dx / length;
+        const jitterAmount = window.innerWidth < 768 ? 6 : 10;
+        const jitter = (Math.random() - 0.5) * jitterAmount;
+        
+        point.x += normalX * jitter;
+        point.y += normalY * jitter;
+      }
+      
       points.push({ x: point.x, y: point.y, messageIndex: i % preSeededMessages.length });
     }
     
@@ -241,6 +201,9 @@ export default function StairwayToHeaven() {
       setDriftingMessage(null);
     }
   };
+
+  const backgroundY = useTransform(scrollYProgress, [0, 1], ['0%', '30%']);
+  const cloudY = useTransform(scrollYProgress, [0, 1], ['0%', '20%']);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -308,29 +271,6 @@ export default function StairwayToHeaven() {
       case 'memory': return 'from-gray-100 to-white border-gray-200';
       default: return 'from-pink-100 to-pink-50 border-pink-200';
     }
-  };
-
-  // Get constellation connections
-  const getConnections = () => {
-    const connections = [];
-    const revealedNodes = nodes.filter(node => node.revealed);
-    
-    // Connect nodes within the same group
-    const groups = revealedNodes.reduce((acc, node) => {
-      if (!acc[node.groupId]) acc[node.groupId] = [];
-      acc[node.groupId].push(node);
-      return acc;
-    }, {} as Record<number, ConstellationNode[]>);
-    
-    Object.values(groups).forEach(groupNodes => {
-      for (let i = 0; i < groupNodes.length - 1; i++) {
-        for (let j = i + 1; j < groupNodes.length; j++) {
-          connections.push([groupNodes[i], groupNodes[j]]);
-        }
-      }
-    });
-    
-    return connections;
   };
 
   const Modal = ({ type, title, icon }: { type: string; title: string; icon: React.ReactNode }) => (
@@ -534,7 +474,7 @@ export default function StairwayToHeaven() {
                 <div className="flex items-center gap-2">
                   <span className="text-sm text-gray-600">Shape:</span>
                   <div className="flex bg-white rounded-full border border-pink-100 p-1">
-                    {(['infinity', 'ribbon', 'heart'] as const).map((shape) => (
+                    {(['ribbon', 'infinity', 'heart'] as const).map((shape) => (
                       <button
                         key={shape}
                         onClick={() => setSelectedShape(shape)}
@@ -567,20 +507,20 @@ export default function StairwayToHeaven() {
             <div className="relative max-w-5xl mx-auto">
               <svg 
                 width="100%" 
-                height="520" 
-                viewBox="0 0 1000 500" 
+                height="600" 
+                viewBox="0 0 1000 600" 
                 preserveAspectRatio="xMidYMid meet"
                 className="w-full"
               >
                 <defs>
-                  <filter id="starGlow">
+                  <filter id="starGlow" x="-50%" y="-50%" width="200%" height="200%">
                     <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
                     <feMerge> 
                       <feMergeNode in="coloredBlur"/>
                       <feMergeNode in="SourceGraphic"/>
                     </feMerge>
                   </filter>
-                  <filter id="starGlowHover">
+                  <filter id="starGlowHover" x="-50%" y="-50%" width="200%" height="200%">
                     <feGaussianBlur stdDeviation="4" result="coloredBlur"/>
                     <feMerge> 
                       <feMergeNode in="coloredBlur"/>
@@ -589,31 +529,39 @@ export default function StairwayToHeaven() {
                   </filter>
                 </defs>
 
+                {/* Hidden path for sampling (no visual) */}
+                <path
+                  d={shapePaths[selectedShape]}
+                  fill="none"
+                  stroke="none"
+                  style={{ display: 'none' }}
+                />
+
                 {/* Render stars along path */}
                 {starPositions.map((position, index) => {
                   const starId = `star-${selectedShape}-${index}`;
                   return (
                     <g key={starId}>
                       <motion.path
-                        d="M0,-8 L2.4,-2.4 L8,-2.4 L3.2,1.6 L5.6,8 L0,4 L-5.6,8 L-3.2,1.6 L-8,-2.4 L-2.4,-2.4 Z"
+                        d="M0,-6 L1.8,-1.8 L6,-1.8 L2.4,1.2 L4.2,6 L0,3 L-4.2,6 L-2.4,1.2 L-6,-1.8 L-1.8,-1.8 Z"
                         fill="#EC4899"
                         filter="url(#starGlow)"
                         transform={`translate(${position.x}, ${position.y})`}
                         className="cursor-pointer focus:outline-none"
                         role="button"
                         tabIndex={0}
-                        aria-label={`Message of hope ${index + 1}`}
+                        aria-label={`Message of hope #${index + 1}`}
                         initial={{ scale: 0, opacity: 0 }}
                         animate={messagesInView ? { scale: 1, opacity: 1 } : {}}
                         transition={{ duration: 0.6, delay: index * 0.02 }}
                         whileHover={{ 
-                          scale: 1.1,
+                          scale: 1.15,
                           filter: "url(#starGlowHover)"
                         }}
                         whileTap={{ scale: 0.9 }}
                         onClick={() => handleStarClick(position.messageIndex, starId)}
                         onKeyDown={(e) => handleStarKeyDown(e, position.messageIndex, starId)}
-                        animate={shouldReduceMotion ? {} : {
+                        animate={shouldReduceMotion ? { opacity: 1 } : {
                           opacity: [1, 0.7, 1],
                         }}
                         transition={{
@@ -634,7 +582,7 @@ export default function StairwayToHeaven() {
                 {driftingMessage && (
                   <motion.div
                     key={driftingMessage.id}
-                    className="absolute top-1/2 left-0 transform -translate-y-1/2 bg-white/95 backdrop-blur-lg rounded-lg px-6 py-3 shadow-lg border border-pink-100 text-center max-w-md z-10"
+                    className="absolute top-1/2 left-0 transform -translate-y-1/2 bg-white/95 backdrop-blur-lg rounded-lg px-6 py-3 shadow-lg border border-pink-200 text-center max-w-md z-10"
                     initial={{ x: -100, opacity: 0 }}
                     animate={shouldReduceMotion ? 
                       { opacity: [0, 1, 1, 0] } :
@@ -654,94 +602,13 @@ export default function StairwayToHeaven() {
                   </motion.div>
                 )}
               </AnimatePresence>
-            </div>
-          </div>
-        </motion.section>
 
-        {/* 3. Constellation of Hope */}
-        <motion.section 
-          ref={constellationRef}
-          className="py-20 bg-gradient-to-b from-transparent to-pink-50/30 relative min-h-[60vh] flex items-center"
-          initial={{ opacity: 0 }}
-          animate={constellationInView ? { opacity: 1 } : {}}
-        >
-          <div className="container">
-            <motion.div 
-              className="text-center mb-12"
-              initial={{ y: 30, opacity: 0 }}
-              animate={constellationInView ? { y: 0, opacity: 1 } : {}}
-              transition={{ duration: 0.8 }}
-            >
-              <h2 className="text-3xl font-bold mb-4 bg-gradient-to-r from-pink-600 to-gray-700 bg-clip-text text-transparent">
-                Constellation of Hope
-              </h2>
-              <div className="inline-block bg-white/80 backdrop-blur-lg rounded-lg px-4 py-2 shadow-lg border border-pink-100">
-                <p className="text-gray-600 text-sm">Tap stars to reveal messages</p>
-              </div>
-            </motion.div>
-
-            {/* Constellation */}
-            <div className="relative h-96 max-w-4xl mx-auto">
-              {/* Connection Lines */}
-              <svg className="absolute inset-0 w-full h-full pointer-events-none">
-                {connections.map(([node1, node2], index) => (
-                  <motion.line
-                    key={`${node1.id}-${node2.id}`}
-                    x1={`${node1.x}%`}
-                    y1={`${node1.y}%`}
-                    x2={`${node2.x}%`}
-                    y2={`${node2.y}%`}
-                    stroke="rgba(236, 72, 153, 0.3)"
-                    strokeWidth="1"
-                    strokeDasharray="2,2"
-                    initial={{ pathLength: 0, opacity: 0 }}
-                    animate={{ pathLength: 1, opacity: 1 }}
-                    exit={{ pathLength: 0, opacity: 0 }}
-                    transition={{ duration: 1, delay: index * 0.1 }}
-                  />
-                ))}
-              </svg>
-
-              {/* Constellation Nodes */}
-              {nodes.map((node, index) => (
-                <motion.div
-                  key={node.id}
-                  className="absolute cursor-pointer group"
-                  style={{ left: `${node.x}%`, top: `${node.y}%` }}
-                  initial={{ scale: 0, opacity: 0 }}
-                  animate={constellationInView ? { scale: 1, opacity: 1 } : {}}
-                  transition={{ duration: 0.6, delay: index * 0.05 }}
-                  onClick={() => handleNodeClick(node.id)}
-                >
-                  <motion.div
-                    className="w-3 h-3 bg-white rounded-full border-2 border-pink-200 shadow-lg"
-                    animate={shouldReduceMotion ? {} : {
-                      boxShadow: [
-                        '0 0 5px rgba(236, 72, 153, 0.3)',
-                        '0 0 15px rgba(236, 72, 153, 0.5)',
-                        '0 0 5px rgba(236, 72, 153, 0.3)'
-                      ]
-                    }}
-                    transition={{ duration: 3, repeat: Infinity }}
-                    whileHover={{ scale: 1.5 }}
-                  />
-                  
-                  <AnimatePresence>
-                    {node.revealed && (
-                      <motion.div
-                        className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-3 py-2 bg-white/95 backdrop-blur-lg border border-pink-100 text-gray-800 text-xs rounded-lg shadow-lg whitespace-nowrap"
-                        initial={{ opacity: 0, y: 10, scale: 0.8 }}
-                        animate={{ opacity: 1, y: 0, scale: 1 }}
-                        exit={{ opacity: 0, y: 10, scale: 0.8 }}
-                        transition={{ duration: 0.2 }}
-                      >
-                        <div className="font-medium text-pink-600">{node.name}</div>
-                        <div className="opacity-80">{node.message}</div>
-                      </motion.div>
-                    )}
-                  </AnimatePresence>
-                </motion.div>
-              ))}
+              {/* Helper text when no messages */}
+              {starPositions.length === 0 && (
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <p className="text-gray-500 text-center">Messages will appear here</p>
+                </div>
+              )}
             </div>
           </div>
         </motion.section>
