@@ -21,13 +21,16 @@ import {
   VolumeX,
   Flame,
   Heart,
-  MessageCircle
+  MessageCircle,
+  Upload,
+  Image as ImageIcon
 } from "lucide-react";
 
 interface Tribute {
   id: string;
   name: string;
   message: string;
+  photo?: string;
   type: 'candle' | 'tribute' | 'memory';
   timestamp: Date;
 }
@@ -60,27 +63,25 @@ const preSeededMessages = [
   "Strength flows through connection"
 ];
 
-// Constellation formations - organized groups
+// Constellation formations - meaningful shapes
 const constellationNodes: ConstellationNode[] = [
-  // Group 1 - Heart formation
+  // Heart formation
   { id: '1', name: 'Hope', x: 20, y: 30, message: 'Hope lights the way forward', revealed: false, groupId: 1 },
   { id: '2', name: 'Love', x: 25, y: 25, message: 'Love never fades away', revealed: false, groupId: 1 },
   { id: '3', name: 'Peace', x: 30, y: 30, message: 'Peace comes through remembrance', revealed: false, groupId: 1 },
   
-  // Group 2 - Triangle formation
+  // Infinity loop (cancer symbol)
   { id: '4', name: 'Strength', x: 60, y: 20, message: 'Strength grows through support', revealed: false, groupId: 2 },
-  { id: '5', name: 'Courage', x: 70, y: 35, message: 'Courage inspires others', revealed: false, groupId: 2 },
-  { id: '6', name: 'Faith', x: 50, y: 35, message: 'Faith sustains us', revealed: false, groupId: 2 },
+  { id: '5', name: 'Courage', x: 70, y: 25, message: 'Courage inspires others', revealed: false, groupId: 2 },
+  { id: '6', name: 'Faith', x: 80, y: 20, message: 'Faith sustains us', revealed: false, groupId: 2 },
+  { id: '7', name: 'Unity', x: 70, y: 35, message: 'Unity brings healing', revealed: false, groupId: 2 },
+  { id: '8', name: 'Support', x: 60, y: 35, message: 'Support lifts us up', revealed: false, groupId: 2 },
   
-  // Group 3 - Line formation
-  { id: '7', name: 'Unity', x: 25, y: 60, message: 'Unity brings healing', revealed: false, groupId: 3 },
-  { id: '8', name: 'Support', x: 35, y: 65, message: 'Support lifts us up', revealed: false, groupId: 3 },
-  { id: '9', name: 'Care', x: 45, y: 60, message: 'Care connects hearts', revealed: false, groupId: 3 },
-  
-  // Group 4 - Diamond formation
-  { id: '10', name: 'Memory', x: 75, y: 60, message: 'Memories keep love alive', revealed: false, groupId: 4 },
-  { id: '11', name: 'Honor', x: 80, y: 70, message: 'Honor preserves legacy', revealed: false, groupId: 4 },
-  { id: '12', name: 'Grace', x: 70, y: 70, message: 'Grace guides our journey', revealed: false, groupId: 4 }
+  // Ribbon formation
+  { id: '9', name: 'Care', x: 25, y: 60, message: 'Care connects hearts', revealed: false, groupId: 3 },
+  { id: '10', name: 'Memory', x: 35, y: 55, message: 'Memories keep love alive', revealed: false, groupId: 3 },
+  { id: '11', name: 'Honor', x: 45, y: 60, message: 'Honor preserves legacy', revealed: false, groupId: 3 },
+  { id: '12', name: 'Grace', x: 35, y: 65, message: 'Grace guides our journey', revealed: false, groupId: 3 }
 ];
 
 export default function StairwayToHeaven() {
@@ -99,18 +100,20 @@ export default function StairwayToHeaven() {
   const [nodes, setNodes] = useState<ConstellationNode[]>(constellationNodes);
   const [lightOrbs, setLightOrbs] = useState<LightOrb[]>([]);
   const [driftingMessage, setDriftingMessage] = useState<string | null>(null);
-  const [formData, setFormData] = useState({ name: '', message: '' });
+  const [formData, setFormData] = useState({ name: '', message: '', photo: null as File | null });
   const [isSubmitted, setIsSubmitted] = useState(false);
 
   const { scrollYProgress } = useScroll();
   const heroRef = useRef(null);
   const messagesRef = useRef(null);
   const constellationRef = useRef(null);
+  const tributesRef = useRef(null);
   const memoryTreeRef = useRef(null);
 
   const heroInView = useInView(heroRef, { once: true });
   const messagesInView = useInView(messagesRef, { once: true });
   const constellationInView = useInView(constellationRef, { once: true });
+  const tributesInView = useInView(tributesRef, { once: true });
   const memoryTreeInView = useInView(memoryTreeRef, { once: true });
   const shouldReduceMotion = useReducedMotion();
 
@@ -123,8 +126,8 @@ export default function StairwayToHeaven() {
     // Initialize light orbs
     const orbs = Array.from({ length: 8 }, (_, i) => ({
       id: `orb-${i}`,
-      x: Math.random() * 70 + 15, // Keep away from edges
-      y: Math.random() * 50 + 25, // Keep in middle area
+      x: Math.random() * 70 + 15,
+      y: Math.random() * 50 + 25,
       message: preSeededMessages[i]
     }));
     setLightOrbs(orbs);
@@ -147,7 +150,26 @@ export default function StairwayToHeaven() {
     ));
   };
 
-  const handleSubmit = (type: string) => {
+  const handleTributeSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!formData.name || !formData.message) return;
+    
+    const newTribute: Tribute = {
+      id: Date.now().toString(),
+      name: formData.name,
+      message: formData.message,
+      photo: formData.photo ? URL.createObjectURL(formData.photo) : undefined,
+      type: 'tribute',
+      timestamp: new Date()
+    };
+    
+    setTributes(prev => [newTribute, ...prev]);
+    setFormData({ name: '', message: '', photo: null });
+    setIsSubmitted(true);
+    setTimeout(() => setIsSubmitted(false), 3000);
+  };
+
+  const handleModalSubmit = (type: string) => {
     if (!formData.name || !formData.message) return;
     
     const newTribute: Tribute = {
@@ -159,7 +181,7 @@ export default function StairwayToHeaven() {
     };
     
     setTributes(prev => [newTribute, ...prev]);
-    setFormData({ name: '', message: '' });
+    setFormData({ name: '', message: '', photo: null });
     setIsSubmitted(true);
     setActiveModal(null);
     setTimeout(() => setIsSubmitted(false), 3000);
@@ -267,7 +289,7 @@ export default function StairwayToHeaven() {
           </div>
 
           <Button
-            onClick={() => handleSubmit(type)}
+            onClick={() => handleModalSubmit(type)}
             className="w-full bg-pink-500 hover:bg-pink-600 text-white"
             disabled={!formData.name || !formData.message}
           >
@@ -313,29 +335,6 @@ export default function StairwayToHeaven() {
             />
           ))}
         </motion.div>
-
-        {/* Light Rays */}
-        <div className="absolute inset-0 opacity-5">
-          {[...Array(3)].map((_, i) => (
-            <motion.div
-              key={i}
-              className="absolute bg-gradient-to-b from-pink-200/20 to-transparent"
-              style={{
-                width: '2px',
-                height: '100%',
-                left: `${25 + i * 25}%`,
-                transform: `rotate(${i * 10 - 10}deg)`,
-                transformOrigin: 'top center',
-              }}
-              animate={shouldReduceMotion ? {} : { opacity: [0.1, 0.3, 0.1] }}
-              transition={{
-                duration: 3 + i,
-                repeat: Infinity,
-                ease: "easeInOut"
-              }}
-            />
-          ))}
-        </div>
       </motion.div>
 
       <Navbar />
@@ -365,7 +364,7 @@ export default function StairwayToHeaven() {
                 animate={heroInView ? { y: 0, opacity: 1 } : {}}
                 transition={{ duration: 0.8, delay: 0.4 }}
               >
-                Stairway to Heaven is a space where families and friends can honor loved ones, celebrate survivors, and share messages of support.
+                A space where families and friends can honor loved ones, celebrate survivors, and share messages of support.
               </motion.p>
 
               {/* Primary CTAs */}
@@ -578,7 +577,116 @@ export default function StairwayToHeaven() {
           </div>
         </motion.section>
 
-        {/* 4. Memory Tree Preview */}
+        {/* 4. Tributes Section */}
+        <motion.section 
+          ref={tributesRef}
+          className="py-20 bg-gradient-to-b from-pink-50/30 to-gray-50/30"
+          initial={{ opacity: 0 }}
+          animate={tributesInView ? { opacity: 1 } : {}}
+        >
+          <div className="container">
+            <motion.div 
+              className="text-center mb-12"
+              initial={{ y: 30, opacity: 0 }}
+              animate={tributesInView ? { y: 0, opacity: 1 } : {}}
+              transition={{ duration: 0.8 }}
+            >
+              <h2 className="text-3xl font-bold mb-4 bg-gradient-to-r from-pink-600 to-gray-700 bg-clip-text text-transparent">
+                Leave a Tribute
+              </h2>
+              <p className="text-gray-600">Share your message of support</p>
+            </motion.div>
+
+            <div className="max-w-2xl mx-auto">
+              <motion.form 
+                onSubmit={handleTributeSubmit}
+                className="bg-white/80 backdrop-blur-lg rounded-2xl p-6 shadow-lg border border-pink-100 mb-8"
+                initial={{ y: 30, opacity: 0 }}
+                animate={tributesInView ? { y: 0, opacity: 1 } : {}}
+                transition={{ duration: 0.8, delay: 0.2 }}
+              >
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                  <div>
+                    <Label htmlFor="tribute-name" className="text-sm font-medium text-gray-700">Name *</Label>
+                    <Input
+                      id="tribute-name"
+                      value={formData.name}
+                      onChange={(e) => setFormData(prev => ({ ...prev, name: e.target.value }))}
+                      placeholder="Your name"
+                      className="mt-1 bg-white/80 border-gray-200 focus:border-pink-300 focus:ring-pink-200"
+                      required
+                    />
+                  </div>
+                  <div>
+                    <Label htmlFor="tribute-photo" className="text-sm font-medium text-gray-700">Photo (optional)</Label>
+                    <div className="mt-1 relative">
+                      <Input
+                        id="tribute-photo"
+                        type="file"
+                        accept="image/*"
+                        onChange={(e) => setFormData(prev => ({ ...prev, photo: e.target.files?.[0] || null }))}
+                        className="bg-white/80 border-gray-200 focus:border-pink-300 focus:ring-pink-200"
+                      />
+                      <ImageIcon className="absolute right-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400 pointer-events-none" />
+                    </div>
+                  </div>
+                </div>
+                
+                <div className="mb-4">
+                  <Label htmlFor="tribute-message" className="text-sm font-medium text-gray-700">Message *</Label>
+                  <Textarea
+                    id="tribute-message"
+                    value={formData.message}
+                    onChange={(e) => setFormData(prev => ({ ...prev, message: e.target.value }))}
+                    placeholder="Share your message..."
+                    className="mt-1 min-h-[100px] bg-white/80 border-gray-200 focus:border-pink-300 focus:ring-pink-200"
+                    required
+                  />
+                </div>
+
+                <Button
+                  type="submit"
+                  className="w-full bg-pink-500 hover:bg-pink-600 text-white"
+                  disabled={!formData.name || !formData.message}
+                >
+                  <Heart className="mr-2 h-4 w-4" />
+                  Leave Tribute
+                </Button>
+              </motion.form>
+
+              {/* Recent Tributes */}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                {tributes.slice(0, 4).map((tribute, index) => (
+                  <motion.div
+                    key={tribute.id}
+                    className={`bg-gradient-to-br ${getTypeColor(tribute.type)} backdrop-blur-lg rounded-xl p-4 shadow-lg border hover:shadow-xl transition-all duration-300`}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={tributesInView ? { opacity: 1, y: 0 } : {}}
+                    transition={{ duration: 0.3, delay: 0.4 + index * 0.1 }}
+                    whileHover={{ y: -2, scale: 1.02 }}
+                  >
+                    <div className="flex items-start mb-3">
+                      {tribute.photo && (
+                        <img 
+                          src={tribute.photo} 
+                          alt={`Photo from ${tribute.name}`}
+                          className="w-12 h-12 rounded-full object-cover mr-3 border-2 border-pink-200"
+                        />
+                      )}
+                      <div className="flex-1">
+                        <p className="font-medium text-gray-800 text-sm">{tribute.name}</p>
+                        <p className="text-xs text-gray-600 capitalize">{tribute.type}</p>
+                      </div>
+                    </div>
+                    <p className="text-gray-700 text-sm leading-relaxed line-clamp-2">{tribute.message}</p>
+                  </motion.div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </motion.section>
+
+        {/* 5. Memory Tree Teaser */}
         <motion.section 
           ref={memoryTreeRef}
           className="py-20 relative"
@@ -598,7 +706,7 @@ export default function StairwayToHeaven() {
               <p className="text-gray-600">A living tribute to those we remember</p>
             </motion.div>
 
-            {/* Simple Tree Preview */}
+            {/* Tree Preview */}
             <div className="relative max-w-md mx-auto mb-12">
               <motion.div
                 className="w-full h-80 bg-gradient-to-b from-pink-50 to-white rounded-2xl border border-pink-100 shadow-lg flex items-center justify-center"
@@ -607,8 +715,8 @@ export default function StairwayToHeaven() {
                 transition={{ duration: 0.8, delay: 0.2 }}
               >
                 <div className="text-center">
-                  <div className="text-6xl mb-4">🌸</div>
-                  <p className="text-gray-600 font-medium">Memory Tree Preview</p>
+                  <div className="text-6xl mb-4">💖</div>
+                  <p className="text-gray-600 font-medium">Heart Tree</p>
                   <p className="text-sm text-gray-500 mt-2">Interactive tree with names and messages</p>
                 </div>
               </motion.div>
@@ -619,7 +727,7 @@ export default function StairwayToHeaven() {
               className="flex flex-col sm:flex-row items-center justify-center gap-4"
               initial={{ y: 20, opacity: 0 }}
               animate={memoryTreeInView ? { y: 0, opacity: 1 } : {}}
-              transition={{ duration: 0.8, delay: 1.2 }}
+              transition={{ duration: 0.8, delay: 0.4 }}
             >
               <Button asChild className="bg-pink-500 hover:bg-pink-600 text-white px-8 py-3 rounded-full">
                 <Link to="/memory-tree">View the Memory Tree</Link>
@@ -631,7 +739,7 @@ export default function StairwayToHeaven() {
           </div>
         </motion.section>
 
-        {/* 5. Community Wall */}
+        {/* 6. Community Wall */}
         <section className="py-20 bg-gradient-to-b from-pink-50/30 to-gray-50/30">
           <div className="container">
             <div className="text-center mb-12">
