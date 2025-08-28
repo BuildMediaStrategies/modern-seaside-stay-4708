@@ -84,9 +84,11 @@ export default function MemoryTree() {
     setSearchQuery(query);
     if (query.trim()) {
       const matchingEntry = entries.find(entry => 
-          setHighlightedEntry(matchingEntry.id);
+        entry.name.toLowerCase().includes(query.toLowerCase())
       );
       if (matchingEntry) {
+        setHighlightedEntry(matchingEntry.id);
+      } else {
         setHighlightedEntry(null);
       }
     } else {
@@ -452,21 +454,21 @@ export default function MemoryTree() {
                           duration: 6, 
                           ease: "easeInOut",
                           y: { repeat: Infinity, duration: 4 },
-                              opacity: isRecentEntry ? [0.8, 1, 0.8] : [0.6, 0.8, 0.6]
-                            }
-                          }
-                          transition={{
-                            duration: 3 + Math.random() * 2,
-                            repeat: Infinity,
-                            ease: "easeInOut"
-                          }}
+                          x: { repeat: Infinity, duration: 3 }
+                        }}
+                      >
+                        <text
+                          x={element.x}
+                          y={element.y}
+                          textAnchor="middle"
+                          fontSize="16"
+                          opacity={element.opacity}
                         >
-                          <motion.path
-                            d="M0,-6 L1.8,-1.8 L6,0 L1.8,1.8 L0,6 L-1.8,1.8 L-6,0 L-1.8,-1.8 Z"
-                            fill={focusedStar === entry.id ? "#EC4899" : "#FFFFFF"}
-                            stroke="#EC4899"
-                            strokeWidth="1"
-                            filter="url(#starGlow)"
+                          {getSymbolicEmoji(element.type)}
+                        </text>
+                      </motion.g>
+                    ))}
+                  </AnimatePresence>
                 </svg>
               </div>
             </div>
@@ -474,7 +476,7 @@ export default function MemoryTree() {
             {/* Legend & Actions */}
             <div className="text-center mt-8 space-y-4">
               <p className="text-sm text-gray-600">Hanging cards show recent tributes</p>
-              {isMobile && hangingTributes.length < sortedEntries.length && (
+              {window.innerWidth < 768 && getHangingTributes().length < sortedEntries.length && (
                 <p className="text-xs text-gray-500">+ more tributes below</p>
               )}
               <Button
