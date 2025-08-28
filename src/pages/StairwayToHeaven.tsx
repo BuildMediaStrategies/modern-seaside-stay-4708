@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef, useCallback } from "react";
+import { useMemo } from "react";
 import { motion, useScroll, useTransform, useInView, AnimatePresence, useReducedMotion } from "framer-motion";
 import { Link } from "react-router-dom";
 import Navbar from "@/components/Navbar";
@@ -113,6 +114,7 @@ export default function StairwayToHeaven() {
   
   const [formData, setFormData] = useState({ name: '', message: '', photo: null as File | null });
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [nodes, setNodes] = useState<ConstellationNode[]>(constellationNodes);
 
   const { scrollYProgress } = useScroll();
   const heroRef = useRef(null);
@@ -127,6 +129,38 @@ export default function StairwayToHeaven() {
   const tributesInView = useInView(tributesRef, { once: true });
   const memoryTreeInView = useInView(memoryTreeRef, { once: true });
   const shouldReduceMotion = useReducedMotion();
+
+  // Pure function to build constellation connections
+  const buildConnections = useCallback((nodeList: ConstellationNode[]) => {
+    const edges = [];
+    const revealedNodes = nodeList.filter(node => node.revealed);
+    
+    // Connect nodes within the same group
+    const groups = revealedNodes.reduce((acc, node) => {
+      if (!acc[node.groupId]) acc[node.groupId] = [];
+      acc[node.groupId].push(node);
+      return acc;
+    }, {} as Record<number, ConstellationNode[]>);
+    
+    Object.values(groups).forEach(groupNodes => {
+      for (let i = 0; i < groupNodes.length - 1; i++) {
+        for (let j = i + 1; j < groupNodes.length; j++) {
+          edges.push([groupNodes[i], groupNodes[j]]);
+        }
+      }
+    });
+    
+    return edges;
+  }, []);
+
+  // Memoized connections
+  const connections = useMemo(() => buildConnections(nodes), [nodes, buildConnections]);
+
+  const handleNodeClick = (nodeId: string) => {
+    setNodes(prev => prev.map(node => 
+      node.id === nodeId ? { ...node, revealed: !node.revealed } : node
+    ));
+  };
 
   const backgroundY = useTransform(scrollYProgress, [0, 1], ['0%', '30%']);
   const cloudY = useTransform(scrollYProgress, [0, 1], ['0%', '20%']);
@@ -650,7 +684,7 @@ export default function StairwayToHeaven() {
             <div className="relative h-96 max-w-4xl mx-auto">
               {/* Connection Lines */}
               <svg className="absolute inset-0 w-full h-full pointer-events-none">
-                {getConnections().map(([node1, node2], index) => (
+                {connections.map(([node1, node2], index) => (
                   <motion.line
                     key={`${node1.id}-${node2.id}`}
                     x1={`${node1.x}%`}
@@ -979,36 +1013,4 @@ export default function StairwayToHeaven() {
       <Footer />
     </div>
   );
-
-  // Helper functions moved to bottom
-  const [nodes, setNodes] = useState<ConstellationNode[]>(constellationNodes);
-
-  const handleNodeClick = (nodeId: string) => {
-    setNodes(prev => prev.map(node => 
-      node.id === nodeId ? { ...node, revealed: !node.revealed } : node
-    ));
-  };
-
-  // Get constellation connections
-  const getConnections = () => {
-    const connections = [];
-    const revealedNodes = nodes.filter(node => node.revealed);
-    
-    // Connect nodes within the same group
-    const groups = revealedNodes.reduce((acc, node) => {
-      if (!acc[node.groupId]) acc[node.groupId] = [];
-      acc[node.groupId].push(node);
-      return acc;
-    }, {} as Record<number, ConstellationNode[]>);
-    
-    Object.values(groups).forEach(groupNodes => {
-      for (let i = 0; i < groupNodes.length - 1; i++) {
-        for (let j = i + 1; j < groupNodes.length; j++) {
-          connections.push([groupNodes[i], groupNodes[j]]);
-        }
-      }
-    });
-    
-    return connections;
-  };
 }
